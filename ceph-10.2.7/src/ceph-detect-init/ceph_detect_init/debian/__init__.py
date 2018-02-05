@@ -10,6 +10,8 @@ def choose_init():
     """
     assert(distro and codename)
     if distro.lower() in ('ubuntu', 'linuxmint', 'kylin'):
+        if codename == 'juniper':
+            return 'systemd'
         if codename >= 'vivid':
             return 'systemd'
         else:
