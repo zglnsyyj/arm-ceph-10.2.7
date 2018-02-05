@@ -57,6 +57,7 @@ def _get_distro(distro, use_rhceph=False):
         'redhat': centos,
         'fedora': fedora,
         'suse': suse,
+	'kylin': debian,
     }
 
     if distro == 'redhat' and use_rhceph:
