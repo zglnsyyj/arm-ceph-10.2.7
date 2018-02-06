@@ -5,11 +5,12 @@
 # require the admin ceph user, as there's no way to pass the ceph user
 # to qemu-iotests currently.
 
-testlist='001 002 003 004 005 008 009 010 011 021 025 032 033 055'
+testlist='001 002 003 004 005 008 009 010 011 021 025 032 033'
 
-git clone https://github.com/qemu/qemu.git
+#git clone https://github.com/qemu/qemu.git
 cd qemu
-if lsb_release -da | grep -iq xenial; then
+# if lsb_release -da | grep -iq xenial; then
+if lsb_release -da | grep -iq juniper; then
     # Xenial requires a recent test harness
     git checkout v2.3.0
 else
@@ -21,15 +22,9 @@ fi
 cd tests/qemu-iotests
 mkdir bin
 # qemu-iotests expects a binary called just 'qemu' to be available
-if [ -x '/usr/bin/qemu-system-x86_64' ]
+if [ -x '/usr/bin/qemu-system-arm' ]
 then
-    QEMU='/usr/bin/qemu-system-x86_64'
-else
-    QEMU='/usr/libexec/qemu-kvm'
-
-    # disable test 055 since qemu-kvm (RHEL/CentOS) doesn't support the
-    # required QMP commands
-    testlist=$(echo ${testlist} | sed "s/ 055//g")
+    QEMU='/usr/bin/qemu-system-arm'
 fi
 ln -s $QEMU bin/qemu
 
@@ -42,4 +37,4 @@ touch common.env
 TEST_DIR=rbd PATH="$PATH:$PWD/bin" ./check -rbd $testlist
 
 cd ../../..
-rm -rf qemu
+#rm -rf qemu
