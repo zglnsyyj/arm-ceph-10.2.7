@@ -84,6 +84,6 @@ cmp /tmp/img1 /tmp/img1.export
 
 # remove snapshot and detect error from mapped snapshot
 rbd snap rm --snap=snap1 testimg1
-sudo dd if=/dev/rbd/rbd/testimg1@snap1 of=/tmp/img1.snap1 2>&1 | grep 'Input/output error'
+sudo dd if=/dev/rbd/rbd/testimg1@snap1 of=/tmp/img1.snap1 2>&1 | grep '输入/输出错误'
 
 echo OK
