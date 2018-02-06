@@ -7,7 +7,7 @@
 
 testlist='001 002 003 004 005 008 009 010 011 021 025 032 033'
 
-#git clone https://github.com/qemu/qemu.git
+git clone https://github.com/qemu/qemu.git
 cd qemu
 # if lsb_release -da | grep -iq xenial; then
 if lsb_release -da | grep -iq juniper; then
@@ -37,4 +37,4 @@ touch common.env
 TEST_DIR=rbd PATH="$PATH:$PWD/bin" ./check -rbd $testlist
 
 cd ../../..
-#rm -rf qemu
+rm -rf qemu
