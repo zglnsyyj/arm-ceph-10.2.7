@@ -1,0 +1,405 @@
++ IMAGE_FEATURES=layering,exclusive-lock,object-map,fast-diff
+++ mktemp
++ KEYRING=/tmp/tmp.YrRgWUNAeh
++ trap cleanup EXIT ERR HUP INT QUIT
++ delete_users
++ create_users
++ ceph auth get-or-create client.volumes mon 'allow r' osd 'allow class-read object_prefix rbd_children, allow r class-read pool images, allow rwx pool volumes'
++ ceph auth get-or-create client.images mon 'allow r' osd 'allow class-read object_prefix rbd_children, allow rwx pool images'
++ recreate_pools
++ delete_pools
++ create_pools
++ ceph osd pool create images 100
+pool 'images' created
++ ceph osd pool create volumes 100
+pool 'volumes' created
++ test_images_access
++ rbd -k /tmp/tmp.YrRgWUNAeh --id images create --image-format 2 --image-feature layering,exclusive-lock,object-map,fast-diff -s 1 images/foo
++ rbd -k /tmp/tmp.YrRgWUNAeh --id images snap create images/foo@snap
++ rbd -k /tmp/tmp.YrRgWUNAeh --id images snap protect images/foo@snap
++ rbd -k /tmp/tmp.YrRgWUNAeh --id images snap unprotect images/foo@snap
++ rbd -k /tmp/tmp.YrRgWUNAeh --id images snap protect images/foo@snap
++ rbd -k /tmp/tmp.YrRgWUNAeh --id images export images/foo@snap -
+Exporting image: 100% complete...done.
++ expect 16 rbd -k /tmp/tmp.YrRgWUNAeh --id images snap rm images/foo@snap
++ set +e
++ local expected_ret=16
++ local ret
++ shift
++ cmd='rbd -k /tmp/tmp.YrRgWUNAeh --id images snap rm images/foo@snap'
++ eval rbd -k /tmp/tmp.YrRgWUNAeh --id images snap rm images/foo@snap
+++ rbd -k /tmp/tmp.YrRgWUNAeh --id images snap rm images/foo@snap
+rbd: snapshot 'snap' is protected from removal.2018-02-08 15:14:07.795543 7f637fb850 -1 librbd::Operations: snapshot is protected
+
++ ret=16
++ set -e
++ [[ 16 -ne 16 ]]
++ return 0
++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes clone --image-feature layering,exclusive-lock,object-map,fast-diff images/foo@snap volumes/child
++ expect 16 rbd -k /tmp/tmp.YrRgWUNAeh --id images snap unprotect images/foo@snap
++ set +e
++ local expected_ret=16
++ local ret
++ shift
++ cmd='rbd -k /tmp/tmp.YrRgWUNAeh --id images snap unprotect images/foo@snap'
++ eval rbd -k /tmp/tmp.YrRgWUNAeh --id images snap unprotect images/foo@snap
+++ rbd -k /tmp/tmp.YrRgWUNAeh --id images snap unprotect images/foo@snap
+2018-02-08 15:14:10.285242 7f637fb850 -1 librbd::SnapshotUnprotectRequest: cannot unprotect: at least 1 child(ren) [1318562ae8944a] in pool 'volumes'
+2018-02-08 15:14:10.285774 7f637fb850 -1 librbd::SnapshotUnprotectRequest: encountered error: (16) Device or resource busy
+2018-02-08 15:14:10.285787 7f637fb850 -1 librbd::SnapshotUnprotectRequest: 0x1305a0bc0 should_complete_error: ret_val=-16
+2018-02-08 15:14:10.297479 7f637fb850 -1 librbd::SnapshotUnprotectRequest: 0x1305a0bc0 should_complete_error: ret_val=-16
+rbd: unprotecting snap failed: (16) Device or resource busy
++ ret=16
++ set -e
++ [[ 16 -ne 16 ]]
++ return 0
++ expect 1 rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap unprotect images/foo@snap
++ set +e
++ local expected_ret=1
++ local ret
++ shift
++ cmd='rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap unprotect images/foo@snap'
++ eval rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap unprotect images/foo@snap
+++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap unprotect images/foo@snap
+2018-02-08 15:14:10.352316 7f9a573850 -1 librbd::image::OpenRequest: failed to register watch: (1) Operation not permitted
+2018-02-08 15:14:10.352532 7f99d73850 -1 librbd::ImageState: failed to open image: (1) Operation not permitted
+rbd: error opening image foo: (1) Operation not permitted
++ ret=1
++ set -e
++ [[ 1 -ne 1 ]]
++ return 0
++ expect 1 rbd -k /tmp/tmp.YrRgWUNAeh --id images flatten volumes/child
++ set +e
++ local expected_ret=1
++ local ret
++ shift
++ cmd='rbd -k /tmp/tmp.YrRgWUNAeh --id images flatten volumes/child'
++ eval rbd -k /tmp/tmp.YrRgWUNAeh --id images flatten volumes/child
+++ rbd -k /tmp/tmp.YrRgWUNAeh --id images flatten volumes/child
+2018-02-08 15:14:10.390142 7f98ede850 -1 librbd::image::OpenRequest: failed to stat v2 image header: (1) Operation not permitted
+2018-02-08 15:14:10.390204 7f8bffb850 -1 librbd::ImageState: failed to open image: (1) Operation not permitted
+rbd: error opening image child: (1) Operation not permitted
++ ret=1
++ set -e
++ [[ 1 -ne 1 ]]
++ return 0
++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes flatten volumes/child
+Image flatten: 100% complete...done.
++ expect 1 rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap unprotect images/foo@snap
++ set +e
++ local expected_ret=1
++ local ret
++ shift
++ cmd='rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap unprotect images/foo@snap'
++ eval rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap unprotect images/foo@snap
+++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap unprotect images/foo@snap
+2018-02-08 15:14:10.853000 7f737fb850 -1 librbd::image::OpenRequest: failed to register watch: (1) Operation not permitted
+2018-02-08 15:14:10.853208 7f72ffb850 -1 librbd::ImageState: failed to open image: (1) Operation not permitted
+rbd: error opening image foo: (1) Operation not permitted
++ ret=1
++ set -e
++ [[ 1 -ne 1 ]]
++ return 0
++ rbd -k /tmp/tmp.YrRgWUNAeh --id images snap unprotect images/foo@snap
++ expect 39 rbd -k /tmp/tmp.YrRgWUNAeh --id images rm images/foo
++ set +e
++ local expected_ret=39
++ local ret
++ shift
++ cmd='rbd -k /tmp/tmp.YrRgWUNAeh --id images rm images/foo'
++ eval rbd -k /tmp/tmp.YrRgWUNAeh --id images rm images/foo
+++ rbd -k /tmp/tmp.YrRgWUNAeh --id images rm images/foo
+2018-02-08 15:14:11.109066 7fa0fba000 -1 librbd: image has snapshots - not removing
+Removing image: 0% complete...failed.
+rbd: image has snapshots - these must be deleted with 'rbd snap purge' before the image can be removed.
++ ret=39
++ set -e
++ [[ 39 -ne 39 ]]
++ return 0
++ rbd -k /tmp/tmp.YrRgWUNAeh --id images snap rm images/foo@snap
++ rbd -k /tmp/tmp.YrRgWUNAeh --id images rm images/foo
+Removing image: 100% complete...done.
++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes rm volumes/child
+Removing image: 100% complete...done.
++ recreate_pools
++ delete_pools
++ create_pools
++ ceph osd pool create images 100
+pool 'images' created
++ ceph osd pool create volumes 100
+pool 'volumes' created
++ test_volumes_access
++ rbd -k /tmp/tmp.YrRgWUNAeh --id images create --image-format 2 --image-feature layering,exclusive-lock,object-map,fast-diff -s 1 images/foo
++ rbd -k /tmp/tmp.YrRgWUNAeh --id images snap create images/foo@snap
++ rbd -k /tmp/tmp.YrRgWUNAeh --id images snap protect images/foo@snap
++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes info images/foo@snap
+rbd image 'foo':
+	size 1024 kB in 1 objects
+	order 22 (4096 kB objects)
+	block_name_prefix: rbd_data.13186e2ae8944a
+	format: 2
+	features: layering, exclusive-lock, object-map, fast-diff
+	flags: 
+	protected: True
++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap ls images/foo
+SNAPID NAME    SIZE 
+     4 snap 1024 kB 
++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes export images/foo -
+Exporting image: 100% complete...done.
++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes cp images/foo volumes/foo_copy
+Image copy: 100% complete...Image copy: 100% complete...done.
++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes rm volumes/foo_copy
+Removing image: 100% complete...done.
++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes children images/foo@snap
++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes lock list images/foo
++ expect 1 rbd -k /tmp/tmp.YrRgWUNAeh --id volumes resize -s 2 images/foo --allow-shrink
++ set +e
++ local expected_ret=1
++ local ret
++ shift
++ cmd='rbd -k /tmp/tmp.YrRgWUNAeh --id volumes resize -s 2 images/foo --allow-shrink'
++ eval rbd -k /tmp/tmp.YrRgWUNAeh --id volumes resize -s 2 images/foo --allow-shrink
+++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes resize -s 2 images/foo --allow-shrink
+2018-02-08 15:14:52.610991 7f5fffb850 -1 librbd::image::OpenRequest: failed to register watch: (1) Operation not permitted
+2018-02-08 15:14:52.611270 7f5f7fb850 -1 librbd::ImageState: failed to open image: (1) Operation not permitted
+rbd: error opening image foo: (1) Operation not permitted
++ ret=1
++ set -e
++ [[ 1 -ne 1 ]]
++ return 0
++ expect 1 rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap create images/foo@2
++ set +e
++ local expected_ret=1
++ local ret
++ shift
++ cmd='rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap create images/foo@2'
++ eval rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap create images/foo@2
+++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap create images/foo@2
+2018-02-08 15:14:52.654366 7f78d1c850 -1 librbd::image::OpenRequest: failed to register watch: (1) Operation not permitted
+2018-02-08 15:14:52.654614 7f6bffb850 -1 librbd::ImageState: failed to open image: (1) Operation not permitted
+rbd: error opening image foo: (1) Operation not permitted
++ ret=1
++ set -e
++ [[ 1 -ne 1 ]]
++ return 0
++ expect 1 rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap rollback images/foo@snap
++ set +e
++ local expected_ret=1
++ local ret
++ shift
++ cmd='rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap rollback images/foo@snap'
++ eval rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap rollback images/foo@snap
+++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap rollback images/foo@snap
+2018-02-08 15:14:52.698265 7f635e3850 -1 librbd::image::OpenRequest: failed to register watch: (1) Operation not permitted
+2018-02-08 15:14:52.698497 7f62de3850 -1 librbd::ImageState: failed to open image: (1) Operation not permitted
+rbd: error opening image foo: (1) Operation not permitted
++ ret=1
++ set -e
++ [[ 1 -ne 1 ]]
++ return 0
++ expect 1 rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap remove images/foo@snap
++ set +e
++ local expected_ret=1
++ local ret
++ shift
++ cmd='rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap remove images/foo@snap'
++ eval rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap remove images/foo@snap
+++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap remove images/foo@snap
+2018-02-08 15:14:52.743267 7f7b508850 -1 librbd::image::OpenRequest: failed to register watch: (1) Operation not permitted
+2018-02-08 15:14:52.743474 7f7ad08850 -1 librbd::ImageState: failed to open image: (1) Operation not permitted
+rbd: error opening image foo: (1) Operation not permitted
++ ret=1
++ set -e
++ [[ 1 -ne 1 ]]
++ return 0
++ expect 1 rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap purge images/foo
++ set +e
++ local expected_ret=1
++ local ret
++ shift
++ cmd='rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap purge images/foo'
++ eval rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap purge images/foo
+++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap purge images/foo
+2018-02-08 15:14:52.787866 7f720fb850 -1 librbd::image::OpenRequest: failed to register watch: (1) Operation not permitted
+2018-02-08 15:14:52.788090 7f718fb850 -1 librbd::ImageState: failed to open image: (1) Operation not permitted
+rbd: error opening image foo: (1) Operation not permitted
++ ret=1
++ set -e
++ [[ 1 -ne 1 ]]
++ return 0
++ expect 1 rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap unprotect images/foo@snap
++ set +e
++ local expected_ret=1
++ local ret
++ shift
++ cmd='rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap unprotect images/foo@snap'
++ eval rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap unprotect images/foo@snap
+++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap unprotect images/foo@snap
+2018-02-08 15:14:52.832858 7f759df850 -1 librbd::image::OpenRequest: failed to register watch: (1) Operation not permitted
+2018-02-08 15:14:52.833063 7f751df850 -1 librbd::ImageState: failed to open image: (1) Operation not permitted
+rbd: error opening image foo: (1) Operation not permitted
++ ret=1
++ set -e
++ [[ 1 -ne 1 ]]
++ return 0
++ expect 1 rbd -k /tmp/tmp.YrRgWUNAeh --id volumes flatten images/foo
++ set +e
++ local expected_ret=1
++ local ret
++ shift
++ cmd='rbd -k /tmp/tmp.YrRgWUNAeh --id volumes flatten images/foo'
++ eval rbd -k /tmp/tmp.YrRgWUNAeh --id volumes flatten images/foo
+++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes flatten images/foo
+2018-02-08 15:14:52.874678 7f67ffb850 -1 librbd::image::OpenRequest: failed to register watch: (1) Operation not permitted
+2018-02-08 15:14:52.874901 7f677fb850 -1 librbd::ImageState: failed to open image: (1) Operation not permitted
+rbd: error opening image foo: (1) Operation not permitted
++ ret=1
++ set -e
++ [[ 1 -ne 1 ]]
++ return 0
++ expect 1 rbd -k /tmp/tmp.YrRgWUNAeh --id volumes lock add images/foo test
++ set +e
++ local expected_ret=1
++ local ret
++ shift
++ cmd='rbd -k /tmp/tmp.YrRgWUNAeh --id volumes lock add images/foo test'
++ eval rbd -k /tmp/tmp.YrRgWUNAeh --id volumes lock add images/foo test
+++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes lock add images/foo test
+2018-02-08 15:14:52.920720 7f5e8a3850 -1 librbd::image::OpenRequest: failed to register watch: (1) Operation not permitted
+2018-02-08 15:14:52.920961 7f5e0a3850 -1 librbd::ImageState: failed to open image: (1) Operation not permitted
+rbd: error opening image foo: (1) Operation not permitted
++ ret=1
++ set -e
++ [[ 1 -ne 1 ]]
++ return 0
++ expect 1 rbd -k /tmp/tmp.YrRgWUNAeh --id volumes lock remove images/foo test locker
++ set +e
++ local expected_ret=1
++ local ret
++ shift
++ cmd='rbd -k /tmp/tmp.YrRgWUNAeh --id volumes lock remove images/foo test locker'
++ eval rbd -k /tmp/tmp.YrRgWUNAeh --id volumes lock remove images/foo test locker
+++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes lock remove images/foo test locker
+2018-02-08 15:14:53.093258 7f65cd2850 -1 librbd::image::OpenRequest: failed to register watch: (1) Operation not permitted
+2018-02-08 15:14:53.093498 7f654d2850 -1 librbd::ImageState: failed to open image: (1) Operation not permitted
+rbd: error opening image foo: (1) Operation not permitted
++ ret=1
++ set -e
++ [[ 1 -ne 1 ]]
++ return 0
++ expect 1 rbd -k /tmp/tmp.YrRgWUNAeh --id volumes ls rbd
++ set +e
++ local expected_ret=1
++ local ret
++ shift
++ cmd='rbd -k /tmp/tmp.YrRgWUNAeh --id volumes ls rbd'
++ eval rbd -k /tmp/tmp.YrRgWUNAeh --id volumes ls rbd
+++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes ls rbd
+rbd: list: (1) Operation not permitted
++ ret=1
++ set -e
++ [[ 1 -ne 1 ]]
++ return 0
++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes clone --image-feature layering,exclusive-lock,object-map,fast-diff images/foo@snap volumes/child
++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap create volumes/child@snap1
++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap protect volumes/child@snap1
++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap create volumes/child@snap2
++ expect 16 rbd -k /tmp/tmp.YrRgWUNAeh --id images snap unprotect images/foo@snap
++ set +e
++ local expected_ret=16
++ local ret
++ shift
++ cmd='rbd -k /tmp/tmp.YrRgWUNAeh --id images snap unprotect images/foo@snap'
++ eval rbd -k /tmp/tmp.YrRgWUNAeh --id images snap unprotect images/foo@snap
+++ rbd -k /tmp/tmp.YrRgWUNAeh --id images snap unprotect images/foo@snap
+2018-02-08 15:14:56.131587 7f7f7fb850 -1 librbd::SnapshotUnprotectRequest: cannot unprotect: at least 1 child(ren) [13188f238e1f29] in pool 'volumes'
+2018-02-08 15:14:56.132153 7f7f7fb850 -1 librbd::SnapshotUnprotectRequest: encountered error: (16) Device or resource busy
+2018-02-08 15:14:56.132202 7f7f7fb850 -1 librbd::SnapshotUnprotectRequest: 0x16a29c3b0 should_complete_error: ret_val=-16
+2018-02-08 15:14:56.146030 7f7f7fb850 -1 librbd::SnapshotUnprotectRequest: 0x16a29c3b0 should_complete_error: ret_val=-16
+rbd: unprotecting snap failed: (16) Device or resource busy
++ ret=16
++ set -e
++ [[ 16 -ne 16 ]]
++ return 0
++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes flatten volumes/child
+Image flatten: 100% complete...done.
++ expect 16 rbd -k /tmp/tmp.YrRgWUNAeh --id images snap unprotect images/foo@snap
++ set +e
++ local expected_ret=16
++ local ret
++ shift
++ cmd='rbd -k /tmp/tmp.YrRgWUNAeh --id images snap unprotect images/foo@snap'
++ eval rbd -k /tmp/tmp.YrRgWUNAeh --id images snap unprotect images/foo@snap
+++ rbd -k /tmp/tmp.YrRgWUNAeh --id images snap unprotect images/foo@snap
+2018-02-08 15:14:56.437206 7f6ac2c850 -1 librbd::SnapshotUnprotectRequest: cannot unprotect: at least 1 child(ren) [13188f238e1f29] in pool 'volumes'
+2018-02-08 15:14:56.437227 7f6ac2c850 -1 librbd::SnapshotUnprotectRequest: encountered error: (16) Device or resource busy
+2018-02-08 15:14:56.437237 7f6ac2c850 -1 librbd::SnapshotUnprotectRequest: 0x161e48bc0 should_complete_error: ret_val=-16
+2018-02-08 15:14:56.471122 7f6ac2c850 -1 librbd::SnapshotUnprotectRequest: 0x161e48bc0 should_complete_error: ret_val=-16
+rbd: unprotecting snap failed: (16) Device or resource busy
++ ret=16
++ set -e
++ [[ 16 -ne 16 ]]
++ return 0
++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap rm volumes/child@snap2
++ expect 16 rbd -k /tmp/tmp.YrRgWUNAeh --id images snap unprotect images/foo@snap
++ set +e
++ local expected_ret=16
++ local ret
++ shift
++ cmd='rbd -k /tmp/tmp.YrRgWUNAeh --id images snap unprotect images/foo@snap'
++ eval rbd -k /tmp/tmp.YrRgWUNAeh --id images snap unprotect images/foo@snap
+++ rbd -k /tmp/tmp.YrRgWUNAeh --id images snap unprotect images/foo@snap
+2018-02-08 15:14:57.935745 7f84d2e850 -1 librbd::SnapshotUnprotectRequest: cannot unprotect: at least 1 child(ren) [13188f238e1f29] in pool 'volumes'
+2018-02-08 15:14:57.936694 7f84d2e850 -1 librbd::SnapshotUnprotectRequest: encountered error: (16) Device or resource busy
+2018-02-08 15:14:57.936709 7f84d2e850 -1 librbd::SnapshotUnprotectRequest: 0x166e9ebc0 should_complete_error: ret_val=-16
+2018-02-08 15:14:57.949177 7f84d2e850 -1 librbd::SnapshotUnprotectRequest: 0x166e9ebc0 should_complete_error: ret_val=-16
+rbd: unprotecting snap failed: (16) Device or resource busy
++ ret=16
++ set -e
++ [[ 16 -ne 16 ]]
++ return 0
++ expect 2 rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap rm volumes/child@snap2
++ set +e
++ local expected_ret=2
++ local ret
++ shift
++ cmd='rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap rm volumes/child@snap2'
++ eval rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap rm volumes/child@snap2
+++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap rm volumes/child@snap2
+rbd: failed to remove snapshot: (2) No such file or directory
++ ret=2
++ set -e
++ [[ 2 -ne 2 ]]
++ return 0
++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap unprotect volumes/child@snap1
++ expect 16 rbd -k /tmp/tmp.YrRgWUNAeh --id images snap unprotect images/foo@snap
++ set +e
++ local expected_ret=16
++ local ret
++ shift
++ cmd='rbd -k /tmp/tmp.YrRgWUNAeh --id images snap unprotect images/foo@snap'
++ eval rbd -k /tmp/tmp.YrRgWUNAeh --id images snap unprotect images/foo@snap
+++ rbd -k /tmp/tmp.YrRgWUNAeh --id images snap unprotect images/foo@snap
+2018-02-08 15:14:58.428620 7f918bf850 -1 librbd::SnapshotUnprotectRequest: cannot unprotect: at least 1 child(ren) [13188f238e1f29] in pool 'volumes'
+2018-02-08 15:14:58.429040 7f918bf850 -1 librbd::SnapshotUnprotectRequest: encountered error: (16) Device or resource busy
+2018-02-08 15:14:58.429054 7f918bf850 -1 librbd::SnapshotUnprotectRequest: 0x1326df3b0 should_complete_error: ret_val=-16
+2018-02-08 15:14:58.481941 7f918bf850 -1 librbd::SnapshotUnprotectRequest: 0x1326df3b0 should_complete_error: ret_val=-16
+rbd: unprotecting snap failed: (16) Device or resource busy
++ ret=16
++ set -e
++ [[ 16 -ne 16 ]]
++ return 0
++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes snap rm volumes/child@snap1
++ rbd -k /tmp/tmp.YrRgWUNAeh --id images snap unprotect images/foo@snap
++ rbd -k /tmp/tmp.YrRgWUNAeh --id images snap rm images/foo@snap
++ rbd -k /tmp/tmp.YrRgWUNAeh --id images rm images/foo
+Removing image: 100% complete...done.
++ rbd -k /tmp/tmp.YrRgWUNAeh --id volumes rm volumes/child
+Removing image: 100% complete...done.
++ delete_pools
++ delete_users
++ echo OK
+OK
++ exit 0
++ cleanup
++ rm -f /tmp/tmp.YrRgWUNAeh

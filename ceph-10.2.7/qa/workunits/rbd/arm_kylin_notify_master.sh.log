@@ -1,0 +1,11 @@
++ dirname ./notify_master.sh
++ relpath=./../../../src/test/librbd
++ python ./../../../src/test/librbd/test_notify.py master
+starting master
+acquiring exclusive lock
+waiting for slave to complete
+removing image: test_notify_clone2
+removing snapshot: test_notify_parent@snap1
+removing image: test_notify_parent
+finished
++ exit 0

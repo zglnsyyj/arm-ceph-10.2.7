@@ -1,0 +1,125 @@
++ clean_up
++ rm -f test.log
++ rbd snap remove test@snap
+rbd: error opening image test: (2) No such file or directory
++ true
++ rbd rm test
+Removing image: 0% complete...failed.
+rbd: delete error: (2) No such file or directory
++ true
++ trap clean_up INT TERM EXIT
++ rbd create --image-feature layering -s 10 test
++ rbd snap create test@snap
++ test_read_flags test n n n n
++ local IMAGE=test
++ local SET_BALANCED=n
++ local SET_LOCALIZED=n
++ local EXPECT_BALANCED=n
++ local EXPECT_LOCALIZED=n
++ local 'EXTRA_ARGS=--log-file test.log --debug-ms 1 --no-log-to-stderr'
++ '[' n = y ']'
++ '[' n = y ']'
++ rbd export test - --log-file test.log --debug-ms 1 --no-log-to-stderr
+Exporting image: 40% complete...Exporting image: 80% complete...Exporting image: 100% complete...done.
++ '[' n = y ']'
++ grep -L balance_reads test.log
++ grep -q test.log
++ '[' n = y ']'
++ grep -L localize_reads test.log
++ grep -q test.log
++ rm -f test.log
++ test_read_flags test y y n n
++ local IMAGE=test
++ local SET_BALANCED=y
++ local SET_LOCALIZED=y
++ local EXPECT_BALANCED=n
++ local EXPECT_LOCALIZED=n
++ local 'EXTRA_ARGS=--log-file test.log --debug-ms 1 --no-log-to-stderr'
++ '[' y = y ']'
++ EXTRA_ARGS='--log-file test.log --debug-ms 1 --no-log-to-stderr --rbd-balance-snap-reads'
++ rbd export test - --log-file test.log --debug-ms 1 --no-log-to-stderr --rbd-balance-snap-reads
+Exporting image: 40% complete...Exporting image: 80% complete...Exporting image: 100% complete...done.
++ '[' n = y ']'
++ grep -L balance_reads test.log
++ grep -q test.log
++ '[' n = y ']'
++ grep -q test.log
++ grep -L localize_reads test.log
++ rm -f test.log
++ test_read_flags test@snap n n n n
++ local IMAGE=test@snap
++ local SET_BALANCED=n
++ local SET_LOCALIZED=n
++ local EXPECT_BALANCED=n
++ local EXPECT_LOCALIZED=n
++ local 'EXTRA_ARGS=--log-file test.log --debug-ms 1 --no-log-to-stderr'
++ '[' n = y ']'
++ '[' n = y ']'
++ rbd export test@snap - --log-file test.log --debug-ms 1 --no-log-to-stderr
+Exporting image: 40% complete...Exporting image: 80% complete...Exporting image: 100% complete...done.
++ '[' n = y ']'
++ grep -q test.log
++ grep -L balance_reads test.log
++ '[' n = y ']'
++ grep -q test.log
++ grep -L localize_reads test.log
++ rm -f test.log
++ test_read_flags test@snap y n y n
++ local IMAGE=test@snap
++ local SET_BALANCED=y
++ local SET_LOCALIZED=n
++ local EXPECT_BALANCED=y
++ local EXPECT_LOCALIZED=n
++ local 'EXTRA_ARGS=--log-file test.log --debug-ms 1 --no-log-to-stderr'
++ '[' y = y ']'
++ EXTRA_ARGS='--log-file test.log --debug-ms 1 --no-log-to-stderr --rbd-balance-snap-reads'
++ rbd export test@snap - --log-file test.log --debug-ms 1 --no-log-to-stderr --rbd-balance-snap-reads
+Exporting image: 40% complete...Exporting image: 80% complete...Exporting image: 100% complete...done.
++ '[' y = y ']'
++ grep -q balance_reads test.log
++ '[' n = y ']'
++ grep -q test.log
++ grep -L localize_reads test.log
++ rm -f test.log
++ test_read_flags test@snap n y n y
++ local IMAGE=test@snap
++ local SET_BALANCED=n
++ local SET_LOCALIZED=y
++ local EXPECT_BALANCED=n
++ local EXPECT_LOCALIZED=y
++ local 'EXTRA_ARGS=--log-file test.log --debug-ms 1 --no-log-to-stderr'
++ '[' n = y ']'
++ '[' y = y ']'
++ EXTRA_ARGS='--log-file test.log --debug-ms 1 --no-log-to-stderr --rbd-localize-snap-reads'
++ rbd export test@snap - --log-file test.log --debug-ms 1 --no-log-to-stderr --rbd-localize-snap-reads
+Exporting image: 40% complete...Exporting image: 80% complete...Exporting image: 100% complete...done.
++ '[' n = y ']'
++ grep -L balance_reads test.log
++ grep -q test.log
++ '[' y = y ']'
++ grep -q localize_reads test.log
++ rm -f test.log
++ test_read_flags test@snap y y y n
++ local IMAGE=test@snap
++ local SET_BALANCED=y
++ local SET_LOCALIZED=y
++ local EXPECT_BALANCED=y
++ local EXPECT_LOCALIZED=n
++ local 'EXTRA_ARGS=--log-file test.log --debug-ms 1 --no-log-to-stderr'
++ '[' y = y ']'
++ EXTRA_ARGS='--log-file test.log --debug-ms 1 --no-log-to-stderr --rbd-balance-snap-reads'
++ rbd export test@snap - --log-file test.log --debug-ms 1 --no-log-to-stderr --rbd-balance-snap-reads
+Exporting image: 40% complete...Exporting image: 80% complete...Exporting image: 100% complete...done.
++ '[' y = y ']'
++ grep -q balance_reads test.log
++ '[' n = y ']'
++ grep -L localize_reads test.log
++ grep -q test.log
++ rm -f test.log
++ echo OK
+OK
++ clean_up
++ rm -f test.log
++ rbd snap remove test@snap
++ rbd rm test
+Removing image: 33% complete...Removing image: 66% complete...Removing image: 100% complete...done.

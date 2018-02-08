@@ -1,0 +1,46 @@
++ IMAGE=rbdrw-image
++ LOCKID=rbdrw
+++ dirname ./test_lock_fence.sh
++ RELPATH=./../../../src/test/librbd
++ RBDRW=./../../../src/test/librbd/rbdrw.py
++ rbd create rbdrw-image --size 10 --image-format 2 --image-shared
++ iochild=3319101
++ LOCKS='{}'
++ '[' '{}' == '{}' ']'
+++ rbd lock list rbdrw-image --format json
++ python ./../../../src/test/librbd/rbdrw.py rbdrw-image rbdrw
++ LOCKS='{}'
++ sleep 1
++ '[' '{}' == '{}' ']'
+++ rbd lock list rbdrw-image --format json
++ LOCKS='{"rbdrw":{"locker":"client.823211","address":"192.168.30.11:0\/3410832114"}}'
++ sleep 1
++ '[' '{"rbdrw":{"locker":"client.823211","address":"192.168.30.11:0\/3410832114"}}' == '{}' ']'
+++ awk '{print $NF;}'
+++ tail -1
+++ rbd lock list rbdrw-image
++ clientaddr=192.168.30.11:0/3410832114
+++ awk '{print $1;}'
+++ tail -1
+++ rbd lock list rbdrw-image
++ clientid=client.823211
++ echo 'clientaddr: 192.168.30.11:0/3410832114'
+clientaddr: 192.168.30.11:0/3410832114
++ echo 'clientid: client.823211'
+clientid: client.823211
++ ceph osd blacklist add 192.168.30.11:0/3410832114
+blacklisting 192.168.30.11:0/3410832114 until 2018-02-08 15:07:10.240843 (3600 sec)
++ wait 3319101
++ rbdrw_exitcode=108
++ '[' 108 '!=' 108 ']'
++ echo 'rbdrw stopped with ESHUTDOWN'
+rbdrw stopped with ESHUTDOWN
++ set -e
++ ceph osd blacklist rm 192.168.30.11:0/3410832114
+un-blacklisting 192.168.30.11:0/3410832114
++ rbd lock remove rbdrw-image rbdrw client.823211
++ sleep 30
++ rbd rm rbdrw-image
+Removing image: 33% complete...Removing image: 66% complete...Removing image: 100% complete...done.
++ echo OK
+OK

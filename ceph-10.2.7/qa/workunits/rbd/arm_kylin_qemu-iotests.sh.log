@@ -1,0 +1,53 @@
++ testlist=001 002 003 004 005 008 009 010 011 021 025 032 033
++ git clone https://github.com/qemu/qemu.git
+正克隆到 'qemu'...
+正在检出文件:  27% (1611/5781)   正在检出文件:  28% (1619/5781)   正在检出文件:  29% (1677/5781)   正在检出文件:  30% (1735/5781)   正在检出文件:  31% (1793/5781)   正在检出文件:  32% (1850/5781)   正在检出文件:  33% (1908/5781)   正在检出文件:  34% (1966/5781)   正在检出文件:  35% (2024/5781)   正在检出文件:  36% (2082/5781)   正在检出文件:  37% (2139/5781)   正在检出文件:  38% (2197/5781)   正在检出文件:  39% (2255/5781)   正在检出文件:  40% (2313/5781)   正在检出文件:  41% (2371/5781)   正在检出文件:  42% (2429/5781)   正在检出文件:  43% (2486/5781)   正在检出文件:  44% (2544/5781)   正在检出文件:  45% (2602/5781)   正在检出文件:  46% (2660/5781)   正在检出文件:  47% (2718/5781)   正在检出文件:  48% (2775/5781)   正在检出文件:  49% (2833/5781)   正在检出文件:  50% (2891/5781)   正在检出文件:  51% (2949/5781)   正在检出文件:  52% (3007/5781)   正在检出文件:  53% (3064/5781)   正在检出文件:  54% (3122/5781)   正在检出文件:  54% (3126/5781)   正在检出文件:  55% (3180/5781)   正在检出文件:  56% (3238/5781)   正在检出文件:  57% (3296/5781)   正在检出文件:  58% (3353/5781)   正在检出文件:  59% (3411/5781)   正在检出文件:  60% (3469/5781)   正在检出文件:  61% (3527/5781)   正在检出文件:  62% (3585/5781)   正在检出文件:  63% (3643/5781)   正在检出文件:  64% (3700/5781)   正在检出文件:  65% (3758/5781)   正在检出文件:  66% (3816/5781)   正在检出文件:  67% (3874/5781)   正在检出文件:  68% (3932/5781)   正在检出文件:  69% (3989/5781)   正在检出文件:  70% (4047/5781)   正在检出文件:  71% (4105/5781)   正在检出文件:  72% (4163/5781)   正在检出文件:  73% (4221/5781)   正在检出文件:  74% (4278/5781)   正在检出文件:  75% (4336/5781)   正在检出文件:  76% (4394/5781)   正在检出文件:  77% (4452/5781)   正在检出文件:  78% (4510/5781)   正在检出文件:  79% (4567/5781)   正在检出文件:  80% (4625/5781)   正在检出文件:  81% (4683/5781)   正在检出文件:  82% (4741/5781)   正在检出文件:  83% (4799/5781)   正在检出文件:  84% (4857/5781)   正在检出文件:  85% (4914/5781)   正在检出文件:  86% (4972/5781)   正在检出文件:  87% (5030/5781)   正在检出文件:  88% (5088/5781)   正在检出文件:  89% (5146/5781)   正在检出文件:  90% (5203/5781)   正在检出文件:  91% (5261/5781)   正在检出文件:  92% (5319/5781)   正在检出文件:  93% (5377/5781)   正在检出文件:  94% (5435/5781)   正在检出文件:  95% (5492/5781)   正在检出文件:  96% (5550/5781)   正在检出文件:  97% (5608/5781)   正在检出文件:  98% (5666/5781)   正在检出文件:  99% (5724/5781)   正在检出文件: 100% (5781/5781)   正在检出文件: 100% (5781/5781), 完成.
++ cd qemu
++ grep -iq juniper
++ lsb_release -da
++ git checkout v2.3.0
+Note: checking out 'v2.3.0'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b <new-branch-name>
+
+HEAD 目前位于 e5b3a24... Update version for v2.3.0 release
++ cd tests/qemu-iotests
++ mkdir bin
++ [ -x /usr/bin/qemu-system-arm ]
++ QEMU=/usr/bin/qemu-system-arm
++ ln -s /usr/bin/qemu-system-arm bin/qemu
++ touch common.env
++ TEST_DIR=rbd PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/Research-ceph-test-team/github/arm-ceph-10.2.7/ceph-10.2.7/qa/workunits/rbd/qemu/tests/qemu-iotests/bin ./check -rbd 001 002 003 004 005 008 009 010 011 021 025 032 033
+QEMU          -- /home/Research-ceph-test-team/github/arm-ceph-10.2.7/ceph-10.2.7/qa/workunits/rbd/qemu/tests/qemu-iotests/bin/qemu
+QEMU_IMG      -- /usr/bin/qemu-img
+QEMU_IO       -- /usr/bin/qemu-io 
+QEMU_NBD      -- /usr/bin/qemu-nbd
+IMGFMT        -- raw
+IMGPROTO      -- rbd
+PLATFORM      -- Linux/aarch64 node1 4.4.58-20170818.kylin.5.server.YUN+-generic
+TEST_DIR      -- rbd
+SOCKET_SCM_HELPER -- 
+
+001        
+002        
+003        
+004        
+005        
+008        
+009        
+010        
+011        
+021        
+025        
+032        
+033        
+Passed all 13 tests
++ cd ../../..
++ rm -rf qemu

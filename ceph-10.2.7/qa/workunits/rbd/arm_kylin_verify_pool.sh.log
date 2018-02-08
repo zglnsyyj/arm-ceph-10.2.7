@@ -1,0 +1,22 @@
++ POOL_NAME=rbd_test_validate_pool
++ PG_NUM=100
++ trap tear_down EXIT HUP INT
++ set_up
++ tear_down
++ ceph osd pool delete rbd_test_validate_pool rbd_test_validate_pool --yes-i-really-really-mean-it
+pool 'rbd_test_validate_pool' does not exist
++ ceph osd pool create rbd_test_validate_pool 100
+pool 'rbd_test_validate_pool' created
++ ceph osd pool mksnap rbd_test_validate_pool snap
+created pool rbd_test_validate_pool snap snap
++ rbd create --pool rbd_test_validate_pool --size 1 foo
+rbd: create error: 2018-02-08 14:08:34.184610 7f7af63000 -1 librbd: pool not configured for self-managed RBD snapshot support(22) Invalid argument
+
++ true
++ rados --pool rbd_test_validate_pool create rbd_directory
++ rbd create --pool rbd_test_validate_pool --size 1 foo
++ echo OK
+OK
++ tear_down
++ ceph osd pool delete rbd_test_validate_pool rbd_test_validate_pool --yes-i-really-really-mean-it
+pool 'rbd_test_validate_pool' removed

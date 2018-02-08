@@ -1,0 +1,148 @@
+++ dirname ./ceph-10.1.2-rbd-nbd.sh
++ . ./../ceph-helpers.sh
+++ TIMEOUT=300
+++ PG_NUM=4
+++ : /tmp
+++ type xmlstarlet
+++ XMLSTARLET=xmlstarlet
+++ test 1 = TESTS
++ POOL=rbd
++ IMAGE=testrbdnbd3355027
++ SUDO=sudo
++ SIZE=64
++ DATA=
++ DEV=
++ setup
++ trap cleanup INT TERM EXIT
+++ mktemp -d
++ TEMPDIR=/tmp/tmp.DlVewh6Rdv
++ DATA=/tmp/tmp.DlVewh6Rdv/data
++ dd if=/dev/urandom of=/tmp/tmp.DlVewh6Rdv/data bs=1M count=64
+记录了64+0 的读入
+记录了64+0 的写出
+67108864 bytes (67 MB, 64 MiB) copied, 7.45571 s, 9.0 MB/s
++ rbd --dest-pool rbd --no-progress import /tmp/tmp.DlVewh6Rdv/data testrbdnbd3355027
+++ id -u
++ '[' 0 = 0 ']'
++ SUDO=
++ expect_false rbd-nbd
++ rbd-nbd
+rbd-nbd: must specify command
++ return 0
++ expect_false rbd-nbd INVALIDCMD
++ rbd-nbd INVALIDCMD
+rbd-nbd: unknown command: INVALIDCMD
++ return 0
+++ id -u
++ '[' 0 -ne 0 ']'
++ expect_false rbd-nbd map INVALIDIMAGE
++ rbd-nbd map INVALIDIMAGE
+rbd-nbd: failed to map, status: (2) No such file or directory
++ return 0
++ expect_false rbd-nbd --device INVALIDDEV map testrbdnbd3355027
++ rbd-nbd --device INVALIDDEV map testrbdnbd3355027
+rbd-nbd: failed to open device: INVALIDDEV
++ return 0
+++ rbd-nbd map rbd/testrbdnbd3355027
++ DEV=/dev/nbd0
++ grep '^/dev/nbd0$'
++ rbd-nbd list-mapped
+2018-02-08 15:38:35.239365 7f8cb6e000 -1 asok(0x148d3a270) AdminSocketConfigObs::init: failed: AdminSocket::bind_and_listen: failed to bind the UNIX domain socket to '/var/run/ceph/ceph-client.admin.asok': (17) File exists
+/dev/nbd0
++ expect_false rbd-nbd --device /dev/nbd0 map rbd/testrbdnbd3355027
++ rbd-nbd --device /dev/nbd0 map rbd/testrbdnbd3355027
+rbd-nbd: the device /dev/nbd0 is busy
+2018-02-08 15:38:35.278467 7f99102000 -1 asok(0x132ebe2a0) AdminSocketConfigObs::init: failed: AdminSocket::bind_and_listen: failed to bind the UNIX domain socket to '/var/run/ceph/ceph-client.admin.asok': (17) File exists
++ return 0
++ dev1=/dev/nbd0
++ rbd-nbd unmap /dev/nbd0
+2018-02-08 15:38:35.307733 7f83adf000 -1 asok(0x156244270) AdminSocketConfigObs::init: failed: AdminSocket::bind_and_listen: failed to bind the UNIX domain socket to '/var/run/ceph/ceph-client.admin.asok': (17) File exists
++ expect_false grep '^/dev/nbd0$'
++ grep '^/dev/nbd0$'
++ rbd-nbd list-mapped
+2018-02-08 15:38:35.335927 7f78184000 -1 asok(0x148db4270) AdminSocketConfigObs::init: failed: AdminSocket::bind_and_listen: failed to bind the UNIX domain socket to '/var/run/ceph/ceph-client.admin.asok': (17) File exists
++ return 0
++ DEV=
+++ rbd-nbd --device /dev/nbd0 map rbd/testrbdnbd3355027
++ DEV=/dev/nbd0
++ '[' /dev/nbd0 = /dev/nbd0 ']'
++ rbd-nbd list-mapped
++ grep '^/dev/nbd0$'
+/dev/nbd0
+++ md5sum
+++ dd if=/tmp/tmp.DlVewh6Rdv/data bs=1M
+记录了64+0 的读入
+记录了64+0 的写出
+67108864 bytes (67 MB, 64 MiB) copied, 0.319369 s, 210 MB/s
+++ md5sum
+++ dd if=/dev/nbd0 bs=1M
+记录了64+0 的读入
+记录了64+0 的写出
+67108864 bytes (67 MB, 64 MiB) copied, 0.696851 s, 96.3 MB/s
++ '[' 'e2e96509a2ad0b96ac7404163b03e80f  -' = 'e2e96509a2ad0b96ac7404163b03e80f  -' ']'
++ dd if=/dev/urandom of=/tmp/tmp.DlVewh6Rdv/data bs=1M count=64
+记录了64+0 的读入
+记录了64+0 的写出
+67108864 bytes (67 MB, 64 MiB) copied, 7.45595 s, 9.0 MB/s
++ dd if=/tmp/tmp.DlVewh6Rdv/data of=/dev/nbd0 bs=1M
+记录了64+0 的读入
+记录了64+0 的写出
+67108864 bytes (67 MB, 64 MiB) copied, 0.124288 s, 540 MB/s
++ sync
+++ md5sum
+++ dd if=/tmp/tmp.DlVewh6Rdv/data bs=1M
+记录了64+0 的读入
+记录了64+0 的写出
+67108864 bytes (67 MB, 64 MiB) copied, 0.317919 s, 211 MB/s
+++ md5sum
+++ rbd -p rbd --no-progress export testrbdnbd3355027 -
++ '[' 'bc945661c501fd3c4dc615396c8da5e9  -' = 'bc945661c501fd3c4dc615396c8da5e9  -' ']'
+++ xmlstarlet sel -t -m //stats/images/image/provisioned_size -v .
+++ rbd -p rbd --format xml du testrbdnbd3355027
+warning: fast-diff map is not enabled for testrbdnbd3355027. operation may be slow.
++ provisioned=67108864
+++ xmlstarlet sel -t -m //stats/images/image/used_size -v .
+++ rbd -p rbd --format xml du testrbdnbd3355027
+warning: fast-diff map is not enabled for testrbdnbd3355027. operation may be slow.
++ used=67108864
++ '[' 67108864 -eq 67108864 ']'
++ mkfs.ext4 -E discard /dev/nbd0
+mke2fs 1.42.13 (17-May-2015)
+Discarding device blocks:  1024/65536           完成                            
+Creating filesystem with 65536 1k blocks and 16384 inodes
+Filesystem UUID: d37018ce-b254-4b14-b4c9-b708d05061b7
+Superblock backups stored on blocks: 
+	8193, 24577, 40961, 57345
+
+Allocating group tables: 0/8   完成                            
+正在写入inode表: 0/8   完成                            
+Creating journal (4096 blocks): 完成
+Writing superblocks and filesystem accounting information: 0/8   完成
+
++ sync
+++ xmlstarlet sel -t -m //stats/images/image/provisioned_size -v .
+++ rbd -p rbd --format xml du testrbdnbd3355027
+warning: fast-diff map is not enabled for testrbdnbd3355027. operation may be slow.
++ provisioned=67108864
+++ xmlstarlet sel -t -m //stats/images/image/used_size -v .
+++ rbd -p rbd --format xml du testrbdnbd3355027
+warning: fast-diff map is not enabled for testrbdnbd3355027. operation may be slow.
++ used=33554432
++ '[' 33554432 -lt 67108864 ']'
++ echo OK
+OK
++ cleanup
++ set +e
++ rm -Rf
++ '[' -n /dev/nbd0 ']'
++ rbd-nbd unmap /dev/nbd0
++ rbd -p rbd status testrbdnbd3355027
+Watchers: none
++ for s in 0.1 0.2 0.4 0.8 1.6 3.2 6.4 12.8
++ sleep 0.1
++ grep 'Watchers: none'
++ rbd -p rbd status testrbdnbd3355027
+Watchers: none
++ break
++ rbd -p rbd remove testrbdnbd3355027
+Removing image: 6% complete...Removing image: 12% complete...Removing image: 18% complete...Removing image: 25% complete...Removing image: 31% complete...Removing image: 37% complete...Removing image: 43% complete...Removing image: 50% complete...Removing image: 56% complete...Removing image: 62% complete...Removing image: 68% complete...Removing image: 75% complete...Removing image: 81% complete...Removing image: 87% complete...Removing image: 93% complete...Removing image: 100% complete...done.

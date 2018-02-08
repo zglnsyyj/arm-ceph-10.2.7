@@ -1,0 +1,17 @@
++ dirname ./notify_slave.sh
++ relpath=./../../../src/test/librbd
++ python ./../../../src/test/librbd/test_notify.py slave
+starting slave
+detected master
+rename
+flatten
+resize
+create_snap
+protect_snap
+unprotect_snap
+rename_snap
+remove_snap
+rebuild object map
+write
+finished
++ exit 0

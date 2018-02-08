@@ -1,0 +1,32 @@
++ which ceph-detect-init
++ ceph-detect-init
++ [ systemd = systemd ]
++ echo TEST: save timestamp for use later with journalctl --since
+TEST: save timestamp for use later with journalctl --since
++ date +%Y-%m-%d %H:%M:%S
++ TIMESTAMP=2018-02-08 11:01:40
++ echo TEST: assert that rbdmap has not logged anything since boot
+TEST: assert that rbdmap has not logged anything since boot
++ grep rbdmap\[[[:digit:]]
++ journalctl -b 0 -t rbdmap
++ grep rbdmap\[[[:digit:]]
++ journalctl -b 0 -t init-rbdmap
++ echo TEST: restart the rbdmap.service
+TEST: restart the rbdmap.service
++ sudo systemctl restart rbdmap.service
++ echo TEST: ensure that /usr/bin/rbdmap runs to completion
+TEST: ensure that /usr/bin/rbdmap runs to completion
++ grep active (exited)
++ sudo systemctl status rbdmap.service
+   Active: active (exited) since 四 2018-02-08 11:01:41 CST; 18ms ago
++ echo TEST: assert that rbdmap has not logged anything since TIMESTAMP
+TEST: assert that rbdmap has not logged anything since TIMESTAMP
++ journalctl --since 2018-02-08 11:01:40 -t rbdmap
++ grep rbdmap\[[[:digit:]]
+2月 08 11:01:40 node1 rbdmap[3255911]: Unmapping '/dev/rbd0'
+2月 08 11:01:40 node1 rbdmap[3255915]: Unmounting '/var/lib/kubelet/plugins/kubernetes.io/rbd/rbd/rbd-image-kubernetes-dynamic-pvc-abe56f66-fccb-11e7-b2b4-0023812673e3
+2月 08 11:01:41 node1 rbdmap[3255925]: Failed to unmap '/var/lib/kubelet/plugins/kubernetes.io/rbd/rbd/rbd-image-kubernetes-dynamic-pvc-abe56f66-fccb-11e7-b2b4-0023812673e3
+2月 08 11:01:41 node1 rbdmap[3255929]: Unmapping '/dev/rbd1'
+2月 08 11:01:41 node1 rbdmap[3255933]: Unmounting '/var/lib/kubelet/plugins/kubernetes.io/rbd/rbd/rbd-image-kubernetes-dynamic-pvc-532b9030-001d-11e8-b2b4-0023812673e3
+2月 08 11:01:41 node1 rbdmap[3255940]: Failed to unmap '/var/lib/kubelet/plugins/kubernetes.io/rbd/rbd/rbd-image-kubernetes-dynamic-pvc-532b9030-001d-11e8-b2b4-0023812673e3
++ exit 1

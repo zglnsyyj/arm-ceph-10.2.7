@@ -1,0 +1,74 @@
++ TMPDIR=/tmp/rbd_test_admin_socket3255544
++ mkdir /tmp/rbd_test_admin_socket3255544
++ trap 'rm -fr /tmp/rbd_test_admin_socket3255544' 0
+++ dirname ./test_admin_socket.sh
++ . ./../ceph-helpers.sh
+++ TIMEOUT=300
+++ PG_NUM=4
+++ : /tmp
+++ type xmlstarlet
+++ XMLSTARLET=xmlstarlet
+++ test 1 = TESTS
++ wait_for_clean
++ local status=1
++ local num_active_clean=-1
++ local cur_active_clean
++ local -i timer=0
+++ get_num_pgs
+++ xmlstarlet sel -t -m //pgmap/num_pgs -v .
+++ ceph --format xml status
+-:1.3348: Namespace prefix up on standby is not defined
+>0</rank><name>node1</name><status>up:active</status></mds></by_rank><up:standby
+                                                                               ^
++ local num_pgs=448
++ test 448 '!=' 0
++ true
+++ get_num_active_clean
+++ local 'expression=('
+++ expression+='contains(.,'\''active'\'') and '
+++ expression+='contains(.,'\''clean'\'') and '
+++ expression+='not(contains(.,'\''stale'\''))'
+++ expression+=')'
+++ grep -cv '^$'
+++ xmlstarlet sel -t -m '//pg_stat/state[(contains(.,'\''active'\'') and contains(.,'\''clean'\'') and not(contains(.,'\''stale'\'')))]' -v . -n
+++ ceph --format xml pg dump pgs
++ cur_active_clean=448
++ test 448 = 448
++ break
++ return 0
++ pool=rbd
++ image=testimg3255544
+++ rbd_watch_asok testimg3255544
+++ echo /tmp/rbd_test_admin_socket3255544/rbd_watch_testimg3255544.asok
++ ceph_admin='ceph --admin-daemon /tmp/rbd_test_admin_socket3255544/rbd_watch_testimg3255544.asok'
++ rbd create --size 128 rbd/testimg3255544
++ rbd_cache_flush='rbd cache flush rbd/testimg3255544'
++ rbd_cache_invalidate='rbd cache invalidate rbd/testimg3255544'
++ rbd_watch_start testimg3255544
++ local image=testimg3255544
+++ rbd_watch_fifo testimg3255544
+++ echo /tmp/rbd_test_admin_socket3255544/rbd_watch_testimg3255544.fifo
++ mkfifo /tmp/rbd_test_admin_socket3255544/rbd_watch_testimg3255544.fifo
++ local pid
++ rbd watch testimg3255544
+++ seq 10
+++ rbd_watch_out_file testimg3255544
+++ echo /tmp/rbd_test_admin_socket3255544/rbd_watch_testimg3255544.out
++ for i in '`seq 10`'
+++ rbd_watch_fifo testimg3255544
+++ echo /tmp/rbd_test_admin_socket3255544/rbd_watch_testimg3255544.fifo
++ cat /tmp/rbd_test_admin_socket3255544/rbd_watch_testimg3255544.fifo
+++ awk '/[r]bd watch testimg3255544/ {print $2}'
+++ ps auxww
++ pid=3255617
++ test -n 3255617
++ break
++ test -n 3255617
++ echo 3255617
+++ rbd_watch_pid_file testimg3255544
+++ echo /tmp/rbd_test_admin_socket3255544/rbd_watch_testimg3255544.pid
+++ sed -E 's/[0-9]+/3255617/'
+++ ceph-conf admin_socket
++ local asok=
++ test -n ''
++ rm -fr /tmp/rbd_test_admin_socket3255544
