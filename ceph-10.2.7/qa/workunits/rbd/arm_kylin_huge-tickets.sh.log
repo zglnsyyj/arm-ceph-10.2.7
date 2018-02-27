@@ -21,17 +21,6 @@ creating /tmp/keyring-baz
 + ceph auth import -i /tmp/keyring-foo
 imported keyring
 ++ sudo rbd map -n client.foo --keyring /tmp/keyring-foo test
-+ DEV=/dev/rbd2
-+ sudo rbd unmap /dev/rbd2
-+ for user in '{foo,bar,baz}'
-+ ceph auth import -i /tmp/keyring-bar
-imported keyring
-++ sudo rbd map -n client.bar --keyring /tmp/keyring-bar test
-+ DEV=/dev/rbd2
-+ sudo rbd unmap /dev/rbd2
-+ for user in '{foo,bar,baz}'
-+ ceph auth import -i /tmp/keyring-baz
-imported keyring
-++ sudo rbd map -n client.baz --keyring /tmp/keyring-baz test
-+ DEV=/dev/rbd2
-+ sudo rbd unmap /dev/rbd2
+rbd: sysfs write failed
+rbd: map failed: (110) Connection timed out
++ DEV='In some cases useful info is found in syslog - try "dmesg | tail" or so.'

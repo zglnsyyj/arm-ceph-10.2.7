@@ -22,8 +22,8 @@ rbd: delete error: (2) No such file or directory
 + rbd export test - --log-file test.log --debug-ms 1 --no-log-to-stderr
 Exporting image: 40% complete...Exporting image: 80% complete...Exporting image: 100% complete...done.
 + '[' n = y ']'
-+ grep -L balance_reads test.log
 + grep -q test.log
++ grep -L balance_reads test.log
 + '[' n = y ']'
 + grep -L localize_reads test.log
 + grep -q test.log
@@ -40,8 +40,8 @@ rbd: delete error: (2) No such file or directory
 + rbd export test - --log-file test.log --debug-ms 1 --no-log-to-stderr --rbd-balance-snap-reads
 Exporting image: 40% complete...Exporting image: 80% complete...Exporting image: 100% complete...done.
 + '[' n = y ']'
-+ grep -L balance_reads test.log
 + grep -q test.log
++ grep -L balance_reads test.log
 + '[' n = y ']'
 + grep -q test.log
 + grep -L localize_reads test.log
@@ -58,11 +58,11 @@ rbd: delete error: (2) No such file or directory
 + rbd export test@snap - --log-file test.log --debug-ms 1 --no-log-to-stderr
 Exporting image: 40% complete...Exporting image: 80% complete...Exporting image: 100% complete...done.
 + '[' n = y ']'
-+ grep -q test.log
 + grep -L balance_reads test.log
-+ '[' n = y ']'
 + grep -q test.log
++ '[' n = y ']'
 + grep -L localize_reads test.log
++ grep -q test.log
 + rm -f test.log
 + test_read_flags test@snap y n y n
 + local IMAGE=test@snap
