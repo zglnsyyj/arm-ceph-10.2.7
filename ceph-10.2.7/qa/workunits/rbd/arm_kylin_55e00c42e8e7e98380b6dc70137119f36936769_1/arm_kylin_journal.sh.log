@@ -1,0 +1,398 @@
++ test_rbd_journal
++ local image=testrbdjournal645131
++ rbd create --image-feature exclusive-lock --image-feature journaling --size 128 testrbdjournal645131
+++ xmlstarlet sel -t -v //image/journal
+++ rbd info testrbdjournal645131 --format=xml
++ local journal=c988d238e1f29
++ test -n c988d238e1f29
++ rbd journal info c988d238e1f29
+rbd journal 'c988d238e1f29':
+        header_oid: journal.c988d238e1f29
+        object_oid_prefix: journal_data.135.c988d238e1f29.
+        order: 24 (16384 kB objects)
+        splay_width: 4
++ rbd journal info --journal c988d238e1f29
+rbd journal 'c988d238e1f29':
+        header_oid: journal.c988d238e1f29
+        object_oid_prefix: journal_data.135.c988d238e1f29.
+        order: 24 (16384 kB objects)
+        splay_width: 4
++ rbd journal info --image testrbdjournal645131
+rbd journal 'c988d238e1f29':
+        header_oid: journal.c988d238e1f29
+        object_oid_prefix: journal_data.135.c988d238e1f29.
+        order: 24 (16384 kB objects)
+        splay_width: 4
++ rbd feature disable testrbdjournal645131 journaling
++ expect_false xmlstarlet sel -t -v //image/journal
++ set -x
++ rbd info testrbdjournal645131 --format=xml
++ xmlstarlet sel -t -v //image/journal
++ return 0
++ expect_false rbd journal info c988d238e1f29
++ set -x
++ rbd journal info c988d238e1f29
+failed to get journal metadata: (2) No such file or directory
+rbd: journal info: (2) No such file or directory
++ return 0
++ expect_false rbd journal info --image testrbdjournal645131
++ set -x
++ rbd journal info --image testrbdjournal645131
+rbd: journaling is not enabled for image testrbdjournal645131
++ return 0
++ rbd feature enable testrbdjournal645131 journaling
+++ xmlstarlet sel -t -v //image/journal
+++ rbd info testrbdjournal645131 --format=xml
++ local journal1=c988d238e1f29
++ test c988d238e1f29 = c988d238e1f29
++ rbd journal info c988d238e1f29
+rbd journal 'c988d238e1f29':
+        header_oid: journal.c988d238e1f29
+        object_oid_prefix: journal_data.135.c988d238e1f29.
+        order: 24 (16384 kB objects)
+        splay_width: 4
++ rbd journal status c988d238e1f29
+minimum_set: 0
+active_set: 0
+registered clients: 
+        [id=, commit_position=[positions=[]], state=connected]
++ local count=10
++ save_commit_position c988d238e1f29
++ local journal=c988d238e1f29
++ rados -p rbd getomapval journal.c988d238e1f29 client_ /tmp/rbd_journal645131/c988d238e1f29.client_.omap
+Writing to /tmp/rbd_journal645131/c988d238e1f29.client_.omap
++ rbd bench-write testrbdjournal645131 --io-size 4096 --io-threads 1 --io-total 40960 --io-pattern seq
+bench-write  io_size 4096 io_threads 1 bytes 40960 pattern sequential
+  SEC       OPS   OPS/SEC   BYTES/SEC
+elapsed:     0  ops:       10  ops/sec:   156.91  bytes/sec: 642691.32
++ fgrep tid=9
++ rbd journal status --image testrbdjournal645131
+        [id=, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=9], [object_number=0, tag_tid=1, entry_tid=8], [object_number=3, tag_tid=1, entry_tid=7], [object_number=2, tag_tid=1, entry_tid=6]]], state=connected]
++ restore_commit_position c988d238e1f29
++ local journal=c988d238e1f29
++ rados -p rbd setomapval journal.c988d238e1f29 client_
++ rbd journal status --image testrbdjournal645131
++ fgrep 'positions=[]'
+        [id=, commit_position=[positions=[]], state=connected]
+++ rbd journal inspect --verbose c988d238e1f29
+++ grep -c 'event_type.*AioWrite'
+2018-02-28 11:08:15.357566 7f5c7fb850 -1 JournalMetadata: 0x13bf57a20 failed to locate client: INSPECT
++ local count1=10
++ test 10 -eq 10
++ rbd journal export c988d238e1f29 /tmp/rbd_journal645131/journal.export
+10 entries processed, 0 errors
+2018-02-28 11:08:15.427689 7f7effb850 -1 JournalMetadata: 0x15ec901e0 failed to locate client: EXPORT
+++ stat -c %s /tmp/rbd_journal645131/journal.export
++ local size=55599
++ test 55599 -gt 0
++ rbd export testrbdjournal645131 /tmp/rbd_journal645131/testrbdjournal645131.export
+Exporting image: 100% complete...done.
++ local image1=testrbdjournal6451311
++ rbd create --image-feature exclusive-lock --image-feature journaling --size 128 testrbdjournal6451311
+++ xmlstarlet sel -t -v //image/journal
+++ rbd info testrbdjournal6451311 --format=xml
++ journal1=c98b12ae8944a
++ save_commit_position c98b12ae8944a
++ local journal=c98b12ae8944a
++ rados -p rbd getomapval journal.c98b12ae8944a client_ /tmp/rbd_journal645131/c98b12ae8944a.client_.omap
+Writing to /tmp/rbd_journal645131/c98b12ae8944a.client_.omap
++ rbd journal import --dest testrbdjournal6451311 /tmp/rbd_journal645131/journal.export
+10 entries processed, 0 errors
+Waiting for journal append to complete...
+2018-02-28 11:08:16.642647 7f94ffb850 -1 JournalMetadata: 0x118939990 failed to locate client: IMPORT
++ rbd snap create testrbdjournal6451311@test
++ restore_commit_position c98b12ae8944a
++ local journal=c98b12ae8944a
++ rados -p rbd setomapval journal.c98b12ae8944a client_
++ awk '
+      /AioWrite/          {w++}         # match: "event_type": "AioWrite",
+      /SnapCreate/        {s++}         # match: "event_type": "SnapCreate",
+      /OpFinish/          {f++}         # match: "event_type": "OpFinish",
+      /entries inspected/ {t=$1; e=$4}  # match: 12 entries inspected, 0 errors
+                          {print}       # for diagnostic
+      END                 {
+        if (w != 10 || s != 1 || f != 1 || t != 12 || e != 0) exit(1)
+      }
+    '
++ rbd journal inspect --image testrbdjournal6451311 --verbose
+Entry: tag_id=1, commit_tid=1
+{
+    "event_type": "AioWrite",
+    "offset": 99282944,
+    "length": 4096
+}
+Entry: tag_id=1, commit_tid=2
+{
+    "event_type": "AioWrite",
+    "offset": 99287040,
+    "length": 4096
+}
+Entry: tag_id=1, commit_tid=3
+{
+    "event_type": "AioWrite",
+    "offset": 99291136,
+    "length": 4096
+}
+Entry: tag_id=1, commit_tid=4
+{
+    "event_type": "AioWrite",
+    "offset": 99295232,
+    "length": 4096
+}
+Entry: tag_id=1, commit_tid=5
+{
+    "event_type": "AioWrite",
+    "offset": 99299328,
+    "length": 4096
+}
+Entry: tag_id=1, commit_tid=6
+{
+    "event_type": "AioWrite",
+    "offset": 99303424,
+    "length": 4096
+}
+Entry: tag_id=1, commit_tid=7
+{
+    "event_type": "AioWrite",
+    "offset": 99307520,
+    "length": 4096
+}
+Entry: tag_id=1, commit_tid=8
+{
+    "event_type": "AioWrite",
+    "offset": 99311616,
+    "length": 4096
+}
+Entry: tag_id=1, commit_tid=9
+{
+    "event_type": "AioWrite",
+    "offset": 99315712,
+    "length": 4096
+}
+Entry: tag_id=1, commit_tid=10
+{
+    "event_type": "AioWrite",
+    "offset": 99319808,
+    "length": 4096
+}
+Entry: tag_id=1, commit_tid=11
+{
+    "event_type": "SnapCreate",
+    "op_tid": 1,
+    "snap_name": "test"
+}
+Entry: tag_id=1, commit_tid=12
+{
+    "event_type": "OpFinish",
+    "op_tid": 1,
+    "op_tid": 1,
+    "result": 0
+}
+Summary:
+  12 entries inspected, 0 errors
+2018-02-28 11:08:17.981017 7f5b7fb850 -1 JournalMetadata: 0x13b946f80 failed to locate client: INSPECT
++ rbd export testrbdjournal6451311@test /tmp/rbd_journal645131/testrbdjournal6451311.export
+Exporting image: 100% complete...done.
++ cmp /tmp/rbd_journal645131/testrbdjournal645131.export /tmp/rbd_journal645131/testrbdjournal6451311.export
++ rbd journal reset c988d238e1f29
++ rbd journal inspect --verbose c988d238e1f29
++ expect_false grep event_type
++ set -x
++ grep event_type
+2018-02-28 11:08:18.990855 7f5d7fb850 -1 JournalMetadata: 0x13a7b9a80 failed to locate client: INSPECT
++ return 0
++ rbd snap purge testrbdjournal6451311
+Removing all snapshots: 100% complete...done.
++ rbd remove testrbdjournal6451311
+Removing image: 100% complete...done.
++ rbd remove testrbdjournal645131
+Removing image: 100% complete...done.
++ set +x
++ test_rbd_create
++ local image=testrbdcreate645131
++ rbd create --image-feature exclusive-lock --image-feature journaling --journal-pool rbd --journal-object-size 20M --journal-splay-width 6 --size 256 testrbdcreate645131
++ rbd_assert_eq testrbdcreate645131 'journal info' //journal/order 25
++ local image=testrbdcreate645131
++ local 'cmd=journal info'
++ local param=//journal/order
++ local expected_val=25
+++ xmlstarlet sel -t -v //journal/order
+++ rbd --format xml journal info --image testrbdcreate645131
++ local val=25
++ test 25 = 25
++ rbd_assert_eq testrbdcreate645131 'journal info' //journal/splay_width 6
++ local image=testrbdcreate645131
++ local 'cmd=journal info'
++ local param=//journal/splay_width
++ local expected_val=6
+++ xmlstarlet sel -t -v //journal/splay_width
+++ rbd --format xml journal info --image testrbdcreate645131
++ local val=6
++ test 6 = 6
++ rbd_assert_eq testrbdcreate645131 'journal info' //journal/object_pool rbd
++ local image=testrbdcreate645131
++ local 'cmd=journal info'
++ local param=//journal/object_pool
++ local expected_val=rbd
+++ xmlstarlet sel -t -v //journal/object_pool
+++ rbd --format xml journal info --image testrbdcreate645131
++ local val=rbd
++ test rbd = rbd
++ rbd remove testrbdcreate645131
+Removing image: 100% complete...done.
++ set +x
++ test_rbd_copy
++ local src=testrbdcopys645131
++ rbd create --size 256 testrbdcopys645131
++ local image=testrbdcopy645131
++ rbd copy --image-feature exclusive-lock --image-feature journaling --journal-pool rbd --journal-object-size 20M --journal-splay-width 6 testrbdcopys645131 testrbdcopy645131
+Image copy: 100% complete...done.
++ rbd remove testrbdcopys645131
+Removing image: 100% complete...done.
++ rbd_assert_eq testrbdcopy645131 'journal info' //journal/order 25
++ local image=testrbdcopy645131
++ local 'cmd=journal info'
++ local param=//journal/order
++ local expected_val=25
+++ xmlstarlet sel -t -v //journal/order
+++ rbd --format xml journal info --image testrbdcopy645131
++ local val=25
++ test 25 = 25
++ rbd_assert_eq testrbdcopy645131 'journal info' //journal/splay_width 6
++ local image=testrbdcopy645131
++ local 'cmd=journal info'
++ local param=//journal/splay_width
++ local expected_val=6
+++ xmlstarlet sel -t -v //journal/splay_width
+++ rbd --format xml journal info --image testrbdcopy645131
++ local val=6
++ test 6 = 6
++ rbd_assert_eq testrbdcopy645131 'journal info' //journal/object_pool rbd
++ local image=testrbdcopy645131
++ local 'cmd=journal info'
++ local param=//journal/object_pool
++ local expected_val=rbd
+++ xmlstarlet sel -t -v //journal/object_pool
+++ rbd --format xml journal info --image testrbdcopy645131
++ local val=rbd
++ test rbd = rbd
++ rbd remove testrbdcopy645131
+Removing image: 100% complete...done.
++ set +x
++ test_rbd_clone
++ local parent=testrbdclonep645131
++ rbd create --image-feature layering --size 256 testrbdclonep645131
++ rbd snap create testrbdclonep645131@snap
++ rbd snap protect testrbdclonep645131@snap
++ local image=testrbdclone645131
++ rbd clone --image-feature layering --image-feature exclusive-lock --image-feature journaling --journal-pool rbd --journal-object-size 20M --journal-splay-width 6 testrbdclonep645131@snap testrbdclone645131
++ rbd_assert_eq testrbdclone645131 'journal info' //journal/order 25
++ local image=testrbdclone645131
++ local 'cmd=journal info'
++ local param=//journal/order
++ local expected_val=25
+++ xmlstarlet sel -t -v //journal/order
+++ rbd --format xml journal info --image testrbdclone645131
++ local val=25
++ test 25 = 25
++ rbd_assert_eq testrbdclone645131 'journal info' //journal/splay_width 6
++ local image=testrbdclone645131
++ local 'cmd=journal info'
++ local param=//journal/splay_width
++ local expected_val=6
+++ xmlstarlet sel -t -v //journal/splay_width
+++ rbd --format xml journal info --image testrbdclone645131
++ local val=6
++ test 6 = 6
++ rbd_assert_eq testrbdclone645131 'journal info' //journal/object_pool rbd
++ local image=testrbdclone645131
++ local 'cmd=journal info'
++ local param=//journal/object_pool
++ local expected_val=rbd
+++ xmlstarlet sel -t -v //journal/object_pool
+++ rbd --format xml journal info --image testrbdclone645131
++ local val=rbd
++ test rbd = rbd
++ rbd remove testrbdclone645131
+Removing image: 100% complete...done.
++ rbd snap unprotect testrbdclonep645131@snap
++ rbd snap purge testrbdclonep645131
+Removing all snapshots: 100% complete...done.
++ rbd remove testrbdclonep645131
+Removing image: 100% complete...done.
++ set +x
++ test_rbd_import
++ local src=testrbdimports645131
++ rbd create --size 256 testrbdimports645131
++ rbd export testrbdimports645131 /tmp/rbd_journal645131/testrbdimports645131.export
+Exporting image: 100% complete...done.
++ rbd remove testrbdimports645131
+Removing image: 100% complete...done.
++ local image=testrbdimport645131
++ rbd import --image-feature exclusive-lock --image-feature journaling --journal-pool rbd --journal-object-size 20M --journal-splay-width 6 /tmp/rbd_journal645131/testrbdimports645131.export testrbdimport645131
+Importing image: 100% complete...done.
++ rbd_assert_eq testrbdimport645131 'journal info' //journal/order 25
++ local image=testrbdimport645131
++ local 'cmd=journal info'
++ local param=//journal/order
++ local expected_val=25
+++ xmlstarlet sel -t -v //journal/order
+++ rbd --format xml journal info --image testrbdimport645131
++ local val=25
++ test 25 = 25
++ rbd_assert_eq testrbdimport645131 'journal info' //journal/splay_width 6
++ local image=testrbdimport645131
++ local 'cmd=journal info'
++ local param=//journal/splay_width
++ local expected_val=6
+++ xmlstarlet sel -t -v //journal/splay_width
+++ rbd --format xml journal info --image testrbdimport645131
++ local val=6
++ test 6 = 6
++ rbd_assert_eq testrbdimport645131 'journal info' //journal/object_pool rbd
++ local image=testrbdimport645131
++ local 'cmd=journal info'
++ local param=//journal/object_pool
++ local expected_val=rbd
+++ xmlstarlet sel -t -v //journal/object_pool
+++ rbd --format xml journal info --image testrbdimport645131
++ local val=rbd
++ test rbd = rbd
++ rbd remove testrbdimport645131
+Removing image: 100% complete...done.
++ set +x
++ test_rbd_feature
++ local image=testrbdfeature645131
++ rbd create --image-feature exclusive-lock --size 256 testrbdfeature645131
++ rbd feature enable testrbdfeature645131 journaling --journal-pool rbd --journal-object-size 20M --journal-splay-width 6
++ rbd_assert_eq testrbdfeature645131 'journal info' //journal/order 25
++ local image=testrbdfeature645131
++ local 'cmd=journal info'
++ local param=//journal/order
++ local expected_val=25
+++ xmlstarlet sel -t -v //journal/order
+++ rbd --format xml journal info --image testrbdfeature645131
++ local val=25
++ test 25 = 25
++ rbd_assert_eq testrbdfeature645131 'journal info' //journal/splay_width 6
++ local image=testrbdfeature645131
++ local 'cmd=journal info'
++ local param=//journal/splay_width
++ local expected_val=6
+++ xmlstarlet sel -t -v //journal/splay_width
+++ rbd --format xml journal info --image testrbdfeature645131
++ local val=6
++ test 6 = 6
++ rbd_assert_eq testrbdfeature645131 'journal info' //journal/object_pool rbd
++ local image=testrbdfeature645131
++ local 'cmd=journal info'
++ local param=//journal/object_pool
++ local expected_val=rbd
+++ xmlstarlet sel -t -v //journal/object_pool
+++ rbd --format xml journal info --image testrbdfeature645131
++ local val=rbd
++ test rbd = rbd
++ rbd remove testrbdfeature645131
+Removing image: 100% complete...done.
++ set +x
+OK

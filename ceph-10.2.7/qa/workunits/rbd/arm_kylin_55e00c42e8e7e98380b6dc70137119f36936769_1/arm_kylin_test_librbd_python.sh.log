@@ -1,0 +1,108 @@
++ dirname ./test_librbd_python.sh
++ relpath=./../../../src/test/pybind
++ [ -n  ]
++ nosetests -v ./../../../src/test/pybind/test_rbd.py
+test_rbd.TestClone.test_flatten_basic ... ok
+test_rbd.TestClone.test_flatten_drops_cache ... ok
+test_rbd.TestClone.test_flatten_errors ... ok
+test_rbd.TestClone.test_flatten_larger_order ... ok
+test_rbd.TestClone.test_flatten_multi_level ... ok
+test_rbd.TestClone.test_flatten_smaller_order ... ok
+test_rbd.TestClone.test_list_children ... ok
+test_rbd.TestClone.test_read ... ok
+test_rbd.TestClone.test_resize_flatten_multi_level ... ok
+test_rbd.TestClone.test_resize_io ... ok
+test_rbd.TestClone.test_resize_stat ... ok
+test_rbd.TestClone.test_stat ... ok
+test_rbd.TestClone.test_unprotect_with_children ... ok
+test_rbd.TestClone.test_unprotected ... ok
+test_rbd.TestClone.test_with_params ... ok
+test_rbd.TestClone.test_with_params2 ... ok
+test_rbd.TestClone.test_with_params3 ... SKIP
+test_rbd.TestClone.test_write ... ok
+test_rbd.TestExclusiveLock.test_acquire_release_lock ... ok
+test_rbd.TestExclusiveLock.test_break_lock ... ok
+test_rbd.TestExclusiveLock.test_follower_discard ... ok
+test_rbd.TestExclusiveLock.test_follower_flatten ... ok
+test_rbd.TestExclusiveLock.test_follower_resize ... ok
+test_rbd.TestExclusiveLock.test_follower_snap_create ... ok
+test_rbd.TestExclusiveLock.test_follower_snap_rollback ... ok
+test_rbd.TestExclusiveLock.test_follower_write ... ok
+test_rbd.TestExclusiveLock.test_ownership ... ok
+test_rbd.TestExclusiveLock.test_read_only_leadership ... ok
+test_rbd.TestExclusiveLock.test_snapshot_leadership ... ok
+test_rbd.TestImage.test_block_name_prefix ... ok
+test_rbd.TestImage.test_copy ... ok
+test_rbd.TestImage.test_copy2 ... ok
+test_rbd.TestImage.test_copy3 ... SKIP
+test_rbd.TestImage.test_create_snap ... ok
+test_rbd.TestImage.test_create_with_params ... SKIP
+test_rbd.TestImage.test_diff_iterate ... ok
+test_rbd.TestImage.test_flags ... ok
+test_rbd.TestImage.test_id ... ok
+test_rbd.TestImage.test_image_auto_close ... ok
+test_rbd.TestImage.test_invalidate_cache ... ok
+test_rbd.TestImage.test_large_read ... ok
+test_rbd.TestImage.test_large_write ... ok
+test_rbd.TestImage.test_list_lockers ... ok
+test_rbd.TestImage.test_list_snaps ... ok
+test_rbd.TestImage.test_list_snaps_iterator_auto_close ... ok
+test_rbd.TestImage.test_lock_unlock ... ok
+test_rbd.TestImage.test_many_snaps ... ok
+test_rbd.TestImage.test_protect_snap ... ok
+test_rbd.TestImage.test_read ... ok
+test_rbd.TestImage.test_read_bad_offset ... ok
+test_rbd.TestImage.test_read_with_fadvise_flags ... ok
+test_rbd.TestImage.test_remove_snap ... ok
+test_rbd.TestImage.test_remove_with_exclusive_lock ... ok
+test_rbd.TestImage.test_remove_with_snap ... SKIP
+test_rbd.TestImage.test_remove_with_watcher ... SKIP
+test_rbd.TestImage.test_rename_snap ... ok
+test_rbd.TestImage.test_resize ... ok
+test_rbd.TestImage.test_resize_bytes ... ok
+test_rbd.TestImage.test_resize_down ... ok
+test_rbd.TestImage.test_rollback_to_snap ... ok
+test_rbd.TestImage.test_rollback_to_snap_sparse ... ok
+test_rbd.TestImage.test_rollback_with_resize ... ok
+test_rbd.TestImage.test_set_no_snap ... ok
+test_rbd.TestImage.test_set_snap ... ok
+test_rbd.TestImage.test_set_snap_deleted ... ok
+test_rbd.TestImage.test_set_snap_recreated ... ok
+test_rbd.TestImage.test_set_snap_sparse ... ok
+test_rbd.TestImage.test_size ... ok
+test_rbd.TestImage.test_stat ... ok
+test_rbd.TestImage.test_update_features ... SKIP
+test_rbd.TestImage.test_write ... ok
+test_rbd.TestImage.test_write_read ... ok
+test_rbd.TestImage.test_write_with_fadvise_flags ... ok
+test_rbd.TestMirroring.test_mirror_image ... SKIP
+test_rbd.TestMirroring.test_mirror_image_status ... SKIP
+test_rbd.TestMirroring.test_mirror_peer ... ok
+test_rbd.test_version ... ok
+test_rbd.test_create ... ok
+test_rbd.test_create_defaults ... FAIL
+test_rbd.test_context_manager ... ok
+test_rbd.test_open_read_only ... ok
+test_rbd.test_open_dne ... ok
+test_rbd.test_open_readonly_dne ... ok
+test_rbd.test_remove_dne ... ok
+test_rbd.test_list_empty ... ok
+test_rbd.test_list ... ok
+test_rbd.test_rename ... ok
+
+======================================================================
+FAIL: test_rbd.test_create_defaults
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/nose/case.py", line 197, in runTest
+    self.test(*self.arg)
+  File "/home/yujiang/arm-ceph-10.2.7/ceph-10.2.7/src/test/pybind/test_rbd.py", line 174, in test_create_defaults
+    check_default_params(2)
+  File "/home/yujiang/arm-ceph-10.2.7/ceph-10.2.7/src/test/pybind/test_rbd.py", line 150, in check_default_params
+    eq(expected_features, image.features())
+AssertionError: 61 != 3L
+
+----------------------------------------------------------------------
+Ran 87 tests in 767.559s
+
+FAILED (SKIP=8, failures=1)

@@ -1,0 +1,70 @@
+++ dirname ./rbd-nbd.sh
++ . ./../ceph-helpers.sh
+++ TIMEOUT=300
+++ PG_NUM=4
+++ : /tmp
+++ type xmlstarlet
+++ XMLSTARLET=xmlstarlet
+++ test 1 = TESTS
++ POOL=rbd
++ IMAGE=testrbdnbd3352146
++ TOO_LARGE_IMAGE=testrbdnbd3352146_large
++ SUDO=sudo
++ SIZE=64
++ DATA=
++ DEV=
++ setup
++ trap cleanup INT TERM EXIT
+++ mktemp -d
++ TEMPDIR=/tmp/tmp.j7Wrx7fJND
++ DATA=/tmp/tmp.j7Wrx7fJND/data
++ dd if=/dev/urandom of=/tmp/tmp.j7Wrx7fJND/data bs=1M count=64
+记录了64+0 的读入
+记录了64+0 的写出
+67108864 bytes (67 MB, 64 MiB) copied, 7.3752 s, 9.1 MB/s
++ rbd --dest-pool rbd --no-progress import /tmp/tmp.j7Wrx7fJND/data testrbdnbd3352146
++ rbd -p rbd create testrbdnbd3352146_large --size 3T
+++ id -u
++ '[' 0 = 0 ']'
++ SUDO=
++ expect_false rbd-nbd
++ rbd-nbd
+rbd-nbd: must specify command
++ return 0
++ expect_false rbd-nbd INVALIDCMD
++ rbd-nbd INVALIDCMD
+rbd-nbd: unknown command: INVALIDCMD
++ return 0
+++ id -u
++ '[' 0 -ne 0 ']'
++ expect_false rbd-nbd map INVALIDIMAGE
++ rbd-nbd map INVALIDIMAGE
+rbd-nbd: failed to map, status: (2) No such file or directory
++ return 0
++ expect_false rbd-nbd --device INVALIDDEV map testrbdnbd3352146
++ rbd-nbd --device INVALIDDEV map testrbdnbd3352146
+rbd-nbd: failed to open device: INVALIDDEV
++ return 0
++ expect_false rbd-nbd map testrbdnbd3352146_large
++ rbd-nbd map testrbdnbd3352146_large
+/dev/nbd0
++ return 1
++ cleanup
++ set +e
++ rm -Rf
++ '[' -n '' ']'
++ rbd -p rbd status testrbdnbd3352146
+Watchers: none
++ for s in 0.1 0.2 0.4 0.8 1.6 3.2 6.4 12.8
++ sleep 0.1
++ grep 'Watchers: none'
++ rbd -p rbd status testrbdnbd3352146
+Watchers: none
++ break
++ rbd -p rbd remove testrbdnbd3352146
+Removing image: 6% complete...Removing image: 12% complete...Removing image: 18% complete...Removing image: 25% complete...Removing image: 31% complete...Removing image: 37% complete...Removing image: 43% complete...Removing image: 50% complete...Removing image: 56% complete...Removing image: 62% complete...Removing image: 68% complete...Removing image: 75% complete...Removing image: 81% complete...Removing image: 87% complete...Removing image: 93% complete...Removing image: 100% complete...done.
++ rbd -p rbd remove testrbdnbd3352146_large
+2018-02-08 15:31:37.050852 7f8dd16000 -1 librbd: image has watchers - not removing
+Removing image: 0% complete...failed.
+rbd: error: image still has watchers
+This means the image is still open or the client using it crashed. Try again after closing/unmapping it or waiting 30s for the crashed client to timeout.

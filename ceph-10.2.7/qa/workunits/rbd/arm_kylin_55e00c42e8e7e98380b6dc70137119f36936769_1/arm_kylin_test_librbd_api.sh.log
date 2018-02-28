@@ -880,3 +880,16 @@ SKIPPING
 [----------] 7 tests from DiffIterateTest/0, where TypeParam = DiffIterateParams<false>
 [ RUN      ] DiffIterateTest/0.DiffIterate
 using old format
+ wrote [430884~60198,3808708~73907,6628658~1386,7897958~34258,12846541~46565,17314068~69155,18285648~74409,20766199~85497]
+ wrote [731331~1445,6016022~93254,11457317~93078,13884727~17784,13950079~91618,14272267~59661,15286512~9839,17542335~69912]
+ diff was [731331~1445,6016022~93254,6576877~15920,8388608~3161787,12893106~2403245,17542335~69912]
+[       OK ] DiffIterateTest/0.DiffIterate (38738902 ms)
+[ RUN      ] DiffIterateTest/0.DiffIterateDiscard
+using old format
+iterate_cb 0~256
+iterate_cb 0~256
+iterate_cb 0~256
+iterate_cb 0~256
+[       OK ] DiffIterateTest/0.DiffIterateDiscard (690905 ms)
+[ RUN      ] DiffIterateTest/0.DiffIterateStress
+using old format
