@@ -1,0 +1,23 @@
++ dirname ./notify_slave.sh
++ relpath=./../../../src/test/librbd
++ python ./../../../src/test/librbd/test_notify.py slave
+starting slave
+detected master
+rename
+flatten
+resize
+create_snap
+protect_snap
+unprotect_snap
+rename_snap
+remove_snap
+rebuild object map
+Traceback (most recent call last):
+  File "./../../../src/test/librbd/test_notify.py", line 170, in <module>
+    main()
+  File "./../../../src/test/librbd/test_notify.py", line 166, in main
+    slave(ioctx)
+  File "./../../../src/test/librbd/test_notify.py", line 141, in slave
+    False)
+  File "rbd.pyx", line 1348, in rbd.Image.update_features (/tmp/release/Kylin/WORKDIR/ceph-10.2.7/src/build/rbd.c:13682)
+rbd.InvalidArgument: error updating features for image test_notify_clone2

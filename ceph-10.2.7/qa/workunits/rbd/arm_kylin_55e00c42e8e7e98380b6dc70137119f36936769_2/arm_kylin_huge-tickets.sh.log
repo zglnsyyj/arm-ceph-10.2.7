@@ -1,0 +1,26 @@
++ generate_keyring foo 1000
++ local user=foo
++ local n=1000
++ ceph-authtool -C -n client.foo --cap mon 'allow *' --gen-key /tmp/keyring-foo
+creating /tmp/keyring-foo
++ set +x
++ generate_keyring bar 20000
++ local user=bar
++ local n=20000
++ ceph-authtool -C -n client.bar --cap mon 'allow *' --gen-key /tmp/keyring-bar
+creating /tmp/keyring-bar
++ set +x
++ generate_keyring baz 300000
++ local user=baz
++ local n=300000
++ ceph-authtool -C -n client.baz --cap mon 'allow *' --gen-key /tmp/keyring-baz
+creating /tmp/keyring-baz
++ set +x
++ rbd create --size 1 test
++ for user in '{foo,bar,baz}'
++ ceph auth import -i /tmp/keyring-foo
+imported keyring
+++ sudo rbd map -n client.foo --keyring /tmp/keyring-foo test
+rbd: sysfs write failed
+rbd: map failed: (110) Connection timed out
++ DEV='In some cases useful info is found in syslog - try "dmesg | tail" or so.'

@@ -1,0 +1,13 @@
++ which ceph-detect-init
++ ceph-detect-init
++ [ systemd = systemd ]
++ echo TEST: save timestamp for use later with journalctl --since
+TEST: save timestamp for use later with journalctl --since
++ date +%Y-%m-%d %H:%M:%S
++ TIMESTAMP=2018-02-28 16:58:34
++ echo TEST: assert that rbdmap has not logged anything since boot
+TEST: assert that rbdmap has not logged anything since boot
++ journalctl -b 0 -t rbdmap
++ grep rbdmap\[[[:digit:]]
+2月 28 14:08:47 node3 rbdmap[707340]: No /etc/ceph/rbdmap found.
++ exit 1

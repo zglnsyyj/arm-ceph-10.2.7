@@ -1,0 +1,921 @@
+[==========] Running 42 tests from 5 test cases.
+[----------] Global test environment set-up.
+[----------] 4 tests from TestClusterWatcher
+[ RUN      ] TestClusterWatcher.NoPools
+[       OK ] TestClusterWatcher.NoPools (51 ms)
+[ RUN      ] TestClusterWatcher.NoMirroredPools
+[       OK ] TestClusterWatcher.NoMirroredPools (12154 ms)
+[ RUN      ] TestClusterWatcher.ReplicatedPools
+[       OK ] TestClusterWatcher.ReplicatedPools (30921 ms)
+[ RUN      ] TestClusterWatcher.CachePools
+[       OK ] TestClusterWatcher.CachePools (24863 ms)
+[----------] 4 tests from TestClusterWatcher (67989 ms total)
+
+[----------] 2 tests from TestPoolWatcher
+[ RUN      ] TestPoolWatcher.EmptyPool
+[       OK ] TestPoolWatcher.EmptyPool (3989 ms)
+[ RUN      ] TestPoolWatcher.ReplicatedPools
+[       OK ] TestPoolWatcher.ReplicatedPools (10563 ms)
+[----------] 2 tests from TestPoolWatcher (14552 ms total)
+
+[----------] 19 tests from TestImageReplayer
+[ RUN      ] TestImageReplayer.Bootstrap
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+[       OK ] TestImageReplayer.Bootstrap (18452 ms)
+[ RUN      ] TestImageReplayer.BootstrapErrorLocalImageExists
+[       OK ] TestImageReplayer.BootstrapErrorLocalImageExists (12771 ms)
+[ RUN      ] TestImageReplayer.BootstrapErrorNoJournal
+[       OK ] TestImageReplayer.BootstrapErrorNoJournal (10125 ms)
+[ RUN      ] TestImageReplayer.BootstrapErrorMirrorDisabled
+[       OK ] TestImageReplayer.BootstrapErrorMirrorDisabled (9814 ms)
+[ RUN      ] TestImageReplayer.BootstrapMirrorDisabling
+[       OK ] TestImageReplayer.BootstrapMirrorDisabling (9398 ms)
+[ RUN      ] TestImageReplayer.BootstrapDemoted
+[       OK ] TestImageReplayer.BootstrapDemoted (9899 ms)
+[ RUN      ] TestImageReplayer.StartInterrupted
+start returned -125
+[       OK ] TestImageReplayer.StartInterrupted (12490 ms)
+[ RUN      ] TestImageReplayer.JournalReset
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+[       OK ] TestImageReplayer.JournalReset (25003 ms)
+[ RUN      ] TestImageReplayer.ErrorNoJournal
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+[       OK ] TestImageReplayer.ErrorNoJournal (18071 ms)
+[ RUN      ] TestImageReplayer.StartStop
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+[       OK ] TestImageReplayer.StartStop (19310 ms)
+[ RUN      ] TestImageReplayer.WriteAndStartReplay
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+flushed
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=11], [object_number=2, tag_tid=2, entry_tid=10], [object_number=1, tag_tid=2, entry_tid=9], [object_number=0, tag_tid=2, entry_tid=8]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=11], [object_number=2, tag_tid=2, entry_tid=10], [object_number=1, tag_tid=2, entry_tid=9], [object_number=0, tag_tid=2, entry_tid=8]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=11], [object_number=2, tag_tid=2, entry_tid=10], [object_number=1, tag_tid=2, entry_tid=9], [object_number=0, tag_tid=2, entry_tid=8]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=11], [object_number=2, tag_tid=2, entry_tid=10], [object_number=1, tag_tid=2, entry_tid=9], [object_number=0, tag_tid=2, entry_tid=8]]], state=connected]
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+[       OK ] TestImageReplayer.WriteAndStartReplay (19572 ms)
+[ RUN      ] TestImageReplayer.StartReplayAndWrite
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+flushed
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=11], [object_number=2, tag_tid=2, entry_tid=10], [object_number=1, tag_tid=2, entry_tid=9], [object_number=0, tag_tid=2, entry_tid=8]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=11], [object_number=2, tag_tid=2, entry_tid=10], [object_number=1, tag_tid=2, entry_tid=9], [object_number=0, tag_tid=2, entry_tid=8]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=11], [object_number=2, tag_tid=2, entry_tid=10], [object_number=1, tag_tid=2, entry_tid=9], [object_number=0, tag_tid=2, entry_tid=8]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=11], [object_number=2, tag_tid=2, entry_tid=10], [object_number=1, tag_tid=2, entry_tid=9], [object_number=0, tag_tid=2, entry_tid=8]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=11], [object_number=2, tag_tid=2, entry_tid=10], [object_number=1, tag_tid=2, entry_tid=9], [object_number=0, tag_tid=2, entry_tid=8]]], state=connected]
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+flushed
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=23], [object_number=2, tag_tid=2, entry_tid=22], [object_number=1, tag_tid=2, entry_tid=21], [object_number=0, tag_tid=2, entry_tid=20]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=23], [object_number=2, tag_tid=2, entry_tid=22], [object_number=1, tag_tid=2, entry_tid=21], [object_number=0, tag_tid=2, entry_tid=20]]], state=connected]
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+[       OK ] TestImageReplayer.StartReplayAndWrite (20987 ms)
+[ RUN      ] TestImageReplayer.NextTag
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=2, tag_tid=11, entry_tid=10], [object_number=1, tag_tid=11, entry_tid=9], [object_number=0, tag_tid=11, entry_tid=8], [object_number=3, tag_tid=11, entry_tid=7]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=2, tag_tid=6, entry_tid=10], [object_number=1, tag_tid=6, entry_tid=9], [object_number=0, tag_tid=6, entry_tid=8], [object_number=3, tag_tid=6, entry_tid=7]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=2, tag_tid=11, entry_tid=10], [object_number=1, tag_tid=11, entry_tid=9], [object_number=0, tag_tid=11, entry_tid=8], [object_number=3, tag_tid=11, entry_tid=7]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=0, tag_tid=7, entry_tid=0], [object_number=2, tag_tid=6, entry_tid=10], [object_number=1, tag_tid=6, entry_tid=9], [object_number=3, tag_tid=6, entry_tid=7]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=2, tag_tid=11, entry_tid=10], [object_number=1, tag_tid=11, entry_tid=9], [object_number=0, tag_tid=11, entry_tid=8], [object_number=3, tag_tid=11, entry_tid=7]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=7, entry_tid=3], [object_number=2, tag_tid=7, entry_tid=2], [object_number=1, tag_tid=7, entry_tid=1], [object_number=0, tag_tid=7, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=2, tag_tid=11, entry_tid=10], [object_number=1, tag_tid=11, entry_tid=9], [object_number=0, tag_tid=11, entry_tid=8], [object_number=3, tag_tid=11, entry_tid=7]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=0, tag_tid=7, entry_tid=8], [object_number=3, tag_tid=7, entry_tid=7], [object_number=2, tag_tid=7, entry_tid=6], [object_number=1, tag_tid=7, entry_tid=5]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=2, tag_tid=11, entry_tid=10], [object_number=1, tag_tid=11, entry_tid=9], [object_number=0, tag_tid=11, entry_tid=8], [object_number=3, tag_tid=11, entry_tid=7]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=2, tag_tid=7, entry_tid=10], [object_number=1, tag_tid=7, entry_tid=9], [object_number=0, tag_tid=7, entry_tid=8], [object_number=3, tag_tid=7, entry_tid=7]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=2, tag_tid=11, entry_tid=10], [object_number=1, tag_tid=11, entry_tid=9], [object_number=0, tag_tid=11, entry_tid=8], [object_number=3, tag_tid=11, entry_tid=7]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=8, entry_tid=1], [object_number=0, tag_tid=8, entry_tid=0], [object_number=2, tag_tid=7, entry_tid=10], [object_number=3, tag_tid=7, entry_tid=7]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=2, tag_tid=11, entry_tid=10], [object_number=1, tag_tid=11, entry_tid=9], [object_number=0, tag_tid=11, entry_tid=8], [object_number=3, tag_tid=11, entry_tid=7]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=8, entry_tid=5], [object_number=0, tag_tid=8, entry_tid=4], [object_number=3, tag_tid=8, entry_tid=3], [object_number=2, tag_tid=8, entry_tid=2]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=2, tag_tid=11, entry_tid=10], [object_number=1, tag_tid=11, entry_tid=9], [object_number=0, tag_tid=11, entry_tid=8], [object_number=3, tag_tid=11, entry_tid=7]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=8, entry_tid=9], [object_number=0, tag_tid=8, entry_tid=8], [object_number=3, tag_tid=8, entry_tid=7], [object_number=2, tag_tid=8, entry_tid=6]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=2, tag_tid=11, entry_tid=10], [object_number=1, tag_tid=11, entry_tid=9], [object_number=0, tag_tid=11, entry_tid=8], [object_number=3, tag_tid=11, entry_tid=7]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=2, tag_tid=8, entry_tid=10], [object_number=1, tag_tid=8, entry_tid=9], [object_number=0, tag_tid=8, entry_tid=8], [object_number=3, tag_tid=8, entry_tid=7]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=2, tag_tid=11, entry_tid=10], [object_number=1, tag_tid=11, entry_tid=9], [object_number=0, tag_tid=11, entry_tid=8], [object_number=3, tag_tid=11, entry_tid=7]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=2, tag_tid=9, entry_tid=2], [object_number=1, tag_tid=9, entry_tid=1], [object_number=0, tag_tid=9, entry_tid=0], [object_number=3, tag_tid=8, entry_tid=7]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=2, tag_tid=11, entry_tid=10], [object_number=1, tag_tid=11, entry_tid=9], [object_number=0, tag_tid=11, entry_tid=8], [object_number=3, tag_tid=11, entry_tid=7]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=9, entry_tid=7], [object_number=2, tag_tid=9, entry_tid=6], [object_number=1, tag_tid=9, entry_tid=5], [object_number=0, tag_tid=9, entry_tid=4]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=2, tag_tid=11, entry_tid=10], [object_number=1, tag_tid=11, entry_tid=9], [object_number=0, tag_tid=11, entry_tid=8], [object_number=3, tag_tid=11, entry_tid=7]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=2, tag_tid=9, entry_tid=10], [object_number=1, tag_tid=9, entry_tid=9], [object_number=0, tag_tid=9, entry_tid=8], [object_number=3, tag_tid=9, entry_tid=7]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=2, tag_tid=11, entry_tid=10], [object_number=1, tag_tid=11, entry_tid=9], [object_number=0, tag_tid=11, entry_tid=8], [object_number=3, tag_tid=11, entry_tid=7]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=2, tag_tid=9, entry_tid=10], [object_number=1, tag_tid=9, entry_tid=9], [object_number=0, tag_tid=9, entry_tid=8], [object_number=3, tag_tid=9, entry_tid=7]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=2, tag_tid=11, entry_tid=10], [object_number=1, tag_tid=11, entry_tid=9], [object_number=0, tag_tid=11, entry_tid=8], [object_number=3, tag_tid=11, entry_tid=7]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=2, tag_tid=11, entry_tid=10], [object_number=1, tag_tid=11, entry_tid=9], [object_number=0, tag_tid=11, entry_tid=8], [object_number=3, tag_tid=11, entry_tid=7]]], state=connected]
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+[       OK ] TestImageReplayer.NextTag (21631 ms)
+[ RUN      ] TestImageReplayer.Resync
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+flushed
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=11], [object_number=2, tag_tid=2, entry_tid=10], [object_number=1, tag_tid=2, entry_tid=9], [object_number=0, tag_tid=2, entry_tid=8]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=11], [object_number=2, tag_tid=2, entry_tid=10], [object_number=1, tag_tid=2, entry_tid=9], [object_number=0, tag_tid=2, entry_tid=8]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=11], [object_number=2, tag_tid=2, entry_tid=10], [object_number=1, tag_tid=2, entry_tid=9], [object_number=0, tag_tid=2, entry_tid=8]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=11], [object_number=2, tag_tid=2, entry_tid=10], [object_number=1, tag_tid=2, entry_tid=9], [object_number=0, tag_tid=2, entry_tid=8]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=11], [object_number=2, tag_tid=2, entry_tid=10], [object_number=1, tag_tid=2, entry_tid=9], [object_number=0, tag_tid=2, entry_tid=8]]], state=connected]
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+flushed
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=3], [object_number=2, tag_tid=3, entry_tid=2], [object_number=1, tag_tid=3, entry_tid=1], [object_number=0, tag_tid=3, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=23], [object_number=2, tag_tid=2, entry_tid=22], [object_number=1, tag_tid=2, entry_tid=21], [object_number=0, tag_tid=2, entry_tid=20]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=3], [object_number=2, tag_tid=3, entry_tid=2], [object_number=1, tag_tid=3, entry_tid=1], [object_number=0, tag_tid=3, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=23], [object_number=2, tag_tid=2, entry_tid=22], [object_number=1, tag_tid=2, entry_tid=21], [object_number=0, tag_tid=2, entry_tid=20]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=3], [object_number=2, tag_tid=3, entry_tid=2], [object_number=1, tag_tid=3, entry_tid=1], [object_number=0, tag_tid=3, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=3, entry_tid=1], [object_number=0, tag_tid=3, entry_tid=0], [object_number=3, tag_tid=2, entry_tid=23], [object_number=2, tag_tid=2, entry_tid=22]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=3], [object_number=2, tag_tid=3, entry_tid=2], [object_number=1, tag_tid=3, entry_tid=1], [object_number=0, tag_tid=3, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=3, entry_tid=1], [object_number=0, tag_tid=3, entry_tid=0], [object_number=3, tag_tid=2, entry_tid=23], [object_number=2, tag_tid=2, entry_tid=22]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=3], [object_number=2, tag_tid=3, entry_tid=2], [object_number=1, tag_tid=3, entry_tid=1], [object_number=0, tag_tid=3, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=3], [object_number=2, tag_tid=3, entry_tid=2], [object_number=1, tag_tid=3, entry_tid=1], [object_number=0, tag_tid=3, entry_tid=0]]], state=connected]
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+[       OK ] TestImageReplayer.Resync (27192 ms)
+[ RUN      ] TestImageReplayer.Resync_While_Stop
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+flushed
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=11], [object_number=2, tag_tid=2, entry_tid=10], [object_number=1, tag_tid=2, entry_tid=9], [object_number=0, tag_tid=2, entry_tid=8]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=11], [object_number=2, tag_tid=2, entry_tid=10], [object_number=1, tag_tid=2, entry_tid=9], [object_number=0, tag_tid=2, entry_tid=8]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=11], [object_number=2, tag_tid=2, entry_tid=10], [object_number=1, tag_tid=2, entry_tid=9], [object_number=0, tag_tid=2, entry_tid=8]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=11], [object_number=2, tag_tid=2, entry_tid=10], [object_number=1, tag_tid=2, entry_tid=9], [object_number=0, tag_tid=2, entry_tid=8]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=11], [object_number=2, tag_tid=2, entry_tid=10], [object_number=1, tag_tid=2, entry_tid=9], [object_number=0, tag_tid=2, entry_tid=8]]], state=connected]
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+flushed
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=23], [object_number=2, tag_tid=2, entry_tid=22], [object_number=1, tag_tid=2, entry_tid=21], [object_number=0, tag_tid=2, entry_tid=20]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=2, entry_tid=21], [object_number=0, tag_tid=2, entry_tid=20], [object_number=3, tag_tid=2, entry_tid=19], [object_number=2, tag_tid=2, entry_tid=18]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=23], [object_number=2, tag_tid=2, entry_tid=22], [object_number=1, tag_tid=2, entry_tid=21], [object_number=0, tag_tid=2, entry_tid=20]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=2, entry_tid=21], [object_number=0, tag_tid=2, entry_tid=20], [object_number=3, tag_tid=2, entry_tid=19], [object_number=2, tag_tid=2, entry_tid=18]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=23], [object_number=2, tag_tid=2, entry_tid=22], [object_number=1, tag_tid=2, entry_tid=21], [object_number=0, tag_tid=2, entry_tid=20]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=23], [object_number=2, tag_tid=2, entry_tid=22], [object_number=1, tag_tid=2, entry_tid=21], [object_number=0, tag_tid=2, entry_tid=20]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=3], [object_number=2, tag_tid=3, entry_tid=2], [object_number=1, tag_tid=3, entry_tid=1], [object_number=0, tag_tid=3, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=23], [object_number=2, tag_tid=2, entry_tid=22], [object_number=1, tag_tid=2, entry_tid=21], [object_number=0, tag_tid=2, entry_tid=20]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=3], [object_number=2, tag_tid=3, entry_tid=2], [object_number=1, tag_tid=3, entry_tid=1], [object_number=0, tag_tid=3, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=23], [object_number=2, tag_tid=2, entry_tid=22], [object_number=1, tag_tid=2, entry_tid=21], [object_number=0, tag_tid=2, entry_tid=20]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=3], [object_number=2, tag_tid=3, entry_tid=2], [object_number=1, tag_tid=3, entry_tid=1], [object_number=0, tag_tid=3, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=3, entry_tid=1], [object_number=0, tag_tid=3, entry_tid=0], [object_number=3, tag_tid=2, entry_tid=23], [object_number=2, tag_tid=2, entry_tid=22]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=3], [object_number=2, tag_tid=3, entry_tid=2], [object_number=1, tag_tid=3, entry_tid=1], [object_number=0, tag_tid=3, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=3, entry_tid=1], [object_number=0, tag_tid=3, entry_tid=0], [object_number=3, tag_tid=2, entry_tid=23], [object_number=2, tag_tid=2, entry_tid=22]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=3], [object_number=2, tag_tid=3, entry_tid=2], [object_number=1, tag_tid=3, entry_tid=1], [object_number=0, tag_tid=3, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=3], [object_number=2, tag_tid=3, entry_tid=2], [object_number=1, tag_tid=3, entry_tid=1], [object_number=0, tag_tid=3, entry_tid=0]]], state=connected]
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+[       OK ] TestImageReplayer.Resync_While_Stop (28651 ms)
+[ RUN      ] TestImageReplayer.Resync_StartInterrupted
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+flushed
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=11], [object_number=2, tag_tid=3, entry_tid=10], [object_number=1, tag_tid=3, entry_tid=9], [object_number=0, tag_tid=3, entry_tid=8]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=2, entry_tid=1], [object_number=0, tag_tid=2, entry_tid=0], [object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=11], [object_number=2, tag_tid=3, entry_tid=10], [object_number=1, tag_tid=3, entry_tid=9], [object_number=0, tag_tid=3, entry_tid=8]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=2, entry_tid=1], [object_number=0, tag_tid=2, entry_tid=0], [object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=11], [object_number=2, tag_tid=3, entry_tid=10], [object_number=1, tag_tid=3, entry_tid=9], [object_number=0, tag_tid=3, entry_tid=8]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=2, entry_tid=1], [object_number=0, tag_tid=2, entry_tid=0], [object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=11], [object_number=2, tag_tid=3, entry_tid=10], [object_number=1, tag_tid=3, entry_tid=9], [object_number=0, tag_tid=3, entry_tid=8]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=3], [object_number=2, tag_tid=2, entry_tid=2], [object_number=1, tag_tid=2, entry_tid=1], [object_number=0, tag_tid=2, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=11], [object_number=2, tag_tid=3, entry_tid=10], [object_number=1, tag_tid=3, entry_tid=9], [object_number=0, tag_tid=3, entry_tid=8]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=0, tag_tid=3, entry_tid=0], [object_number=3, tag_tid=2, entry_tid=3], [object_number=2, tag_tid=2, entry_tid=2], [object_number=1, tag_tid=2, entry_tid=1]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=11], [object_number=2, tag_tid=3, entry_tid=10], [object_number=1, tag_tid=3, entry_tid=9], [object_number=0, tag_tid=3, entry_tid=8]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=2, tag_tid=3, entry_tid=2], [object_number=1, tag_tid=3, entry_tid=1], [object_number=0, tag_tid=3, entry_tid=0], [object_number=3, tag_tid=2, entry_tid=3]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=11], [object_number=2, tag_tid=3, entry_tid=10], [object_number=1, tag_tid=3, entry_tid=9], [object_number=0, tag_tid=3, entry_tid=8]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=2, tag_tid=3, entry_tid=6], [object_number=1, tag_tid=3, entry_tid=5], [object_number=0, tag_tid=3, entry_tid=4], [object_number=3, tag_tid=3, entry_tid=3]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=11], [object_number=2, tag_tid=3, entry_tid=10], [object_number=1, tag_tid=3, entry_tid=9], [object_number=0, tag_tid=3, entry_tid=8]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=2, tag_tid=3, entry_tid=10], [object_number=1, tag_tid=3, entry_tid=9], [object_number=0, tag_tid=3, entry_tid=8], [object_number=3, tag_tid=3, entry_tid=7]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=11], [object_number=2, tag_tid=3, entry_tid=10], [object_number=1, tag_tid=3, entry_tid=9], [object_number=0, tag_tid=3, entry_tid=8]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=11], [object_number=2, tag_tid=3, entry_tid=10], [object_number=1, tag_tid=3, entry_tid=9], [object_number=0, tag_tid=3, entry_tid=8]]], state=connected]
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+flushed
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=23], [object_number=2, tag_tid=3, entry_tid=22], [object_number=1, tag_tid=3, entry_tid=21], [object_number=0, tag_tid=3, entry_tid=20]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=11], [object_number=2, tag_tid=3, entry_tid=10], [object_number=1, tag_tid=3, entry_tid=9], [object_number=0, tag_tid=3, entry_tid=8]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=23], [object_number=2, tag_tid=3, entry_tid=22], [object_number=1, tag_tid=3, entry_tid=21], [object_number=0, tag_tid=3, entry_tid=20]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=11], [object_number=2, tag_tid=3, entry_tid=10], [object_number=1, tag_tid=3, entry_tid=9], [object_number=0, tag_tid=3, entry_tid=8]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=23], [object_number=2, tag_tid=3, entry_tid=22], [object_number=1, tag_tid=3, entry_tid=21], [object_number=0, tag_tid=3, entry_tid=20]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=23], [object_number=2, tag_tid=3, entry_tid=22], [object_number=1, tag_tid=3, entry_tid=21], [object_number=0, tag_tid=3, entry_tid=20]]], state=connected]
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+read: 512
+[       OK ] TestImageReplayer.Resync_StartInterrupted (28299 ms)
+[ RUN      ] TestImageReplayer.MultipleReplayFailures_SingleEpoch
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+[       OK ] TestImageReplayer.MultipleReplayFailures_SingleEpoch (25533 ms)
+[ RUN      ] TestImageReplayer.MultipleReplayFailures_MultiEpoch
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+wrote: 512
+[       OK ] TestImageReplayer.MultipleReplayFailures_MultiEpoch (26038 ms)
+[ RUN      ] TestImageReplayer.Disconnect
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=1, entry_tid=3], [object_number=2, tag_tid=1, entry_tid=2], [object_number=1, tag_tid=1, entry_tid=1], [object_number=0, tag_tid=1, entry_tid=0]]], state=connected]
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+flushed
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=3], [object_number=2, tag_tid=3, entry_tid=2], [object_number=1, tag_tid=3, entry_tid=1], [object_number=0, tag_tid=3, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=2, entry_tid=11], [object_number=2, tag_tid=2, entry_tid=10], [object_number=1, tag_tid=2, entry_tid=9], [object_number=0, tag_tid=2, entry_tid=8]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=3], [object_number=2, tag_tid=3, entry_tid=2], [object_number=1, tag_tid=3, entry_tid=1], [object_number=0, tag_tid=3, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=3, entry_tid=1], [object_number=0, tag_tid=3, entry_tid=0], [object_number=3, tag_tid=2, entry_tid=11], [object_number=2, tag_tid=2, entry_tid=10]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=3], [object_number=2, tag_tid=3, entry_tid=2], [object_number=1, tag_tid=3, entry_tid=1], [object_number=0, tag_tid=3, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=3, entry_tid=1], [object_number=0, tag_tid=3, entry_tid=0], [object_number=3, tag_tid=2, entry_tid=11], [object_number=2, tag_tid=2, entry_tid=10]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=3], [object_number=2, tag_tid=3, entry_tid=2], [object_number=1, tag_tid=3, entry_tid=1], [object_number=0, tag_tid=3, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=3, entry_tid=3], [object_number=2, tag_tid=3, entry_tid=2], [object_number=1, tag_tid=3, entry_tid=1], [object_number=0, tag_tid=3, entry_tid=0]]], state=connected]
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+wrote: 512
+flushed
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=5, entry_tid=3], [object_number=2, tag_tid=5, entry_tid=2], [object_number=1, tag_tid=5, entry_tid=1], [object_number=0, tag_tid=5, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=4, entry_tid=11], [object_number=2, tag_tid=4, entry_tid=10], [object_number=1, tag_tid=4, entry_tid=9], [object_number=0, tag_tid=4, entry_tid=8]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=5, entry_tid=3], [object_number=2, tag_tid=5, entry_tid=2], [object_number=1, tag_tid=5, entry_tid=1], [object_number=0, tag_tid=5, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=4, entry_tid=11], [object_number=2, tag_tid=4, entry_tid=10], [object_number=1, tag_tid=4, entry_tid=9], [object_number=0, tag_tid=4, entry_tid=8]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=5, entry_tid=3], [object_number=2, tag_tid=5, entry_tid=2], [object_number=1, tag_tid=5, entry_tid=1], [object_number=0, tag_tid=5, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=5, entry_tid=1], [object_number=0, tag_tid=5, entry_tid=0], [object_number=3, tag_tid=4, entry_tid=11], [object_number=2, tag_tid=4, entry_tid=10]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=5, entry_tid=3], [object_number=2, tag_tid=5, entry_tid=2], [object_number=1, tag_tid=5, entry_tid=1], [object_number=0, tag_tid=5, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=1, tag_tid=5, entry_tid=1], [object_number=0, tag_tid=5, entry_tid=0], [object_number=3, tag_tid=4, entry_tid=11], [object_number=2, tag_tid=4, entry_tid=10]]], state=connected]
+m_replayer->flush()
+get_commit_positions: client: [id=, commit_position=[positions=[[object_number=3, tag_tid=5, entry_tid=3], [object_number=2, tag_tid=5, entry_tid=2], [object_number=1, tag_tid=5, entry_tid=1], [object_number=0, tag_tid=5, entry_tid=0]]], state=connected]
+get_commit_positions: client: [id=local mirror uuid, commit_position=[positions=[[object_number=3, tag_tid=5, entry_tid=3], [object_number=2, tag_tid=5, entry_tid=2], [object_number=1, tag_tid=5, entry_tid=1], [object_number=0, tag_tid=5, entry_tid=0]]], state=connected]
+[       OK ] TestImageReplayer.Disconnect (31714 ms)
+[----------] 19 tests from TestImageReplayer (374952 ms total)
+
+[----------] 14 tests from TestImageDeleter
+[ RUN      ] TestImageDeleter.Delete_NonPrimary_Image
+seed 954116
+[       OK ] TestImageDeleter.Delete_NonPrimary_Image (4512 ms)
+[ RUN      ] TestImageDeleter.Fail_Delete_Primary_Image
+[       OK ] TestImageDeleter.Fail_Delete_Primary_Image (309 ms)
+[ RUN      ] TestImageDeleter.Fail_Delete_Diff_GlobalId
+[       OK ] TestImageDeleter.Fail_Delete_Diff_GlobalId (276 ms)
+[ RUN      ] TestImageDeleter.Delete_Image_With_Child
+[       OK ] TestImageDeleter.Delete_Image_With_Child (3533 ms)
+[ RUN      ] TestImageDeleter.Delete_Image_With_Children
+[       OK ] TestImageDeleter.Delete_Image_With_Children (5853 ms)
+[ RUN      ] TestImageDeleter.Delete_Image_With_ProtectedChild
+[       OK ] TestImageDeleter.Delete_Image_With_ProtectedChild (3183 ms)
+[ RUN      ] TestImageDeleter.Delete_Image_With_ProtectedChildren
+[       OK ] TestImageDeleter.Delete_Image_With_ProtectedChildren (6600 ms)
+[ RUN      ] TestImageDeleter.Delete_Image_With_Clone
+[       OK ] TestImageDeleter.Delete_Image_With_Clone (3149 ms)
+[ RUN      ] TestImageDeleter.Delete_NonExistent_Image
+[       OK ] TestImageDeleter.Delete_NonExistent_Image (315 ms)
+[ RUN      ] TestImageDeleter.Delete_NonExistent_Image_With_MirroringState
+[       OK ] TestImageDeleter.Delete_NonExistent_Image_With_MirroringState (244 ms)
+[ RUN      ] TestImageDeleter.Delete_NonExistent_Image_Without_MirroringState
+[       OK ] TestImageDeleter.Delete_NonExistent_Image_Without_MirroringState (276 ms)
+[ RUN      ] TestImageDeleter.Fail_Delete_NonPrimary_Image
+[       OK ] TestImageDeleter.Fail_Delete_NonPrimary_Image (303 ms)
+[ RUN      ] TestImageDeleter.Retry_Failed_Deletes
+[       OK ] TestImageDeleter.Retry_Failed_Deletes (2258 ms)
+[ RUN      ] TestImageDeleter.Delete_Is_Idempotent
+[       OK ] TestImageDeleter.Delete_Is_Idempotent (295 ms)
+[----------] 14 tests from TestImageDeleter (31150 ms total)
+
+[----------] 3 tests from TestImageSync
+[ RUN      ] TestImageSync.Empty
+[       OK ] TestImageSync.Empty (10110 ms)
+[ RUN      ] TestImageSync.Simple
+[       OK ] TestImageSync.Simple (4607 ms)
+[ RUN      ] TestImageSync.SnapshotStress
+[       OK ] TestImageSync.SnapshotStress (16746 ms)
+[----------] 3 tests from TestImageSync (31464 ms total)
+
+[----------] Global test environment tear-down
+[==========] 42 tests from 5 test cases ran. (530551 ms total)
+[  PASSED  ] 42 tests.

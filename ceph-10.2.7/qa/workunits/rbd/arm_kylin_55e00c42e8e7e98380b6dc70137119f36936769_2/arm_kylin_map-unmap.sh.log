@@ -1,0 +1,27 @@
++ RUN_TIME=300
++ '[' 1 -eq 1 ']'
++ RUN_TIME=1
++ IMAGE_NAME=image-801833
++ IMAGE_SIZE=1024
++ rbd create image-801833 --size=1024
++ COUNT=0
+++ get_time
+++ date +%s
++ START_TIME=1519805209
++++ get_time
++++ date +%s
+++ expr 1519805209 + 1
++ END_TIME=1519805210
++ times_up 1519805210
++ local end_time=1519805210
+++ get_time
+++ date +%s
++ test 1519805209 -ge 1519805210
++ map_unmap image-801833
++ '[' 1 -eq 1 ']'
++ local image_name=image-801833
++ local dev
+++ sudo rbd map image-801833
+rbd: sysfs write failed
+rbd: map failed: (110) Connection timed out
++ dev='In some cases useful info is found in syslog - try "dmesg | tail" or so.'

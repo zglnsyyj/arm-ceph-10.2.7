@@ -1,0 +1,46 @@
++ IMAGE=rbdrw-image
++ LOCKID=rbdrw
+++ dirname ./test_lock_fence.sh
++ RELPATH=./../../../src/test/librbd
++ RBDRW=./../../../src/test/librbd/rbdrw.py
++ rbd create rbdrw-image --size 10 --image-format 2 --image-shared
++ iochild=827187
++ LOCKS='{}'
++ python ./../../../src/test/librbd/rbdrw.py rbdrw-image rbdrw
++ '[' '{}' == '{}' ']'
+++ rbd lock list rbdrw-image --format json
++ LOCKS='{}'
++ sleep 1
++ '[' '{}' == '{}' ']'
+++ rbd lock list rbdrw-image --format json
++ LOCKS='{"rbdrw":{"locker":"client.473478","address":"172.16.20.13:0\/233411668"}}'
++ sleep 1
++ '[' '{"rbdrw":{"locker":"client.473478","address":"172.16.20.13:0\/233411668"}}' == '{}' ']'
+++ awk '{print $NF;}'
+++ tail -1
+++ rbd lock list rbdrw-image
++ clientaddr=172.16.20.13:0/233411668
+++ awk '{print $1;}'
+++ tail -1
+++ rbd lock list rbdrw-image
++ clientid=client.473478
++ echo 'clientaddr: 172.16.20.13:0/233411668'
+clientaddr: 172.16.20.13:0/233411668
++ echo 'clientid: client.473478'
+clientid: client.473478
++ ceph osd blacklist add 172.16.20.13:0/233411668
+blacklisting 172.16.20.13:0/233411668 until 2018-02-28 17:24:11.672730 (3600 sec)
++ wait 827187
++ rbdrw_exitcode=108
++ '[' 108 '!=' 108 ']'
++ echo 'rbdrw stopped with ESHUTDOWN'
+rbdrw stopped with ESHUTDOWN
++ set -e
++ ceph osd blacklist rm 172.16.20.13:0/233411668
+un-blacklisting 172.16.20.13:0/233411668
++ rbd lock remove rbdrw-image rbdrw client.473478
++ sleep 30
++ rbd rm rbdrw-image
+Removing image: 33% complete...Removing image: 66% complete...Removing image: 100% complete...done.
++ echo OK
+OK

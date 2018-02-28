@@ -1,0 +1,33 @@
++ TMPDIR=/tmp/rbd_test_admin_socket762899
++ mkdir /tmp/rbd_test_admin_socket762899
++ trap 'rm -fr /tmp/rbd_test_admin_socket762899' 0
+++ dirname ./test_admin_socket.sh
++ . ./../ceph-helpers.sh
+++ TIMEOUT=300
+++ PG_NUM=4
+++ : /tmp
+++ type xmlstarlet
+++ XMLSTARLET=xmlstarlet
+++ test 1 = TESTS
++ wait_for_clean
++ local status=1
++ local num_active_clean=-1
++ local cur_active_clean
++ local -i timer=0
+++ get_num_pgs
+++ ceph --format xml status
+++ xmlstarlet sel -t -m //pgmap/num_pgs -v .
++ local num_pgs=512
++ test 512 '!=' 0
++ true
+++ get_num_active_clean
+++ local 'expression=('
+++ expression+='contains(.,'\''active'\'') and '
+++ expression+='contains(.,'\''clean'\'') and '
+++ expression+='not(contains(.,'\''stale'\''))'
+++ expression+=')'
+++ grep -cv '^$'
+++ xmlstarlet sel -t -m '//pg_stat/state[(contains(.,'\''active'\'') and contains(.,'\''clean'\'') and not(contains(.,'\''stale'\'')))]' -v . -n
+++ ceph --format xml pg dump pgs
++ cur_active_clean=0
++ rm -fr /tmp/rbd_test_admin_socket762899

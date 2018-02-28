@@ -1,0 +1,52 @@
++ testlist=001 002 003 004 005 008 009 010 011 021 025 032 033
++ git clone https://github.com/qemu/qemu.git
+正克隆到 'qemu'...
++ cd qemu
++ grep -iq juniper
++ lsb_release -da
++ git checkout v2.3.0
+Note: checking out 'v2.3.0'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b <new-branch-name>
+
+HEAD 目前位于 e5b3a24... Update version for v2.3.0 release
++ cd tests/qemu-iotests
++ mkdir bin
++ [ -x /usr/bin/qemu-system-arm ]
++ QEMU=/usr/bin/qemu-system-arm
++ ln -s /usr/bin/qemu-system-arm bin/qemu
++ touch common.env
++ TEST_DIR=rbd PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/yujiang/arm-ceph-10.2.7/ceph-10.2.7/qa/workunits/rbd/qemu/tests/qemu-iotests/bin ./check -rbd 001 002 003 004 005 008 009 010 011 021 025 032 033
+QEMU          -- /home/yujiang/arm-ceph-10.2.7/ceph-10.2.7/qa/workunits/rbd/qemu/tests/qemu-iotests/bin/qemu
+QEMU_IMG      -- /usr/bin/qemu-img
+QEMU_IO       -- /usr/bin/qemu-io 
+QEMU_NBD      -- /usr/bin/qemu-nbd
+IMGFMT        -- raw
+IMGPROTO      -- rbd
+PLATFORM      -- Linux/aarch64 node3 4.4.58-20170818.kylin.5.server.YUN+-generic
+TEST_DIR      -- rbd
+SOCKET_SCM_HELPER -- 
+
+001        
+002        
+003        
+004        
+005        
+008        
+009        
+010        
+011        
+021        
+025        
+032        
+033        
+Passed all 13 tests
++ cd ../../..
++ rm -rf qemu
