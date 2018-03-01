@@ -1,6 +1,6 @@
-+ TMPDIR=/tmp/rbd_test_admin_socket131602
-+ mkdir /tmp/rbd_test_admin_socket131602
-+ trap 'rm -fr /tmp/rbd_test_admin_socket131602' 0
++ TMPDIR=/tmp/rbd_test_admin_socket1360856
++ mkdir /tmp/rbd_test_admin_socket1360856
++ trap 'rm -fr /tmp/rbd_test_admin_socket1360856' 0
 ++ dirname ./test_admin_socket.sh
 + . ./../ceph-helpers.sh
 ++ TIMEOUT=300
@@ -29,5 +29,627 @@
 ++ grep -cv '^$'
 ++ xmlstarlet sel -t -m '//pg_stat/state[(contains(.,'\''active'\'') and contains(.,'\''clean'\'') and not(contains(.,'\''stale'\'')))]' -v . -n
 ++ ceph --format xml pg dump pgs
-+ cur_active_clean=0
-+ rm -fr /tmp/rbd_test_admin_socket131602
++ cur_active_clean=512
++ test 512 = 512
++ break
++ return 0
++ pool=rbd
++ image=testimg1360856
+++ rbd_watch_asok testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
++ ceph_admin='ceph --admin-daemon /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok'
++ rbd create --size 128 rbd/testimg1360856
++ rbd_cache_flush='rbd cache flush rbd/testimg1360856'
++ rbd_cache_invalidate='rbd cache invalidate rbd/testimg1360856'
++ rbd_watch_start testimg1360856
++ local image=testimg1360856
+++ rbd_watch_fifo testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.fifo
++ mkfifo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.fifo
++ local pid
+++ seq 10
++ rbd watch testimg1360856
+++ rbd_watch_fifo testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.fifo
+++ rbd_watch_out_file testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.out
++ for i in '`seq 10`'
++ cat /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.fifo
+++ ps auxww
+++ awk '/[r]bd watch testimg1360856/ {print $2}'
++ pid=1360937
++ test -n 1360937
++ break
++ test -n 1360937
++ echo 1360937
+++ rbd_watch_pid_file testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.pid
+++ ceph-conf admin_socket
+++ sed -E 's/[0-9]+/1360937/'
++ local asok=/var/run/ceph/rbd-client-1360937.asok
++ test -n /var/run/ceph/rbd-client-1360937.asok
+++ seq 10
++ for i in '`seq 10`'
++ test -S /var/run/ceph/rbd-client-1360937.asok
++ break
++ test -S /var/run/ceph/rbd-client-1360937.asok
+++ rbd_watch_asok testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
++ ln -s /var/run/ceph/rbd-client-1360937.asok /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
++ ceph --admin-daemon /var/run/ceph/rbd-client-1360937.asok config set debug_rbd 20
+{
+    "success": ""
+}
+
++ expect_false grep 'Watchers: none'
++ set -x
++ grep 'Watchers: none'
++ rbd status testimg1360856
++ return 0
++ fgrep 'rbd cache flush rbd/testimg1360856'
++ ceph --admin-daemon /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok help
+    "rbd cache flush rbd/testimg1360856": "flush rbd image rbd\/testimg1360856 cache",
++ ceph --admin-daemon /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok help
++ fgrep 'rbd cache invalidate rbd/testimg1360856'
+    "rbd cache invalidate rbd/testimg1360856": "invalidate rbd image rbd\/testimg1360856 cache",
++ rbd_watch_end testimg1360856
++ local image=testimg1360856
++ local regexp=
++ echo
+++ rbd_watch_fifo testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.fifo
++++ rbd_watch_pid_file testimg1360856
++++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.pid
+++ cat /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.pid
++ kill 1360937
+++ rbd_watch_out_file testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.out
++ cat /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.out
+./test_admin_socket.sh: 行 63: 1360935 已完成               cat $(rbd_watch_fifo ${image})
+     1360937 已终止               | rbd watch ${image} > $(rbd_watch_out_file ${image}) 2>&1
+press enter to exit...
+2018-03-01 13:48:05.448851 7f93a9c000 20 librbd::ImageState: 0x143333f50 close
+2018-03-01 13:48:05.448866 7f93a9c000 10 librbd::ImageState: 0x143333f50 0x143333f50 send_close_unlock
+2018-03-01 13:48:05.448884 7f93a9c000 10 librbd::image::CloseRequest: 0x1433368b0 send_shut_down_update_watchers
+2018-03-01 13:48:05.448887 7f93a9c000 20 librbd::ImageState: 0x143333f50 shut_down_update_watchers
+2018-03-01 13:48:05.448889 7f93a9c000 20 librbd::ImageState: 0x143333410 ImageUpdateWatchers::shut_down
+2018-03-01 13:48:05.448892 7f93a9c000 20 librbd::ImageState: 0x143333410 ImageUpdateWatchers::shut_down: completing shut down
+2018-03-01 13:48:05.448922 7f89ffb850 10 librbd::image::CloseRequest: 0x1433368b0 handle_shut_down_update_watchers: r=0
+2018-03-01 13:48:05.448929 7f89ffb850 10 librbd::image::CloseRequest: 0x1433368b0 send_shut_down_aio_queue
+2018-03-01 13:48:05.448935 7f89ffb850  5 librbd::AioImageRequestWQ: shut_down: in_flight=0
+2018-03-01 13:48:05.448943 7f89ffb850 10 librbd::image::CloseRequest: 0x1433368b0 handle_shut_down_aio_queue: r=0
+2018-03-01 13:48:05.448957 7f89ffb850 10 librbd::image::CloseRequest: 0x1433368b0 send_flush
+2018-03-01 13:48:05.448964 7f89ffb850 10 librbd::image::CloseRequest: 0x1433368b0 handle_flush: r=0
+2018-03-01 13:48:05.448967 7f89ffb850 10 librbd::image::CloseRequest: 0x1433368b0 send_flush_readahead
+2018-03-01 13:48:05.448971 7f89ffb850 10 librbd::image::CloseRequest: 0x1433368b0 handle_flush_readahead: r=0
+2018-03-01 13:48:05.448973 7f89ffb850 10 librbd::image::CloseRequest: 0x1433368b0 send_shut_down_cache
+2018-03-01 13:48:05.448976 7f89ffb850 10 librbd::image::CloseRequest: 0x1433368b0 handle_shut_down_cache: r=0
+2018-03-01 13:48:05.448978 7f89ffb850 10 librbd::image::CloseRequest: 0x1433368b0 send_flush_op_work_queue
+2018-03-01 13:48:05.448982 7f89ffb850 10 librbd::image::CloseRequest: 0x1433368b0 handle_flush_op_work_queue: r=0
+2018-03-01 13:48:05.449007 7f89ffb850 10 librbd::ImageState: 0x143333f50 0x143333f50 handle_close: r=0
+++ rbd_watch_fifo testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.fifo
+++ rbd_watch_pid_file testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.pid
+++ rbd_watch_out_file testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.out
+++ rbd_watch_asok testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
++ rm -f /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.fifo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.pid /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.out /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
++ for conf_rbd_cache in false true
++ rbd image-meta set testimg1360856 conf_rbd_cache false
++ rbd_watch_start testimg1360856
++ local image=testimg1360856
+++ rbd_watch_fifo testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.fifo
++ mkfifo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.fifo
++ local pid
+++ seq 10
++ rbd watch testimg1360856
++ for i in '`seq 10`'
+++ rbd_watch_out_file testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.out
+++ rbd_watch_fifo testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.fifo
++ cat /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.fifo
+++ awk '/[r]bd watch testimg1360856/ {print $2}'
+++ ps auxww
++ pid=1361025
++ test -n 1361025
++ break
++ test -n 1361025
++ echo 1361025
+++ rbd_watch_pid_file testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.pid
+++ sed -E 's/[0-9]+/1361025/'
+++ ceph-conf admin_socket
++ local asok=/var/run/ceph/rbd-client-1361025.asok
++ test -n /var/run/ceph/rbd-client-1361025.asok
+++ seq 10
++ for i in '`seq 10`'
++ test -S /var/run/ceph/rbd-client-1361025.asok
++ break
++ test -S /var/run/ceph/rbd-client-1361025.asok
+++ rbd_watch_asok testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
++ ln -s /var/run/ceph/rbd-client-1361025.asok /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
++ ceph --admin-daemon /var/run/ceph/rbd-client-1361025.asok config set debug_rbd 20
+{
+    "success": ""
+}
+
++ rbd status testimg1360856
++ expect_false grep 'Watchers: none'
++ set -x
++ grep 'Watchers: none'
++ return 0
++ rbd_check_perfcounter testimg1360856 flush 0
++ local image=testimg1360856
++ local counter=flush
++ local expected_val=0
++ local val=
+++ rbd_get_perfcounter testimg1360856 flush
+++ local image=testimg1360856
+++ local counter=flush
+++ local name
++++ xmlstarlet el -d3
+++++ rbd_watch_asok testimg1360856
+++++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
++++ ceph --format xml --admin-daemon /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok perf schema
++++ grep '/librbd-.*-testimg1360856/flush$'
+-:1.41: Failed to parse QName 'AsyncMessenger:'
+<perfcounter_collection><AsyncMessenger::Worker-0><msgr_recv_messages><type>10</
+                                        ^
+-:1.957: Failed to parse QName 'AsyncMessenger:'
+ick></nick></msgr_active_connections></AsyncMessenger::Worker-0><AsyncMessenger:
+                                                                               ^
+-:1.1873: Failed to parse QName 'AsyncMessenger:'
+ick></nick></msgr_active_connections></AsyncMessenger::Worker-1><AsyncMessenger:
+                                                                               ^
+++ name=perfcounter_collection/librbd-de70b238e1f29-rbd-testimg1360856/flush
+++ test -n perfcounter_collection/librbd-de70b238e1f29-rbd-testimg1360856/flush
+++ xmlstarlet sel -t -m perfcounter_collection/librbd-de70b238e1f29-rbd-testimg1360856/flush -v .
++++ rbd_watch_asok testimg1360856
++++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
+++ ceph --format xml --admin-daemon /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok perf dump
+-:1.41: Failed to parse QName 'AsyncMessenger:'
+<perfcounter_collection><AsyncMessenger::Worker-0><msgr_recv_messages>2</msgr_re
+                                        ^
+-:1.416: Failed to parse QName 'AsyncMessenger:'
+nnections>1</msgr_active_connections></AsyncMessenger::Worker-0><AsyncMessenger:
+                                                                               ^
+-:1.793: Failed to parse QName 'AsyncMessenger:'
+nnections>1</msgr_active_connections></AsyncMessenger::Worker-1><AsyncMessenger:
+                                                                               ^
++ val=0
++ test 0 -eq 0
++ ceph --admin-daemon /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok rbd cache flush rbd/testimg1360856
+
++ rbd_check_perfcounter testimg1360856 flush 1
++ local image=testimg1360856
++ local counter=flush
++ local expected_val=1
++ local val=
+++ rbd_get_perfcounter testimg1360856 flush
+++ local image=testimg1360856
+++ local counter=flush
+++ local name
++++ grep '/librbd-.*-testimg1360856/flush$'
++++ xmlstarlet el -d3
+++++ rbd_watch_asok testimg1360856
+++++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
++++ ceph --format xml --admin-daemon /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok perf schema
+-:1.41: Failed to parse QName 'AsyncMessenger:'
+<perfcounter_collection><AsyncMessenger::Worker-0><msgr_recv_messages><type>10</
+                                        ^
+-:1.957: Failed to parse QName 'AsyncMessenger:'
+ick></nick></msgr_active_connections></AsyncMessenger::Worker-0><AsyncMessenger:
+                                                                               ^
+-:1.1873: Failed to parse QName 'AsyncMessenger:'
+ick></nick></msgr_active_connections></AsyncMessenger::Worker-1><AsyncMessenger:
+                                                                               ^
+++ name=perfcounter_collection/librbd-de70b238e1f29-rbd-testimg1360856/flush
+++ test -n perfcounter_collection/librbd-de70b238e1f29-rbd-testimg1360856/flush
+++ xmlstarlet sel -t -m perfcounter_collection/librbd-de70b238e1f29-rbd-testimg1360856/flush -v .
++++ rbd_watch_asok testimg1360856
++++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
+++ ceph --format xml --admin-daemon /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok perf dump
+-:1.41: Failed to parse QName 'AsyncMessenger:'
+<perfcounter_collection><AsyncMessenger::Worker-0><msgr_recv_messages>2</msgr_re
+                                        ^
+-:1.416: Failed to parse QName 'AsyncMessenger:'
+nnections>1</msgr_active_connections></AsyncMessenger::Worker-0><AsyncMessenger:
+                                                                               ^
+-:1.793: Failed to parse QName 'AsyncMessenger:'
+nnections>1</msgr_active_connections></AsyncMessenger::Worker-1><AsyncMessenger:
+                                                                               ^
++ val=1
++ test 1 -eq 1
++ rbd_check_perfcounter testimg1360856 invalidate_cache 0
++ local image=testimg1360856
++ local counter=invalidate_cache
++ local expected_val=0
++ local val=
+++ rbd_get_perfcounter testimg1360856 invalidate_cache
+++ local image=testimg1360856
+++ local counter=invalidate_cache
+++ local name
++++ grep '/librbd-.*-testimg1360856/invalidate_cache$'
++++ xmlstarlet el -d3
+++++ rbd_watch_asok testimg1360856
+++++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
++++ ceph --format xml --admin-daemon /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok perf schema
+-:1.41: Failed to parse QName 'AsyncMessenger:'
+<perfcounter_collection><AsyncMessenger::Worker-0><msgr_recv_messages><type>10</
+                                        ^
+-:1.957: Failed to parse QName 'AsyncMessenger:'
+ick></nick></msgr_active_connections></AsyncMessenger::Worker-0><AsyncMessenger:
+                                                                               ^
+-:1.1873: Failed to parse QName 'AsyncMessenger:'
+ick></nick></msgr_active_connections></AsyncMessenger::Worker-1><AsyncMessenger:
+                                                                               ^
+++ name=perfcounter_collection/librbd-de70b238e1f29-rbd-testimg1360856/invalidate_cache
+++ test -n perfcounter_collection/librbd-de70b238e1f29-rbd-testimg1360856/invalidate_cache
+++ xmlstarlet sel -t -m perfcounter_collection/librbd-de70b238e1f29-rbd-testimg1360856/invalidate_cache -v .
++++ rbd_watch_asok testimg1360856
++++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
+++ ceph --format xml --admin-daemon /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok perf dump
+-:1.41: Failed to parse QName 'AsyncMessenger:'
+<perfcounter_collection><AsyncMessenger::Worker-0><msgr_recv_messages>2</msgr_re
+                                        ^
+-:1.416: Failed to parse QName 'AsyncMessenger:'
+nnections>1</msgr_active_connections></AsyncMessenger::Worker-0><AsyncMessenger:
+                                                                               ^
+-:1.793: Failed to parse QName 'AsyncMessenger:'
+nnections>1</msgr_active_connections></AsyncMessenger::Worker-1><AsyncMessenger:
+                                                                               ^
++ val=0
++ test 0 -eq 0
++ ceph --admin-daemon /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok rbd cache invalidate rbd/testimg1360856
+
++ rbd_check_perfcounter testimg1360856 invalidate_cache 1
++ local image=testimg1360856
++ local counter=invalidate_cache
++ local expected_val=1
++ local val=
+++ rbd_get_perfcounter testimg1360856 invalidate_cache
+++ local image=testimg1360856
+++ local counter=invalidate_cache
+++ local name
++++ grep '/librbd-.*-testimg1360856/invalidate_cache$'
++++ xmlstarlet el -d3
+++++ rbd_watch_asok testimg1360856
+++++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
++++ ceph --format xml --admin-daemon /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok perf schema
+-:1.41: Failed to parse QName 'AsyncMessenger:'
+<perfcounter_collection><AsyncMessenger::Worker-0><msgr_recv_messages><type>10</
+                                        ^
+-:1.957: Failed to parse QName 'AsyncMessenger:'
+ick></nick></msgr_active_connections></AsyncMessenger::Worker-0><AsyncMessenger:
+                                                                               ^
+-:1.1873: Failed to parse QName 'AsyncMessenger:'
+ick></nick></msgr_active_connections></AsyncMessenger::Worker-1><AsyncMessenger:
+                                                                               ^
+++ name=perfcounter_collection/librbd-de70b238e1f29-rbd-testimg1360856/invalidate_cache
+++ test -n perfcounter_collection/librbd-de70b238e1f29-rbd-testimg1360856/invalidate_cache
+++ xmlstarlet sel -t -m perfcounter_collection/librbd-de70b238e1f29-rbd-testimg1360856/invalidate_cache -v .
++++ rbd_watch_asok testimg1360856
++++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
+++ ceph --format xml --admin-daemon /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok perf dump
+-:1.41: Failed to parse QName 'AsyncMessenger:'
+<perfcounter_collection><AsyncMessenger::Worker-0><msgr_recv_messages>2</msgr_re
+                                        ^
+-:1.416: Failed to parse QName 'AsyncMessenger:'
+nnections>1</msgr_active_connections></AsyncMessenger::Worker-0><AsyncMessenger:
+                                                                               ^
+-:1.793: Failed to parse QName 'AsyncMessenger:'
+nnections>1</msgr_active_connections></AsyncMessenger::Worker-1><AsyncMessenger:
+                                                                               ^
++ val=1
++ test 1 -eq 1
++ rbd_watch_end testimg1360856
++ local image=testimg1360856
++ local regexp=
++ echo
+++ rbd_watch_fifo testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.fifo
++++ rbd_watch_pid_file testimg1360856
++++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.pid
+++ cat /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.pid
++ kill 1361025
+./test_admin_socket.sh: 行 63: 1361024 已完成               cat $(rbd_watch_fifo ${image})
+     1361025 已终止               | rbd watch ${image} > $(rbd_watch_out_file ${image}) 2>&1
+++ rbd_watch_out_file testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.out
++ cat /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.out
+press enter to exit...
+2018-03-01 13:48:06.345415 7f8c0c1850 20 librbd: flush 0x123204200
+2018-03-01 13:48:07.171282 7f8c0c1850 20 librbd: invalidate_cache 0x123204200
+2018-03-01 13:48:07.528758 7f8d10e000 20 librbd::ImageState: 0x123203f50 close
+2018-03-01 13:48:07.528777 7f8d10e000 10 librbd::ImageState: 0x123203f50 0x123203f50 send_close_unlock
+2018-03-01 13:48:07.528795 7f8d10e000 10 librbd::image::CloseRequest: 0x1232068b0 send_shut_down_update_watchers
+2018-03-01 13:48:07.528799 7f8d10e000 20 librbd::ImageState: 0x123203f50 shut_down_update_watchers
+2018-03-01 13:48:07.528801 7f8d10e000 20 librbd::ImageState: 0x123203410 ImageUpdateWatchers::shut_down
+2018-03-01 13:48:07.528804 7f8d10e000 20 librbd::ImageState: 0x123203410 ImageUpdateWatchers::shut_down: completing shut down
+2018-03-01 13:48:07.528839 7f837fb850 10 librbd::image::CloseRequest: 0x1232068b0 handle_shut_down_update_watchers: r=0
+2018-03-01 13:48:07.528844 7f837fb850 10 librbd::image::CloseRequest: 0x1232068b0 send_shut_down_aio_queue
+2018-03-01 13:48:07.528848 7f837fb850  5 librbd::AioImageRequestWQ: shut_down: in_flight=0
+2018-03-01 13:48:07.528856 7f837fb850 10 librbd::image::CloseRequest: 0x1232068b0 handle_shut_down_aio_queue: r=0
+2018-03-01 13:48:07.528866 7f837fb850 10 librbd::image::CloseRequest: 0x1232068b0 send_flush
+2018-03-01 13:48:07.528875 7f837fb850 10 librbd::image::CloseRequest: 0x1232068b0 handle_flush: r=0
+2018-03-01 13:48:07.528878 7f837fb850 10 librbd::image::CloseRequest: 0x1232068b0 send_flush_readahead
+2018-03-01 13:48:07.528882 7f837fb850 10 librbd::image::CloseRequest: 0x1232068b0 handle_flush_readahead: r=0
+2018-03-01 13:48:07.528884 7f837fb850 10 librbd::image::CloseRequest: 0x1232068b0 send_shut_down_cache
+2018-03-01 13:48:07.528887 7f837fb850 10 librbd::image::CloseRequest: 0x1232068b0 handle_shut_down_cache: r=0
+2018-03-01 13:48:07.528889 7f837fb850 10 librbd::image::CloseRequest: 0x1232068b0 send_flush_op_work_queue
+2018-03-01 13:48:07.528893 7f837fb850 10 librbd::image::CloseRequest: 0x1232068b0 handle_flush_op_work_queue: r=0
+2018-03-01 13:48:07.528919 7f837fb850 10 librbd::ImageState: 0x123203f50 0x123203f50 handle_close: r=0
+++ rbd_watch_fifo testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.fifo
+++ rbd_watch_pid_file testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.pid
+++ rbd_watch_out_file testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.out
+++ rbd_watch_asok testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
++ rm -f /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.fifo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.pid /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.out /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
++ for conf_rbd_cache in false true
++ rbd image-meta set testimg1360856 conf_rbd_cache true
++ rbd_watch_start testimg1360856
++ local image=testimg1360856
+++ rbd_watch_fifo testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.fifo
++ mkfifo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.fifo
++ local pid
++ rbd watch testimg1360856
+++ seq 10
++ for i in '`seq 10`'
+++ rbd_watch_out_file testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.out
+++ rbd_watch_fifo testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.fifo
+++ awk '/[r]bd watch testimg1360856/ {print $2}'
+++ ps auxww
++ cat /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.fifo
++ pid=1361179
++ test -n 1361179
++ break
++ test -n 1361179
++ echo 1361179
+++ rbd_watch_pid_file testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.pid
+++ sed -E 's/[0-9]+/1361179/'
+++ ceph-conf admin_socket
++ local asok=/var/run/ceph/rbd-client-1361179.asok
++ test -n /var/run/ceph/rbd-client-1361179.asok
+++ seq 10
++ for i in '`seq 10`'
++ test -S /var/run/ceph/rbd-client-1361179.asok
++ break
++ test -S /var/run/ceph/rbd-client-1361179.asok
+++ rbd_watch_asok testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
++ ln -s /var/run/ceph/rbd-client-1361179.asok /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
++ ceph --admin-daemon /var/run/ceph/rbd-client-1361179.asok config set debug_rbd 20
+{
+    "success": ""
+}
+
++ expect_false grep 'Watchers: none'
++ set -x
++ grep 'Watchers: none'
++ rbd status testimg1360856
++ return 0
++ rbd_check_perfcounter testimg1360856 flush 0
++ local image=testimg1360856
++ local counter=flush
++ local expected_val=0
++ local val=
+++ rbd_get_perfcounter testimg1360856 flush
+++ local image=testimg1360856
+++ local counter=flush
+++ local name
++++ grep '/librbd-.*-testimg1360856/flush$'
++++ xmlstarlet el -d3
+++++ rbd_watch_asok testimg1360856
+++++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
++++ ceph --format xml --admin-daemon /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok perf schema
+-:1.41: Failed to parse QName 'AsyncMessenger:'
+<perfcounter_collection><AsyncMessenger::Worker-0><msgr_recv_messages><type>10</
+                                        ^
+-:1.957: Failed to parse QName 'AsyncMessenger:'
+ick></nick></msgr_active_connections></AsyncMessenger::Worker-0><AsyncMessenger:
+                                                                               ^
+-:1.1873: Failed to parse QName 'AsyncMessenger:'
+ick></nick></msgr_active_connections></AsyncMessenger::Worker-1><AsyncMessenger:
+                                                                               ^
+++ name=perfcounter_collection/librbd-de70b238e1f29-rbd-testimg1360856/flush
+++ test -n perfcounter_collection/librbd-de70b238e1f29-rbd-testimg1360856/flush
+++ xmlstarlet sel -t -m perfcounter_collection/librbd-de70b238e1f29-rbd-testimg1360856/flush -v .
++++ rbd_watch_asok testimg1360856
++++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
+++ ceph --format xml --admin-daemon /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok perf dump
+-:1.41: Failed to parse QName 'AsyncMessenger:'
+<perfcounter_collection><AsyncMessenger::Worker-0><msgr_recv_messages>2</msgr_re
+                                        ^
+-:1.416: Failed to parse QName 'AsyncMessenger:'
+nnections>1</msgr_active_connections></AsyncMessenger::Worker-0><AsyncMessenger:
+                                                                               ^
+-:1.793: Failed to parse QName 'AsyncMessenger:'
+nnections>1</msgr_active_connections></AsyncMessenger::Worker-1><AsyncMessenger:
+                                                                               ^
++ val=0
++ test 0 -eq 0
++ ceph --admin-daemon /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok rbd cache flush rbd/testimg1360856
+
++ rbd_check_perfcounter testimg1360856 flush 1
++ local image=testimg1360856
++ local counter=flush
++ local expected_val=1
++ local val=
+++ rbd_get_perfcounter testimg1360856 flush
+++ local image=testimg1360856
+++ local counter=flush
+++ local name
++++ grep '/librbd-.*-testimg1360856/flush$'
++++ xmlstarlet el -d3
+++++ rbd_watch_asok testimg1360856
+++++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
++++ ceph --format xml --admin-daemon /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok perf schema
+-:1.41: Failed to parse QName 'AsyncMessenger:'
+<perfcounter_collection><AsyncMessenger::Worker-0><msgr_recv_messages><type>10</
+                                        ^
+-:1.957: Failed to parse QName 'AsyncMessenger:'
+ick></nick></msgr_active_connections></AsyncMessenger::Worker-0><AsyncMessenger:
+                                                                               ^
+-:1.1873: Failed to parse QName 'AsyncMessenger:'
+ick></nick></msgr_active_connections></AsyncMessenger::Worker-1><AsyncMessenger:
+                                                                               ^
+++ name=perfcounter_collection/librbd-de70b238e1f29-rbd-testimg1360856/flush
+++ test -n perfcounter_collection/librbd-de70b238e1f29-rbd-testimg1360856/flush
+++ xmlstarlet sel -t -m perfcounter_collection/librbd-de70b238e1f29-rbd-testimg1360856/flush -v .
++++ rbd_watch_asok testimg1360856
++++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
+++ ceph --format xml --admin-daemon /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok perf dump
+-:1.41: Failed to parse QName 'AsyncMessenger:'
+<perfcounter_collection><AsyncMessenger::Worker-0><msgr_recv_messages>2</msgr_re
+                                        ^
+-:1.416: Failed to parse QName 'AsyncMessenger:'
+nnections>1</msgr_active_connections></AsyncMessenger::Worker-0><AsyncMessenger:
+                                                                               ^
+-:1.793: Failed to parse QName 'AsyncMessenger:'
+nnections>1</msgr_active_connections></AsyncMessenger::Worker-1><AsyncMessenger:
+                                                                               ^
++ val=1
++ test 1 -eq 1
++ rbd_check_perfcounter testimg1360856 invalidate_cache 0
++ local image=testimg1360856
++ local counter=invalidate_cache
++ local expected_val=0
++ local val=
+++ rbd_get_perfcounter testimg1360856 invalidate_cache
+++ local image=testimg1360856
+++ local counter=invalidate_cache
+++ local name
++++ grep '/librbd-.*-testimg1360856/invalidate_cache$'
++++ xmlstarlet el -d3
+++++ rbd_watch_asok testimg1360856
+++++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
++++ ceph --format xml --admin-daemon /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok perf schema
+-:1.41: Failed to parse QName 'AsyncMessenger:'
+<perfcounter_collection><AsyncMessenger::Worker-0><msgr_recv_messages><type>10</
+                                        ^
+-:1.957: Failed to parse QName 'AsyncMessenger:'
+ick></nick></msgr_active_connections></AsyncMessenger::Worker-0><AsyncMessenger:
+                                                                               ^
+-:1.1873: Failed to parse QName 'AsyncMessenger:'
+ick></nick></msgr_active_connections></AsyncMessenger::Worker-1><AsyncMessenger:
+                                                                               ^
+++ name=perfcounter_collection/librbd-de70b238e1f29-rbd-testimg1360856/invalidate_cache
+++ test -n perfcounter_collection/librbd-de70b238e1f29-rbd-testimg1360856/invalidate_cache
+++ xmlstarlet sel -t -m perfcounter_collection/librbd-de70b238e1f29-rbd-testimg1360856/invalidate_cache -v .
++++ rbd_watch_asok testimg1360856
++++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
+++ ceph --format xml --admin-daemon /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok perf dump
+-:1.41: Failed to parse QName 'AsyncMessenger:'
+<perfcounter_collection><AsyncMessenger::Worker-0><msgr_recv_messages>2</msgr_re
+                                        ^
+-:1.416: Failed to parse QName 'AsyncMessenger:'
+nnections>1</msgr_active_connections></AsyncMessenger::Worker-0><AsyncMessenger:
+                                                                               ^
+-:1.793: Failed to parse QName 'AsyncMessenger:'
+nnections>1</msgr_active_connections></AsyncMessenger::Worker-1><AsyncMessenger:
+                                                                               ^
++ val=0
++ test 0 -eq 0
++ ceph --admin-daemon /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok rbd cache invalidate rbd/testimg1360856
+
++ rbd_check_perfcounter testimg1360856 invalidate_cache 1
++ local image=testimg1360856
++ local counter=invalidate_cache
++ local expected_val=1
++ local val=
+++ rbd_get_perfcounter testimg1360856 invalidate_cache
+++ local image=testimg1360856
+++ local counter=invalidate_cache
+++ local name
++++ grep '/librbd-.*-testimg1360856/invalidate_cache$'
+++++ rbd_watch_asok testimg1360856
+++++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
++++ ceph --format xml --admin-daemon /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok perf schema
++++ xmlstarlet el -d3
+-:1.41: Failed to parse QName 'AsyncMessenger:'
+<perfcounter_collection><AsyncMessenger::Worker-0><msgr_recv_messages><type>10</
+                                        ^
+-:1.957: Failed to parse QName 'AsyncMessenger:'
+ick></nick></msgr_active_connections></AsyncMessenger::Worker-0><AsyncMessenger:
+                                                                               ^
+-:1.1873: Failed to parse QName 'AsyncMessenger:'
+ick></nick></msgr_active_connections></AsyncMessenger::Worker-1><AsyncMessenger:
+                                                                               ^
+++ name=perfcounter_collection/librbd-de70b238e1f29-rbd-testimg1360856/invalidate_cache
+++ test -n perfcounter_collection/librbd-de70b238e1f29-rbd-testimg1360856/invalidate_cache
+++ xmlstarlet sel -t -m perfcounter_collection/librbd-de70b238e1f29-rbd-testimg1360856/invalidate_cache -v .
++++ rbd_watch_asok testimg1360856
++++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
+++ ceph --format xml --admin-daemon /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok perf dump
+-:1.41: Failed to parse QName 'AsyncMessenger:'
+<perfcounter_collection><AsyncMessenger::Worker-0><msgr_recv_messages>2</msgr_re
+                                        ^
+-:1.416: Failed to parse QName 'AsyncMessenger:'
+nnections>1</msgr_active_connections></AsyncMessenger::Worker-0><AsyncMessenger:
+                                                                               ^
+-:1.793: Failed to parse QName 'AsyncMessenger:'
+nnections>1</msgr_active_connections></AsyncMessenger::Worker-1><AsyncMessenger:
+                                                                               ^
++ val=1
++ test 1 -eq 1
++ rbd_watch_end testimg1360856
++ local image=testimg1360856
++ local regexp=
++ echo
+++ rbd_watch_fifo testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.fifo
++++ rbd_watch_pid_file testimg1360856
++++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.pid
+++ cat /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.pid
++ kill 1361179
+++ rbd_watch_out_file testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.out
++ cat /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.out
+press enter to exit...
+2018-03-01 13:48:08.417665 7f65840850 20 librbd: flush 0x18138f200
+2018-03-01 13:48:09.262662 7f65840850 20 librbd: invalidate_cache 0x18138f200
+2018-03-01 13:48:09.628104 7f6688d000 20 librbd::ImageState: 0x18138ef50 close
+2018-03-01 13:48:09.628123 7f6688d000 10 librbd::ImageState: 0x18138ef50 0x18138ef50 send_close_unlock
+2018-03-01 13:48:09.628141 7f6688d000 10 librbd::image::CloseRequest: 0x1813918b0 send_shut_down_update_watchers
+2018-03-01 13:48:09.628146 7f6688d000 20 librbd::ImageState: 0x18138ef50 shut_down_update_watchers
+2018-03-01 13:48:09.628149 7f6688d000 20 librbd::ImageState: 0x18138e410 ImageUpdateWatchers::shut_down
+2018-03-01 13:48:09.628152 7f6688d000 20 librbd::ImageState: 0x18138e410 ImageUpdateWatchers::shut_down: completing shut down
+2018-03-01 13:48:09.628188 7f5cf83850 10 librbd::image::CloseRequest: 0x1813918b0 handle_shut_down_update_watchers: r=0
+2018-03-01 13:48:09.628194 7f5cf83850 10 librbd::image::CloseRequest: 0x1813918b0 send_shut_down_aio_queue
+2018-03-01 13:48:09.628198 7f5cf83850  5 librbd::AioImageRequestWQ: shut_down: in_flight=0
+2018-03-01 13:48:09.628215 7f5cf83850 10 librbd::image::CloseRequest: 0x1813918b0 handle_shut_down_aio_queue: r=0
+2018-03-01 13:48:09.628220 7f5cf83850 10 librbd::image::CloseRequest: 0x1813918b0 send_flush
+2018-03-01 13:48:09.628227 7f5cf83850 10 librbd::image::CloseRequest: 0x1813918b0 handle_flush: r=0
+2018-03-01 13:48:09.628230 7f5cf83850 10 librbd::image::CloseRequest: 0x1813918b0 send_flush_readahead
+2018-03-01 13:48:09.628235 7f5cf83850 10 librbd::image::CloseRequest: 0x1813918b0 handle_flush_readahead: r=0
+2018-03-01 13:48:09.628237 7f5cf83850 10 librbd::image::CloseRequest: 0x1813918b0 send_shut_down_cache
+2018-03-01 13:48:09.628320 7f5cf83850 10 librbd::image::CloseRequest: 0x1813918b0 handle_shut_down_cache: r=0
+2018-03-01 13:48:09.628325 7f5cf83850 10 librbd::image::CloseRequest: 0x1813918b0 send_flush_op_work_queue
+2018-03-01 13:48:09.628330 7f5cf83850 10 librbd::image::CloseRequest: 0x1813918b0 handle_flush_op_work_queue: r=0
+2018-03-01 13:48:09.628358 7f5cf83850 10 librbd::ImageState: 0x18138ef50 0x18138ef50 handle_close: r=0
+./test_admin_socket.sh: 行 63: 1361177 已完成               cat $(rbd_watch_fifo ${image})
+     1361179 已终止               | rbd watch ${image} > $(rbd_watch_out_file ${image}) 2>&1
+++ rbd_watch_fifo testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.fifo
+++ rbd_watch_pid_file testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.pid
+++ rbd_watch_out_file testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.out
+++ rbd_watch_asok testimg1360856
+++ echo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
++ rm -f /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.fifo /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.pid /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.out /tmp/rbd_test_admin_socket1360856/rbd_watch_testimg1360856.asok
++ rbd rm testimg1360856
+Removing image: 3% complete...Removing image: 6% complete...Removing image: 9% complete...Removing image: 12% complete...Removing image: 15% complete...Removing image: 18% complete...Removing image: 21% complete...Removing image: 25% complete...Removing image: 28% complete...Removing image: 31% complete...Removing image: 34% complete...Removing image: 37% complete...Removing image: 40% complete...Removing image: 43% complete...Removing image: 46% complete...Removing image: 50% complete...Removing image: 53% complete...Removing image: 56% complete...Removing image: 59% complete...Removing image: 62% complete...Removing image: 65% complete...Removing image: 68% complete...Removing image: 71% complete...Removing image: 75% complete...Removing image: 78% complete...Removing image: 81% complete...Removing image: 84% complete...Removing image: 87% complete...Removing image: 90% complete...Removing image: 93% complete...Removing image: 96% complete...Removing image: 100% complete...done.
++ rm -fr /tmp/rbd_test_admin_socket1360856
