@@ -1,0 +1,54 @@
+Running main() from gmock_main.cc
+[==========] Running 7 tests from 1 test case.
+[----------] Global test environment set-up.
+[----------] 7 tests from LibRadosCmd
+[ RUN      ] LibRadosCmd.MonDescribe
+[       OK ] LibRadosCmd.MonDescribe (154 ms)
+[ RUN      ] LibRadosCmd.MonDescribePP
+[       OK ] LibRadosCmd.MonDescribePP (20 ms)
+[ RUN      ] LibRadosCmd.OSDCmd
+[       OK ] LibRadosCmd.OSDCmd (21 ms)
+[ RUN      ] LibRadosCmd.OSDCmdPP
+[       OK ] LibRadosCmd.OSDCmdPP (20 ms)
+[ RUN      ] LibRadosCmd.PGCmd
+[       OK ] LibRadosCmd.PGCmd (19516 ms)
+[ RUN      ] LibRadosCmd.PGCmdPP
+[       OK ] LibRadosCmd.PGCmdPP (9398 ms)
+[ RUN      ] LibRadosCmd.WatchLog
+got: 2018-03-05 14:28:01.019429 mon.0 [INF] osdmap e5375: 18 osds: 18 up, 18 in
+got: 2018-03-05 14:28:01.108210 mon.0 [INF] pgmap v549335: 672 pgs: 22 creating+peering, 50 creating, 600 active+clean; 30850 bytes data, 143 GB used, 18094 GB / 18237 GB avail; 71723 B/s wr, 87 op/s
+got: 2018-03-05 14:28:01.387152 mon.2 [INF] from='client.? 172.16.20.13:0/4165172316' entity='client.admin' cmd=[{"prefix": "osd tier add", "pool": "test-rados-api-node3-2969289-4", "tierpool": "test-rados-api-node3-2969289-4-cache"}]: dispatch
+got: 2018-03-05 14:28:01.387516 mon.0 [INF] osdmap e5376: 18 osds: 18 up, 18 in
+got: 2018-03-05 14:28:01.393965 mon.0 [INF] from='client.1082741 :/0' entity='client.admin' cmd=[{"prefix": "osd tier add", "pool": "test-rados-api-node3-2969289-4", "tierpool": "test-rados-api-node3-2969289-4-cache"}]: dispatch
+got: 2018-03-05 14:28:02.227093 mon.0 [INF] pgmap v549336: 664 pgs: 15 creating+peering, 51 creating, 598 active+clean; 15206 bytes data, 143 GB used, 18094 GB / 18237 GB avail; 705 B/s rd, 0 op/s
+got: 2018-03-05 14:27:55.036814 osd.8 [INF] unparseable JSON asdfasdf
+got: 2018-03-05 14:28:02.501518 mon.0 [INF] from='client.1082741 :/0' entity='client.admin' cmd='[{"prefix": "osd tier add", "pool": "test-rados-api-node3-2969289-4", "tierpool": "test-rados-api-node3-2969289-4-cache"}]': finished
+got: 2018-03-05 14:28:02.514397 mon.2 [INF] from='client.? 172.16.20.13:0/4165172316' entity='client.admin' cmd=[{"prefix": "osd tier set-overlay", "pool": "test-rados-api-node3-2969289-4", "overlaypool": "test-rados-api-node3-2969289-4-cache"}]: dispatch
+got: 2018-03-05 14:28:02.550923 mon.1 [INF] from='client.? 172.16.20.13:0/1602107712' entity='client.admin' cmd=[{"prefix":"log", "logtext":["onexx"]}]: dispatch
+got: 2018-03-05 14:28:03.333985 mon.0 [INF] osdmap e5377: 18 osds: 18 up, 18 in
+got: 2018-03-05 14:28:03.335135 client.1030714 [INF] onexx
+got: 2018-03-05 14:28:03.336127 mon.0 [INF] from='client.1082741 :/0' entity='client.admin' cmd=[{"prefix": "osd tier set-overlay", "pool": "test-rados-api-node3-2969289-4", "overlaypool": "test-rados-api-node3-2969289-4-cache"}]: dispatch
+got: 2018-03-05 14:28:04.097649 mon.0 [INF] from='client.1030714 :/0' entity='client.admin' cmd=[{"prefix":"log", "logtext":["onexx"]}]: dispatch
+got: 2018-03-05 14:28:04.171340 mon.0 [INF] pgmap v549337: 648 pgs: 16 creating+peering, 42 creating, 1 creating+activating, 589 active+clean; 23140 bytes data, 143 GB used, 18094 GB / 18237 GB avail
+got: 2018-03-05 14:28:04.378271 mon.0 [INF] from='client.1082741 :/0' entity='client.admin' cmd='[{"prefix": "osd tier set-overlay", "pool": "test-rados-api-node3-2969289-4", "overlaypool": "test-rados-api-node3-2969289-4-cache"}]': finished
+got: 2018-03-05 14:28:05.192219 mon.0 [INF] osdmap e5378: 18 osds: 18 up, 18 in
+got: 2018-03-05 14:28:06.058490 client.1030714 [INF] twoxx
+got: 2018-03-05 14:28:06.795906 mon.0 [INF] from='client.1030714 :/0' entity='client.admin' cmd=[{"prefix":"log", "logtext":["twoxx"]}]: dispatch
+got: 2018-03-05 14:28:06.841694 mon.0 [INF] pgmap v549339: 664 pgs: 17 creating+peering, 45 creating, 4 creating+activating, 598 active+clean; 23275 bytes data, 143 GB used, 18094 GB / 18237 GB avail; 743 B/s wr, 0 op/s
+got: 2018-03-05 14:28:06.985069 mon.0 [INF] from='client.1030714 :/0' entity='client.admin' cmd='[{"prefix":"log", "logtext":["twoxx"]}]': finished
+got: 2018-03-05 14:28:07.282758 mon.0 [INF] osdmap e5380: 18 osds: 18 up, 18 in
+got: 2018-03-05 14:28:07.285638 mon.0 [WRN] pool 'test-rados-api-node3-2969265-4' is full (reached quota's max_bytes: 4096)
+got: 2018-03-05 14:28:07.370472 mon.0 [INF] pgmap v549340: 656 pgs: 4 creating+peering, 28 creating, 7 creating+activating, 617 active+clean; 42890 bytes data, 143 GB used, 18094 GB / 18237 GB avail; 0 B/s rd, 23449 B/s wr, 20 op/s
+got: 2018-03-05 14:28:09.041414 mon.1 [INF] from='client.? 172.16.20.13:0/1602107712' entity='client.admin' cmd=[{"prefix":"log", "logtext":["threexx"]}]: dispatch
+got: 2018-03-05 14:28:09.115267 mon.0 [INF] osdmap e5381: 18 osds: 18 up, 18 in
+got: 2018-03-05 14:28:09.116092 client.1030714 [INF] threexx
+got: 2018-03-05 14:28:09.117301 mon.0 [INF] from='client.1030714 :/0' entity='client.admin' cmd=[{"prefix":"log", "logtext":["threexx"]}]: dispatch
+got: 2018-03-05 14:28:09.250962 mon.0 [INF] pgmap v549341: 656 pgs: 4 creating+peering, 28 creating, 7 creating+activating, 617 active+clean; 42890 bytes data, 143 GB used, 18094 GB / 18237 GB avail; 0 B/s rd, 15397 B/s wr, 13 op/s
+got: 2018-03-05 14:28:09.551107 mon.0 [INF] osdmap e5382: 18 osds: 18 up, 18 in
+got: 2018-03-05 14:28:10.389264 mon.0 [INF] pgmap v549342: 664 pgs: 3 creating+peering, 36 creating, 5 creating+activating, 620 active+clean; 44948 bytes data, 143 GB used, 18094 GB / 18237 GB avail; 8184 B/s wr, 7 op/s
+[       OK ] LibRadosCmd.WatchLog (11289 ms)
+[----------] 7 tests from LibRadosCmd (40418 ms total)
+
+[----------] Global test environment tear-down
+[==========] 7 tests from 1 test case ran. (40418 ms total)
+[  PASSED  ] 7 tests.

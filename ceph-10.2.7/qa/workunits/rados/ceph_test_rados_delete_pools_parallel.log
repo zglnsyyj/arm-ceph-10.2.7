@@ -1,0 +1,32 @@
+process_1_[2969394]: starting.
+process_2_[2969395]: starting.
+process_1_[2969394]: creating pool ceph_test_rados_delete_pools_parallel.node3-2969341
+process_1_[2969394]: created object 0...
+process_1_[2969394]: created object 25...
+process_1_[2969394]: created object 49...
+process_1_[2969394]: finishing.
+process_1_[2969394]: shutting down.
+process_2_[2969395]: deleting pool ceph_test_rados_delete_pools_parallel.node3-2969341
+process_2_[2969395]: shutting down.
+*******************************
+process_4_[2970137]: starting.
+*******************************
+process_3_[2970136]: starting.
+*******************************
+process_5_[2970138]: starting.
+process_3_[2970136]: creating pool ceph_test_rados_delete_pools_parallel.node3-2969341
+process_3_[2970136]: created object 0...
+process_3_[2970136]: created object 25...
+process_3_[2970136]: created object 49...
+process_3_[2970136]: finishing.
+process_3_[2970136]: shutting down.
+process_5_[2970138]: listing objects.
+process_5_[2970138]: listed object 0...
+process_5_[2970138]: listed object 25...
+process_5_[2970138]: saw 50 objects
+process_5_[2970138]: shutting down.
+process_4_[2970137]: deleting pool ceph_test_rados_delete_pools_parallel.node3-2969341
+process_4_[2970137]: shutting down.
+*******************************
+*******************************
+******* SUCCESS **********

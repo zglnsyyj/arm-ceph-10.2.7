@@ -1,0 +1,113 @@
+process_1_[2969348]: starting.
+process_2_[2969349]: starting.
+process_4_[2969353]: starting.
+process_3_[2969350]: starting.
+process_1_[2969348]: creating pool foo.2969345
+process_1_[2969348]: created object 0...
+process_1_[2969348]: finishing.
+process_1_[2969348]: shutting down.
+process_3_[2969350]: notifying object 0.obj
+process_3_[2969350]: shutting down.
+process_2_[2969349]: watching object 0.obj
+process_2_[2969349]: shutting down.
+process_4_[2969353]: deleting pool foo.2969345
+process_4_[2969353]: shutting down.
+*******************************
+process_8_[2969766]: starting.
+*******************************
+process_6_[2969764]: starting.
+*******************************
+process_5_[2969763]: starting.
+*******************************
+process_7_[2969765]: starting.
+process_5_[2969763]: creating pool foo.2969345.
+process_5_[2969763]: finishing.
+process_5_[2969763]: shutting down.
+process_6_[2969764]: watching object 0.obj
+process_6_[2969764]: shutting down.
+process_7_[2969765]: notifying object 0.obj
+process_7_[2969765]: shutting down.
+process_8_[2969766]: deleting pool foo.2969345.
+process_8_[2969766]: shutting down.
+*******************************
+*******************************
+process_10_[2970209]: starting.
+*******************************
+*******************************
+process_11_[2970210]: starting.
+*******************************
+*******************************
+process_12_[2970213]: starting.
+*******************************
+*******************************
+process_9_[2970208]: starting.
+*******************************
+*******************************
+process_14_[2970217]: starting.
+*******************************
+*******************************
+process_13_[2970215]: starting.
+*******************************
+*******************************
+process_15_[2970218]: starting.
+process_9_[2970208]: creating pool foo.2969345..
+process_9_[2970208]: created object 0...
+process_9_[2970208]: finishing.
+process_9_[2970208]: shutting down.
+process_11_[2970210]: notifying object 0.obj
+process_11_[2970210]: shutting down.
+process_12_[2970213]: deleting pool foo.2969345..
+process_12_[2970213]: shutting down.
+process_13_[2970215]: creating pool bar
+process_13_[2970215]: created object 0...
+process_13_[2970215]: finishing.
+process_13_[2970215]: shutting down.
+process_14_[2970217]: notifying object 0.obj
+process_14_[2970217]: shutting down.
+process_10_[2970209]: watching object 0.obj
+process_10_[2970209]: shutting down.
+process_15_[2970218]: deleting pool bar
+process_15_[2970218]: shutting down.
+*******************************
+*******************************
+*******************************
+process_16_[2970998]: starting.
+*******************************
+*******************************
+*******************************
+process_17_[2970999]: starting.
+*******************************
+*******************************
+*******************************
+process_18_[2971000]: starting.
+*******************************
+*******************************
+*******************************
+process_19_[2971003]: starting.
+*******************************
+*******************************
+*******************************
+process_20_[2971004]: starting.
+*******************************
+*******************************
+*******************************
+process_21_[2971006]: starting.
+process_16_[2970998]: creating pool foo.2969345...
+process_16_[2970998]: created object 0...
+process_16_[2970998]: finishing.
+process_16_[2970998]: shutting down.
+process_18_[2971000]: notifying object 0.obj
+process_18_[2971000]: shutting down.
+process_19_[2971003]: deleted object 0...
+process_19_[2971003]: shutting down.
+process_20_[2971004]: notifying object 0.obj
+process_20_[2971004]: shutting down.
+process_17_[2970999]: watching object 0.obj
+process_17_[2970999]: shutting down.
+process_21_[2971006]: deleting pool foo.2969345...
+process_21_[2971006]: shutting down.
+*******************************
+*******************************
+*******************************
+*******************************
+******* SUCCESS **********

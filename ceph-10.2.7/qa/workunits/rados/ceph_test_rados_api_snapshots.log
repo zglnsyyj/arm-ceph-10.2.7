@@ -1,0 +1,51 @@
+Running main() from gmock_main.cc
+[==========] Running 28 tests from 8 test cases.
+[----------] Global test environment set-up.
+[----------] 4 tests from LibRadosSnapshots
+[ RUN      ] LibRadosSnapshots.SnapList
+[       OK ] LibRadosSnapshots.SnapList (16023 ms)
+[ RUN      ] LibRadosSnapshots.SnapRemove
+[       OK ] LibRadosSnapshots.SnapRemove (9047 ms)
+[ RUN      ] LibRadosSnapshots.Rollback
+[       OK ] LibRadosSnapshots.Rollback (25918 ms)
+[ RUN      ] LibRadosSnapshots.SnapGetName
+[       OK ] LibRadosSnapshots.SnapGetName (2050 ms)
+[----------] 4 tests from LibRadosSnapshots (53038 ms total)
+
+[----------] 5 tests from LibRadosSnapshotsPP
+[ RUN      ] LibRadosSnapshotsPP.SnapListPP
+[       OK ] LibRadosSnapshotsPP.SnapListPP (9301 ms)
+[ RUN      ] LibRadosSnapshotsPP.SnapRemovePP
+[       OK ] LibRadosSnapshotsPP.SnapRemovePP (3183 ms)
+[ RUN      ] LibRadosSnapshotsPP.RollbackPP
+[       OK ] LibRadosSnapshotsPP.RollbackPP (4257 ms)
+[ RUN      ] LibRadosSnapshotsPP.SnapGetNamePP
+[       OK ] LibRadosSnapshotsPP.SnapGetNamePP (5080 ms)
+[ RUN      ] LibRadosSnapshotsPP.SnapCreateRemovePP
+[       OK ] LibRadosSnapshotsPP.SnapCreateRemovePP (5141 ms)
+[----------] 5 tests from LibRadosSnapshotsPP (26962 ms total)
+
+[----------] 2 tests from LibRadosSnapshotsSelfManaged
+[ RUN      ] LibRadosSnapshotsSelfManaged.Snap
+[       OK ] LibRadosSnapshotsSelfManaged.Snap (268075 ms)
+[ RUN      ] LibRadosSnapshotsSelfManaged.Rollback
+[       OK ] LibRadosSnapshotsSelfManaged.Rollback (7965 ms)
+[----------] 2 tests from LibRadosSnapshotsSelfManaged (276040 ms total)
+
+[----------] 4 tests from LibRadosSnapshotsSelfManagedPP
+[ RUN      ] LibRadosSnapshotsSelfManagedPP.SnapPP
+[       OK ] LibRadosSnapshotsSelfManagedPP.SnapPP (6129 ms)
+[ RUN      ] LibRadosSnapshotsSelfManagedPP.RollbackPP
+[       OK ] LibRadosSnapshotsSelfManagedPP.RollbackPP (4716 ms)
+[ RUN      ] LibRadosSnapshotsSelfManagedPP.SnapOverlapPP
+[       OK ] LibRadosSnapshotsSelfManagedPP.SnapOverlapPP (10193 ms)
+[ RUN      ] LibRadosSnapshotsSelfManagedPP.Bug11677
+[       OK ] LibRadosSnapshotsSelfManagedPP.Bug11677 (4953 ms)
+[----------] 4 tests from LibRadosSnapshotsSelfManagedPP (25991 ms total)
+
+[----------] 4 tests from LibRadosSnapshotsEC
+[ RUN      ] LibRadosSnapshotsEC.SnapList
+[       OK ] LibRadosSnapshotsEC.SnapList (4300 ms)
+[ RUN      ] LibRadosSnapshotsEC.SnapRemove
+[       OK ] LibRadosSnapshotsEC.SnapRemove (2999 ms)
+[ RUN      ] LibRadosSnapshotsEC.Rollback

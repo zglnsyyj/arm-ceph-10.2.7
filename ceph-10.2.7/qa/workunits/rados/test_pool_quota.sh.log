@@ -1,0 +1,72 @@
++ uuidgen
++ p=0e62171d-aaf6-470a-a5f8-26feb9c01bf7
++ ceph osd pool create 0e62171d-aaf6-470a-a5f8-26feb9c01bf7 12
+pool '0e62171d-aaf6-470a-a5f8-26feb9c01bf7' created
++ ceph osd pool set-quota 0e62171d-aaf6-470a-a5f8-26feb9c01bf7 max_objects 10
+set-quota max_objects = 10 for pool 0e62171d-aaf6-470a-a5f8-26feb9c01bf7
++ seq 1 10
++ rados -p 0e62171d-aaf6-470a-a5f8-26feb9c01bf7 put obj1 /etc/passwd
++ rados -p 0e62171d-aaf6-470a-a5f8-26feb9c01bf7 put obj2 /etc/passwd
++ rados -p 0e62171d-aaf6-470a-a5f8-26feb9c01bf7 put obj3 /etc/passwd
++ rados -p 0e62171d-aaf6-470a-a5f8-26feb9c01bf7 put obj4 /etc/passwd
++ rados -p 0e62171d-aaf6-470a-a5f8-26feb9c01bf7 put obj5 /etc/passwd
++ rados -p 0e62171d-aaf6-470a-a5f8-26feb9c01bf7 put obj6 /etc/passwd
++ rados -p 0e62171d-aaf6-470a-a5f8-26feb9c01bf7 put obj7 /etc/passwd
++ rados -p 0e62171d-aaf6-470a-a5f8-26feb9c01bf7 put obj8 /etc/passwd
++ rados -p 0e62171d-aaf6-470a-a5f8-26feb9c01bf7 put obj9 /etc/passwd
++ rados -p 0e62171d-aaf6-470a-a5f8-26feb9c01bf7 put obj10 /etc/passwd
++ sleep 30
++ pid=2952779
++ ceph osd pool set-quota 0e62171d-aaf6-470a-a5f8-26feb9c01bf7 max_objects 100
++ rados -p 0e62171d-aaf6-470a-a5f8-26feb9c01bf7 put onemore /etc/passwd
+2018-03-05 13:37:58.899877 7faac41000  0 client.964311.objecter  FULL, paused modify 0x13fec2b30 tid 0
+set-quota max_objects = 100 for pool 0e62171d-aaf6-470a-a5f8-26feb9c01bf7
++ wait 2952779
++ [ 0 -ne 0 ]
++ true
++ rados -p 0e62171d-aaf6-470a-a5f8-26feb9c01bf7 put twomore /etc/passwd
++ ceph osd pool set-quota 0e62171d-aaf6-470a-a5f8-26feb9c01bf7 max_bytes 100
+set-quota max_bytes = 100 for pool 0e62171d-aaf6-470a-a5f8-26feb9c01bf7
++ sleep 30
++ pid=2953035
++ ceph osd pool set-quota 0e62171d-aaf6-470a-a5f8-26feb9c01bf7 max_bytes 0
++ rados -p 0e62171d-aaf6-470a-a5f8-26feb9c01bf7 put two /etc/passwd
+2018-03-05 13:38:32.035306 7f78729000  0 client.964326.objecter  FULL, paused modify 0x1287c9b30 tid 0
+set-quota max_bytes = 0 for pool 0e62171d-aaf6-470a-a5f8-26feb9c01bf7
++ ceph osd pool set-quota 0e62171d-aaf6-470a-a5f8-26feb9c01bf7 max_objects 0
+set-quota max_objects = 0 for pool 0e62171d-aaf6-470a-a5f8-26feb9c01bf7
++ wait 2953035
++ [ 0 -ne 0 ]
++ true
++ rados -p 0e62171d-aaf6-470a-a5f8-26feb9c01bf7 put three /etc/passwd
++ uuidgen
++ pp=472de32c-f7b6-498a-a186-c58658fc0407
++ ceph osd pool create 472de32c-f7b6-498a-a186-c58658fc0407 12
+pool '472de32c-f7b6-498a-a186-c58658fc0407' created
++ ceph osd pool set-quota 472de32c-f7b6-498a-a186-c58658fc0407 max_objects 10
+set-quota max_objects = 10 for pool 472de32c-f7b6-498a-a186-c58658fc0407
++ sleep 30
++ seq 1 10
++ rados -p 472de32c-f7b6-498a-a186-c58658fc0407 put obj1 /etc/passwd
++ rados -p 472de32c-f7b6-498a-a186-c58658fc0407 put obj2 /etc/passwd
++ rados -p 472de32c-f7b6-498a-a186-c58658fc0407 put obj3 /etc/passwd
++ rados -p 472de32c-f7b6-498a-a186-c58658fc0407 put obj4 /etc/passwd
++ rados -p 472de32c-f7b6-498a-a186-c58658fc0407 put obj5 /etc/passwd
++ rados -p 472de32c-f7b6-498a-a186-c58658fc0407 put obj6 /etc/passwd
++ rados -p 472de32c-f7b6-498a-a186-c58658fc0407 put obj7 /etc/passwd
++ rados -p 472de32c-f7b6-498a-a186-c58658fc0407 put obj8 /etc/passwd
++ rados -p 472de32c-f7b6-498a-a186-c58658fc0407 put obj9 /etc/passwd
++ rados -p 472de32c-f7b6-498a-a186-c58658fc0407 put obj10 /etc/passwd
++ sleep 30
++ rados -p 0e62171d-aaf6-470a-a5f8-26feb9c01bf7 put threemore /etc/passwd
++ ceph osd pool set-quota 0e62171d-aaf6-470a-a5f8-26feb9c01bf7 max_bytes 0
+set-quota max_bytes = 0 for pool 0e62171d-aaf6-470a-a5f8-26feb9c01bf7
++ ceph osd pool set-quota 0e62171d-aaf6-470a-a5f8-26feb9c01bf7 max_objects 0
+set-quota max_objects = 0 for pool 0e62171d-aaf6-470a-a5f8-26feb9c01bf7
++ sleep 30
++ ceph osd pool delete 0e62171d-aaf6-470a-a5f8-26feb9c01bf7 0e62171d-aaf6-470a-a5f8-26feb9c01bf7 --yes-i-really-really-mean-it
+pool '0e62171d-aaf6-470a-a5f8-26feb9c01bf7' removed
++ ceph osd pool delete 472de32c-f7b6-498a-a186-c58658fc0407 472de32c-f7b6-498a-a186-c58658fc0407 --yes-i-really-really-mean-it
+pool '472de32c-f7b6-498a-a186-c58658fc0407' removed
++ echo OK
+OK

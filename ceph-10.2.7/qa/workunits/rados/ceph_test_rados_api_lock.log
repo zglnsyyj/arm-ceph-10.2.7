@@ -1,0 +1,82 @@
+Running main() from gmock_main.cc
+[==========] Running 32 tests from 4 test cases.
+[----------] Global test environment set-up.
+[----------] 8 tests from LibRadosLock
+[ RUN      ] LibRadosLock.LockExclusive
+[       OK ] LibRadosLock.LockExclusive (10354 ms)
+[ RUN      ] LibRadosLock.LockShared
+[       OK ] LibRadosLock.LockShared (252 ms)
+[ RUN      ] LibRadosLock.LockExclusiveDur
+[       OK ] LibRadosLock.LockExclusiveDur (1213 ms)
+[ RUN      ] LibRadosLock.LockSharedDur
+[       OK ] LibRadosLock.LockSharedDur (1310 ms)
+[ RUN      ] LibRadosLock.LockRenew
+[       OK ] LibRadosLock.LockRenew (219 ms)
+[ RUN      ] LibRadosLock.Unlock
+[       OK ] LibRadosLock.Unlock (212 ms)
+[ RUN      ] LibRadosLock.ListLockers
+[       OK ] LibRadosLock.ListLockers (211 ms)
+[ RUN      ] LibRadosLock.BreakLock
+[       OK ] LibRadosLock.BreakLock (208 ms)
+[----------] 8 tests from LibRadosLock (13979 ms total)
+
+[----------] 8 tests from LibRadosLockPP
+[ RUN      ] LibRadosLockPP.LockExclusivePP
+[       OK ] LibRadosLockPP.LockExclusivePP (38452 ms)
+[ RUN      ] LibRadosLockPP.LockSharedPP
+[       OK ] LibRadosLockPP.LockSharedPP (211 ms)
+[ RUN      ] LibRadosLockPP.LockExclusiveDurPP
+[       OK ] LibRadosLockPP.LockExclusiveDurPP (1227 ms)
+[ RUN      ] LibRadosLockPP.LockSharedDurPP
+[       OK ] LibRadosLockPP.LockSharedDurPP (1210 ms)
+[ RUN      ] LibRadosLockPP.LockRenewPP
+[       OK ] LibRadosLockPP.LockRenewPP (210 ms)
+[ RUN      ] LibRadosLockPP.UnlockPP
+[       OK ] LibRadosLockPP.UnlockPP (208 ms)
+[ RUN      ] LibRadosLockPP.ListLockersPP
+[       OK ] LibRadosLockPP.ListLockersPP (210 ms)
+[ RUN      ] LibRadosLockPP.BreakLockPP
+[       OK ] LibRadosLockPP.BreakLockPP (206 ms)
+[----------] 8 tests from LibRadosLockPP (41934 ms total)
+
+[----------] 8 tests from LibRadosLockEC
+[ RUN      ] LibRadosLockEC.LockExclusive
+[       OK ] LibRadosLockEC.LockExclusive (288866 ms)
+[ RUN      ] LibRadosLockEC.LockShared
+[       OK ] LibRadosLockEC.LockShared (214 ms)
+[ RUN      ] LibRadosLockEC.LockExclusiveDur
+[       OK ] LibRadosLockEC.LockExclusiveDur (1215 ms)
+[ RUN      ] LibRadosLockEC.LockSharedDur
+[       OK ] LibRadosLockEC.LockSharedDur (1216 ms)
+[ RUN      ] LibRadosLockEC.LockRenew
+[       OK ] LibRadosLockEC.LockRenew (217 ms)
+[ RUN      ] LibRadosLockEC.Unlock
+[       OK ] LibRadosLockEC.Unlock (292 ms)
+[ RUN      ] LibRadosLockEC.ListLockers
+[       OK ] LibRadosLockEC.ListLockers (213 ms)
+[ RUN      ] LibRadosLockEC.BreakLock
+[       OK ] LibRadosLockEC.BreakLock (212 ms)
+[----------] 8 tests from LibRadosLockEC (292445 ms total)
+
+[----------] 8 tests from LibRadosLockECPP
+[ RUN      ] LibRadosLockECPP.LockExclusivePP
+[       OK ] LibRadosLockECPP.LockExclusivePP (1485 ms)
+[ RUN      ] LibRadosLockECPP.LockSharedPP
+[       OK ] LibRadosLockECPP.LockSharedPP (1577 ms)
+[ RUN      ] LibRadosLockECPP.LockExclusiveDurPP
+[       OK ] LibRadosLockECPP.LockExclusiveDurPP (1810 ms)
+[ RUN      ] LibRadosLockECPP.LockSharedDurPP
+[       OK ] LibRadosLockECPP.LockSharedDurPP (1257 ms)
+[ RUN      ] LibRadosLockECPP.LockRenewPP
+[       OK ] LibRadosLockECPP.LockRenewPP (215 ms)
+[ RUN      ] LibRadosLockECPP.UnlockPP
+[       OK ] LibRadosLockECPP.UnlockPP (240 ms)
+[ RUN      ] LibRadosLockECPP.ListLockersPP
+[       OK ] LibRadosLockECPP.ListLockersPP (231 ms)
+[ RUN      ] LibRadosLockECPP.BreakLockPP
+[       OK ] LibRadosLockECPP.BreakLockPP (217 ms)
+[----------] 8 tests from LibRadosLockECPP (7033 ms total)
+
+[----------] Global test environment tear-down
+[==========] 32 tests from 4 test cases ran. (386912 ms total)
+[  PASSED  ] 32 tests.

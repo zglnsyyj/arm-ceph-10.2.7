@@ -1,0 +1,35 @@
+Running main() from gmock_main.cc
+[==========] Running 13 tests from 1 test case.
+[----------] Global test environment set-up.
+[----------] 13 tests from CReadOpsTest
+[ RUN      ] CReadOpsTest.NewDelete
+[       OK ] CReadOpsTest.NewDelete (3187 ms)
+[ RUN      ] CReadOpsTest.SetOpFlags
+[       OK ] CReadOpsTest.SetOpFlags (239 ms)
+[ RUN      ] CReadOpsTest.AssertExists
+[       OK ] CReadOpsTest.AssertExists (213 ms)
+[ RUN      ] CReadOpsTest.AssertVersion
+[       OK ] CReadOpsTest.AssertVersion (211 ms)
+[ RUN      ] CReadOpsTest.CmpXattr
+[       OK ] CReadOpsTest.CmpXattr (224 ms)
+[ RUN      ] CReadOpsTest.Read
+[       OK ] CReadOpsTest.Read (206 ms)
+[ RUN      ] CReadOpsTest.RWOrderedRead
+[       OK ] CReadOpsTest.RWOrderedRead (205 ms)
+[ RUN      ] CReadOpsTest.ShortRead
+[       OK ] CReadOpsTest.ShortRead (218 ms)
+[ RUN      ] CReadOpsTest.Exec
+[       OK ] CReadOpsTest.Exec (207 ms)
+[ RUN      ] CReadOpsTest.ExecUserBuf
+[       OK ] CReadOpsTest.ExecUserBuf (205 ms)
+[ RUN      ] CReadOpsTest.Stat
+[       OK ] CReadOpsTest.Stat (203 ms)
+[ RUN      ] CReadOpsTest.Omap
+[       OK ] CReadOpsTest.Omap (232 ms)
+[ RUN      ] CReadOpsTest.GetXattrs
+[       OK ] CReadOpsTest.GetXattrs (275 ms)
+[----------] 13 tests from CReadOpsTest (5825 ms total)
+
+[----------] Global test environment tear-down
+[==========] 13 tests from 1 test case ran. (23220 ms total)
+[  PASSED  ] 13 tests.

@@ -1,0 +1,141 @@
+Running main() from gmock_main.cc
+[==========] Running 50 tests from 4 test cases.
+[----------] Global test environment set-up.
+[----------] 12 tests from LibRadosIo
+[ RUN      ] LibRadosIo.SimpleWrite
+[       OK ] LibRadosIo.SimpleWrite (10401 ms)
+[ RUN      ] LibRadosIo.TooBig
+[       OK ] LibRadosIo.TooBig (227 ms)
+[ RUN      ] LibRadosIo.ReadTimeout
+[       OK ] LibRadosIo.ReadTimeout (7215 ms)
+[ RUN      ] LibRadosIo.RoundTrip
+[       OK ] LibRadosIo.RoundTrip (210 ms)
+[ RUN      ] LibRadosIo.OverlappingWriteRoundTrip
+[       OK ] LibRadosIo.OverlappingWriteRoundTrip (207 ms)
+[ RUN      ] LibRadosIo.WriteFullRoundTrip
+[       OK ] LibRadosIo.WriteFullRoundTrip (207 ms)
+[ RUN      ] LibRadosIo.AppendRoundTrip
+[       OK ] LibRadosIo.AppendRoundTrip (206 ms)
+[ RUN      ] LibRadosIo.TruncTest
+[       OK ] LibRadosIo.TruncTest (210 ms)
+[ RUN      ] LibRadosIo.RemoveTest
+[       OK ] LibRadosIo.RemoveTest (212 ms)
+[ RUN      ] LibRadosIo.XattrsRoundTrip
+[       OK ] LibRadosIo.XattrsRoundTrip (300 ms)
+[ RUN      ] LibRadosIo.RmXattr
+[       OK ] LibRadosIo.RmXattr (298 ms)
+[ RUN      ] LibRadosIo.XattrIter
+[       OK ] LibRadosIo.XattrIter (206 ms)
+[----------] 12 tests from LibRadosIo (19899 ms total)
+
+[----------] 14 tests from LibRadosIoPP
+[ RUN      ] LibRadosIoPP.SimpleWritePP
+[       OK ] LibRadosIoPP.SimpleWritePP (33720 ms)
+[ RUN      ] LibRadosIoPP.ReadOpPP
+[       OK ] LibRadosIoPP.ReadOpPP (222 ms)
+[ RUN      ] LibRadosIoPP.SparseReadOpPP
+[       OK ] LibRadosIoPP.SparseReadOpPP (207 ms)
+[ RUN      ] LibRadosIoPP.RoundTripPP
+[       OK ] LibRadosIoPP.RoundTripPP (220 ms)
+[ RUN      ] LibRadosIoPP.RoundTripPP2
+[       OK ] LibRadosIoPP.RoundTripPP2 (202 ms)
+[ RUN      ] LibRadosIoPP.OverlappingWriteRoundTripPP
+[       OK ] LibRadosIoPP.OverlappingWriteRoundTripPP (203 ms)
+[ RUN      ] LibRadosIoPP.WriteFullRoundTripPP
+[       OK ] LibRadosIoPP.WriteFullRoundTripPP (327 ms)
+[ RUN      ] LibRadosIoPP.WriteFullRoundTripPP2
+[       OK ] LibRadosIoPP.WriteFullRoundTripPP2 (206 ms)
+[ RUN      ] LibRadosIoPP.AppendRoundTripPP
+[       OK ] LibRadosIoPP.AppendRoundTripPP (200 ms)
+[ RUN      ] LibRadosIoPP.TruncTestPP
+[       OK ] LibRadosIoPP.TruncTestPP (204 ms)
+[ RUN      ] LibRadosIoPP.RemoveTestPP
+[       OK ] LibRadosIoPP.RemoveTestPP (202 ms)
+[ RUN      ] LibRadosIoPP.XattrsRoundTripPP
+[       OK ] LibRadosIoPP.XattrsRoundTripPP (202 ms)
+[ RUN      ] LibRadosIoPP.RmXattrPP
+[       OK ] LibRadosIoPP.RmXattrPP (210 ms)
+[ RUN      ] LibRadosIoPP.XattrListPP
+[       OK ] LibRadosIoPP.XattrListPP (207 ms)
+[----------] 14 tests from LibRadosIoPP (36532 ms total)
+
+[----------] 10 tests from LibRadosIoEC
+[ RUN      ] LibRadosIoEC.SimpleWrite
+[       OK ] LibRadosIoEC.SimpleWrite (288152 ms)
+[ RUN      ] LibRadosIoEC.RoundTrip
+[       OK ] LibRadosIoEC.RoundTrip (474 ms)
+[ RUN      ] LibRadosIoEC.OverlappingWriteRoundTrip
+[       OK ] LibRadosIoEC.OverlappingWriteRoundTrip (247 ms)
+[ RUN      ] LibRadosIoEC.WriteFullRoundTrip
+[       OK ] LibRadosIoEC.WriteFullRoundTrip (223 ms)
+[ RUN      ] LibRadosIoEC.AppendRoundTrip
+[       OK ] LibRadosIoEC.AppendRoundTrip (220 ms)
+[ RUN      ] LibRadosIoEC.TruncTest
+[       OK ] LibRadosIoEC.TruncTest (249 ms)
+[ RUN      ] LibRadosIoEC.RemoveTest
+test/librados/TestCase.cc:294: Failure
+Value of: rados_remove(ioctx, entry)
+  Actual: -2
+Expected: 0
+[  FAILED  ] LibRadosIoEC.RemoveTest (218 ms)
+[ RUN      ] LibRadosIoEC.XattrsRoundTrip
+[       OK ] LibRadosIoEC.XattrsRoundTrip (214 ms)
+[ RUN      ] LibRadosIoEC.RmXattr
+test/librados/TestCase.cc:294: Failure
+Value of: rados_remove(ioctx, entry)
+  Actual: -2
+Expected: 0
+[  FAILED  ] LibRadosIoEC.RmXattr (211 ms)
+[ RUN      ] LibRadosIoEC.XattrIter
+[       OK ] LibRadosIoEC.XattrIter (222 ms)
+[----------] 10 tests from LibRadosIoEC (290431 ms total)
+
+[----------] 14 tests from LibRadosIoECPP
+[ RUN      ] LibRadosIoECPP.SimpleWritePP
+[       OK ] LibRadosIoECPP.SimpleWritePP (2652 ms)
+[ RUN      ] LibRadosIoECPP.ReadOpPP
+[       OK ] LibRadosIoECPP.ReadOpPP (1685 ms)
+[ RUN      ] LibRadosIoECPP.SparseReadOpPP
+[       OK ] LibRadosIoECPP.SparseReadOpPP (209 ms)
+[ RUN      ] LibRadosIoECPP.RoundTripPP
+[       OK ] LibRadosIoECPP.RoundTripPP (217 ms)
+[ RUN      ] LibRadosIoECPP.RoundTripPP2
+[       OK ] LibRadosIoECPP.RoundTripPP2 (209 ms)
+[ RUN      ] LibRadosIoECPP.OverlappingWriteRoundTripPP
+[       OK ] LibRadosIoECPP.OverlappingWriteRoundTripPP (218 ms)
+[ RUN      ] LibRadosIoECPP.WriteFullRoundTripPP
+[       OK ] LibRadosIoECPP.WriteFullRoundTripPP (1370 ms)
+[ RUN      ] LibRadosIoECPP.WriteFullRoundTripPP2
+[       OK ] LibRadosIoECPP.WriteFullRoundTripPP2 (210 ms)
+[ RUN      ] LibRadosIoECPP.AppendRoundTripPP
+[       OK ] LibRadosIoECPP.AppendRoundTripPP (212 ms)
+[ RUN      ] LibRadosIoECPP.TruncTestPP
+[       OK ] LibRadosIoECPP.TruncTestPP (220 ms)
+[ RUN      ] LibRadosIoECPP.RemoveTestPP
+test/librados/TestCase.cc:350: Failure
+Value of: completion->get_return_value()
+  Actual: -2
+Expected: 0
+[  FAILED  ] LibRadosIoECPP.RemoveTestPP (130 ms)
+[ RUN      ] LibRadosIoECPP.XattrsRoundTripPP
+[       OK ] LibRadosIoECPP.XattrsRoundTripPP (212 ms)
+[ RUN      ] LibRadosIoECPP.RmXattrPP
+test/librados/TestCase.cc:350: Failure
+Value of: completion->get_return_value()
+  Actual: -2
+Expected: 0
+[  FAILED  ] LibRadosIoECPP.RmXattrPP (238 ms)
+[ RUN      ] LibRadosIoECPP.XattrListPP
+[       OK ] LibRadosIoECPP.XattrListPP (229 ms)
+[----------] 14 tests from LibRadosIoECPP (8011 ms total)
+
+[----------] Global test environment tear-down
+[==========] 50 tests from 4 test cases ran. (386882 ms total)
+[  PASSED  ] 46 tests.
+[  FAILED  ] 4 tests, listed below:
+[  FAILED  ] LibRadosIoEC.RemoveTest
+[  FAILED  ] LibRadosIoEC.RmXattr
+[  FAILED  ] LibRadosIoECPP.RemoveTestPP
+[  FAILED  ] LibRadosIoECPP.RmXattrPP
+
+ 4 FAILED TESTS

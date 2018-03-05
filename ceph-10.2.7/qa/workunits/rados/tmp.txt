@@ -1,0 +1,3 @@
+bazobj
+fooobj
+barobj

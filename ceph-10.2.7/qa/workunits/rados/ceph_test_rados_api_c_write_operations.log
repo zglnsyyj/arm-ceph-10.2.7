@@ -1,0 +1,24 @@
+Running main() from gmock_main.cc
+[==========] Running 6 tests from 2 test cases.
+[----------] Global test environment set-up.
+[----------] 1 test from LibradosCWriteOps
+[ RUN      ] LibradosCWriteOps.NewDelete
+[       OK ] LibradosCWriteOps.NewDelete (0 ms)
+[----------] 1 test from LibradosCWriteOps (0 ms total)
+
+[----------] 5 tests from LibRadosCWriteOps
+[ RUN      ] LibRadosCWriteOps.assertExists
+[       OK ] LibRadosCWriteOps.assertExists (16877 ms)
+[ RUN      ] LibRadosCWriteOps.WriteOpAssertVersion
+[       OK ] LibRadosCWriteOps.WriteOpAssertVersion (12064 ms)
+[ RUN      ] LibRadosCWriteOps.Xattrs
+[       OK ] LibRadosCWriteOps.Xattrs (4736 ms)
+[ RUN      ] LibRadosCWriteOps.Write
+[       OK ] LibRadosCWriteOps.Write (33654 ms)
+[ RUN      ] LibRadosCWriteOps.Exec
+[       OK ] LibRadosCWriteOps.Exec (6148 ms)
+[----------] 5 tests from LibRadosCWriteOps (73479 ms total)
+
+[----------] Global test environment tear-down
+[==========] 6 tests from 2 test cases ran. (73480 ms total)
+[  PASSED  ] 6 tests.

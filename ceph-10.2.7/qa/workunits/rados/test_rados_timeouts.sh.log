@@ -1,0 +1,126 @@
++ delay_mon omap rados lspools
++ MSGTYPE=omap
++ shift
++ rados lspools --rados-mon-op-timeout 1 --ms-inject-delay-type mon --ms-inject-delay-max 10000000 --ms-inject-delay-probability 1 --ms-inject-delay-msg-type omap
+2018-03-05 13:49:49.431044 7fb3292000  0 monclient(hunting): authenticate timed out after 300
+2018-03-05 13:49:49.431108 7fb3292000  0 librados: client.admin authentication error (110) Connection timed out
+couldn't connect to cluster: (110) Connection timed out
++ '[' 1 -eq 0 ']'
++ delay_mon poolopreply rados mkpool test
++ MSGTYPE=poolopreply
++ shift
++ rados mkpool test --rados-mon-op-timeout 1 --ms-inject-delay-type mon --ms-inject-delay-max 10000000 --ms-inject-delay-probability 1 --ms-inject-delay-msg-type poolopreply
+2018-03-05 13:54:49.474190 7fb3ea6000  0 monclient(hunting): authenticate timed out after 300
+2018-03-05 13:54:49.474265 7fb3ea6000  0 librados: client.admin authentication error (110) Connection timed out
+couldn't connect to cluster: (110) Connection timed out
++ '[' 1 -eq 0 ']'
++ delay_mon poolopreply rados mksnap -p test snap
++ MSGTYPE=poolopreply
++ shift
++ rados mksnap -p test snap --rados-mon-op-timeout 1 --ms-inject-delay-type mon --ms-inject-delay-max 10000000 --ms-inject-delay-probability 1 --ms-inject-delay-msg-type poolopreply
+2018-03-05 13:59:49.520377 7fa7a45000  0 monclient(hunting): authenticate timed out after 300
+2018-03-05 13:59:49.520451 7fa7a45000  0 librados: client.admin authentication error (110) Connection timed out
+couldn't connect to cluster: (110) Connection timed out
++ '[' 1 -eq 0 ']'
++ delay_mon poolopreply rados rmpool test test --yes-i-really-really-mean-it
++ MSGTYPE=poolopreply
++ shift
++ rados rmpool test test --yes-i-really-really-mean-it --rados-mon-op-timeout 1 --ms-inject-delay-type mon --ms-inject-delay-max 10000000 --ms-inject-delay-probability 1 --ms-inject-delay-msg-type poolopreply
+2018-03-05 14:04:49.566252 7f79e6b000  0 monclient(hunting): authenticate timed out after 300
+2018-03-05 14:04:49.566304 7f79e6b000  0 librados: client.admin authentication error (110) Connection timed out
+couldn't connect to cluster: (110) Connection timed out
++ '[' 1 -eq 0 ']'
++ delay_mon getpoolstats rados df
++ MSGTYPE=getpoolstats
++ shift
++ rados df --rados-mon-op-timeout 1 --ms-inject-delay-type mon --ms-inject-delay-max 10000000 --ms-inject-delay-probability 1 --ms-inject-delay-msg-type getpoolstats
+2018-03-05 14:09:49.606423 7f81475000  0 monclient(hunting): authenticate timed out after 300
+2018-03-05 14:09:49.606489 7f81475000  0 librados: client.admin authentication error (110) Connection timed out
+couldn't connect to cluster: (110) Connection timed out
++ '[' 1 -eq 0 ']'
++ delay_mon mon_command ceph df
++ MSGTYPE=mon_command
++ shift
++ ceph df --rados-mon-op-timeout 1 --ms-inject-delay-type mon --ms-inject-delay-max 10000000 --ms-inject-delay-probability 1 --ms-inject-delay-msg-type mon_command
+2018-03-05 14:14:49.754788 7f9bb64200  0 monclient(hunting): authenticate timed out after 300
+2018-03-05 14:14:49.754826 7f9bb64200  0 librados: client.admin authentication error (110) Connection timed out
+Error connecting to cluster: TimedOut
++ '[' 1 -eq 0 ']'
++ delay_mon omap ceph osd dump
++ MSGTYPE=omap
++ shift
++ ceph osd dump --rados-mon-op-timeout 1 --ms-inject-delay-type mon --ms-inject-delay-max 10000000 --ms-inject-delay-probability 1 --ms-inject-delay-msg-type omap
+2018-03-05 14:19:49.957944 7f9c7b6200  0 monclient(hunting): authenticate timed out after 300
+2018-03-05 14:19:49.957997 7f9c7b6200  0 librados: client.admin authentication error (110) Connection timed out
+Error connecting to cluster: TimedOut
++ '[' 1 -eq 0 ']'
++ delay_mon omap ceph -s
++ MSGTYPE=omap
++ shift
++ ceph -s --rados-mon-op-timeout 1 --ms-inject-delay-type mon --ms-inject-delay-max 10000000 --ms-inject-delay-probability 1 --ms-inject-delay-msg-type omap
+2018-03-05 14:24:50.119798 7f6d5af200  0 monclient(hunting): authenticate timed out after 300
+2018-03-05 14:24:50.119847 7f6d5af200  0 librados: client.admin authentication error (110) Connection timed out
+Error connecting to cluster: TimedOut
++ '[' 1 -eq 0 ']'
++ delay_osd osd_op_reply rados -p data put ls /bin/ls
++ MSGTYPE=osd_op_reply
++ shift
++ rados -p data put ls /bin/ls --rados-osd-op-timeout 1 --ms-inject-delay-type osd --ms-inject-delay-max 10000000 --ms-inject-delay-probability 1 --ms-inject-delay-msg-type osd_op_reply
+error opening pool data: (2) No such file or directory
++ '[' 1 -eq 0 ']'
++ delay_osd osd_op_reply rados -p data get ls -
++ MSGTYPE=osd_op_reply
++ shift
++ rados -p data get ls - --rados-osd-op-timeout 1 --ms-inject-delay-type osd --ms-inject-delay-max 10000000 --ms-inject-delay-probability 1 --ms-inject-delay-msg-type osd_op_reply
+error opening pool data: (2) No such file or directory
++ '[' 1 -eq 0 ']'
++ delay_osd osd_op_reply rados -p data ls
++ MSGTYPE=osd_op_reply
++ shift
++ rados -p data ls --rados-osd-op-timeout 1 --ms-inject-delay-type osd --ms-inject-delay-max 10000000 --ms-inject-delay-probability 1 --ms-inject-delay-msg-type osd_op_reply
+error opening pool data: (2) No such file or directory
++ '[' 1 -eq 0 ']'
++ delay_osd command_reply ceph tell osd.0 bench 1 1
++ MSGTYPE=command_reply
++ shift
++ ceph tell osd.0 bench 1 1 --rados-osd-op-timeout 1 --ms-inject-delay-type osd --ms-inject-delay-max 10000000 --ms-inject-delay-probability 1 --ms-inject-delay-msg-type command_reply
+Error ETIMEDOUT: problem getting command descriptions from osd.0
++ '[' 110 -eq 0 ']'
++ rbd create -s 1 test
++ delay_osd osd_op_reply rbd watch test
++ MSGTYPE=osd_op_reply
++ shift
++ rbd watch test --rados-osd-op-timeout 1 --ms-inject-delay-type osd --ms-inject-delay-max 10000000 --ms-inject-delay-probability 1 --ms-inject-delay-msg-type osd_op_reply
+2018-03-05 14:24:54.393868 7f5effb850 -1 librbd::image::OpenRequest: failed to stat v2 image header: (110) Connection timed out
+2018-03-05 14:24:54.393979 7f5e7fb850 -1 librbd::ImageState: 0x16f916d10 failed to open image: (110) Connection timed out
+rbd: error opening image test: (110) Connection timed out
++ '[' 110 -eq 0 ']'
++ delay_osd osd_op_reply rbd info test
++ MSGTYPE=osd_op_reply
++ shift
++ rbd info test --rados-osd-op-timeout 1 --ms-inject-delay-type osd --ms-inject-delay-max 10000000 --ms-inject-delay-probability 1 --ms-inject-delay-msg-type osd_op_reply
+2018-03-05 14:24:55.444708 7f72ffb850 -1 librbd::image::OpenRequest: failed to stat v2 image header: (110) Connection timed out
+2018-03-05 14:24:55.444822 7f727fb850 -1 librbd::ImageState: 0x1404d45f0 failed to open image: (110) Connection timed out
+rbd: error opening image test: (110) Connection timed out
++ '[' 110 -eq 0 ']'
++ delay_osd osd_op_reply rbd snap create test@snap
++ MSGTYPE=osd_op_reply
++ shift
++ rbd snap create test@snap --rados-osd-op-timeout 1 --ms-inject-delay-type osd --ms-inject-delay-max 10000000 --ms-inject-delay-probability 1 --ms-inject-delay-msg-type osd_op_reply
+2018-03-05 14:24:56.495657 7f967fb850 -1 librbd::image::OpenRequest: failed to stat v2 image header: (110) Connection timed out
+2018-03-05 14:24:56.495779 7f95ffb850 -1 librbd::ImageState: 0x156bcd090 failed to open image: (110) Connection timed out
+rbd: error opening image test: (110) Connection timed out
++ '[' 110 -eq 0 ']'
++ delay_osd osd_op_reply rbd import /bin/ls ls
++ MSGTYPE=osd_op_reply
++ shift
++ rbd import /bin/ls ls --rados-osd-op-timeout 1 --ms-inject-delay-type osd --ms-inject-delay-max 10000000 --ms-inject-delay-probability 1 --ms-inject-delay-msg-type osd_op_reply
+rbd: image creation failed2018-03-05 14:24:57.548878 7f7b86b000 -1 librbd: Could not tell if ls already exists
+Importing image: 0% complete...failed.
+
+rbd: import failed: (110) Connection timed out
++ '[' 110 -eq 0 ']'
++ rbd rm test
+Removing image: 100% complete...done.
++ echo OK
+OK

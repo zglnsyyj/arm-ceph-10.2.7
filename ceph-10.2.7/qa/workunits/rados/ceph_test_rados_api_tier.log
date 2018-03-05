@@ -1,0 +1,324 @@
+[==========] Running 46 tests from 4 test cases.
+[----------] Global test environment set-up.
+[----------] 3 tests from LibRadosTierPP
+[ RUN      ] LibRadosTierPP.Dirty
+[       OK ] LibRadosTierPP.Dirty (4702 ms)
+[ RUN      ] LibRadosTierPP.FlushWriteRaces
+[       OK ] LibRadosTierPP.FlushWriteRaces (49080 ms)
+[ RUN      ] LibRadosTierPP.HitSetNone
+[       OK ] LibRadosTierPP.HitSetNone (207 ms)
+[----------] 3 tests from LibRadosTierPP (53989 ms total)
+
+[----------] 21 tests from LibRadosTwoPoolsPP
+[ RUN      ] LibRadosTwoPoolsPP.Overlay
+[       OK ] LibRadosTwoPoolsPP.Overlay (13314 ms)
+[ RUN      ] LibRadosTwoPoolsPP.Promote
+[       OK ] LibRadosTwoPoolsPP.Promote (11011 ms)
+[ RUN      ] LibRadosTwoPoolsPP.PromoteSnap
+[       OK ] LibRadosTwoPoolsPP.PromoteSnap (13897 ms)
+[ RUN      ] LibRadosTwoPoolsPP.PromoteSnapScrub
+my_snaps [4]
+my_snaps [5,4]
+my_snaps [6,5,4]
+my_snaps [7,6,5,4]
+promoting some heads
+promoting from clones for snap 7
+promoting from clones for snap 6
+promoting from clones for snap 5
+promoting from clones for snap 4
+waiting for scrubs...
+done waiting
+[       OK ] LibRadosTwoPoolsPP.PromoteSnapScrub (57504 ms)
+[ RUN      ] LibRadosTwoPoolsPP.PromoteSnapTrimRace
+[       OK ] LibRadosTwoPoolsPP.PromoteSnapTrimRace (11424 ms)
+[ RUN      ] LibRadosTwoPoolsPP.Whiteout
+test/librados/tier.cc:666: Failure
+Value of: it != cache_ioctx.nobjects_end()
+  Actual: false
+Expected: true
+[  FAILED  ] LibRadosTwoPoolsPP.Whiteout (9396 ms)
+[ RUN      ] LibRadosTwoPoolsPP.WhiteoutDeleteCreate
+[       OK ] LibRadosTwoPoolsPP.WhiteoutDeleteCreate (9755 ms)
+[ RUN      ] LibRadosTwoPoolsPP.Evict
+[       OK ] LibRadosTwoPoolsPP.Evict (10562 ms)
+[ RUN      ] LibRadosTwoPoolsPP.EvictSnap
+[       OK ] LibRadosTwoPoolsPP.EvictSnap (11499 ms)
+[ RUN      ] LibRadosTwoPoolsPP.EvictSnap2
+[       OK ] LibRadosTwoPoolsPP.EvictSnap2 (10825 ms)
+[ RUN      ] LibRadosTwoPoolsPP.TryFlush
+[       OK ] LibRadosTwoPoolsPP.TryFlush (9050 ms)
+[ RUN      ] LibRadosTwoPoolsPP.Flush
+[       OK ] LibRadosTwoPoolsPP.Flush (8948 ms)
+[ RUN      ] LibRadosTwoPoolsPP.FlushSnap
+test/librados/tier.cc:1689: Failure
+Value of: bl[0]
+  Actual: 'b' (98, 0x62)
+Expected: 'a'
+Which is: 'a' (97, 0x61)
+[  FAILED  ] LibRadosTwoPoolsPP.FlushSnap (12686 ms)
+[ RUN      ] LibRadosTwoPoolsPP.FlushTryFlushRaces
+[       OK ] LibRadosTwoPoolsPP.FlushTryFlushRaces (9714 ms)
+[ RUN      ] LibRadosTwoPoolsPP.TryFlushReadRace
+[       OK ] LibRadosTwoPoolsPP.TryFlushReadRace (10003 ms)
+[ RUN      ] LibRadosTwoPoolsPP.HitSetRead
+hmm, no HitSet yet
+ok, hit_set contains 578:602f83fe:::foo:head
+[       OK ] LibRadosTwoPoolsPP.HitSetRead (10322 ms)
+[ RUN      ] LibRadosTwoPoolsPP.HitSetWrite
+pg_num = 8
+pg 0 ls 1520231551,0
+pg 1 ls 1520231551,0
+pg 2 ls 1520231551,0
+pg 3 ls 1520231551,0
+pg 4 ls 1520231551,0
+pg 5 ls 1520231551,0
+pg 6 ls 1520231551,0
+pg 7 ls 1520231551,0
+pg_num = 8
+checking for 579:6cac518f:::0:head
+checking for 579:02547ec2:::1:head
+checking for 579:f905c69b:::2:head
+checking for 579:cfc208b3:::3:head
+checking for 579:d83876eb:::4:head
+checking for 579:b29083e3:::5:head
+checking for 579:c4fdafeb:::6:head
+checking for 579:5c6b0b28:::7:head
+checking for 579:bd63b0f1:::8:head
+checking for 579:e960b815:::9:head
+checking for 579:52ea6a34:::10:head
+checking for 579:89d3ae78:::11:head
+checking for 579:de5d7c5f:::12:head
+checking for 579:566253c9:::13:head
+checking for 579:62a1935d:::14:head
+checking for 579:863748b0:::15:head
+checking for 579:3958e169:::16:head
+checking for 579:4d4dabf9:::17:head
+checking for 579:8391935d:::18:head
+checking for 579:28883081:::19:head
+checking for 579:69259c59:::20:head
+checking for 579:4bdb80b7:::21:head
+checking for 579:a11c5d71:::22:head
+checking for 579:271af37b:::23:head
+checking for 579:95b121be:::24:head
+checking for 579:58d1031b:::25:head
+checking for 579:0a050783:::26:head
+checking for 579:c709704c:::27:head
+checking for 579:cbe56eaf:::28:head
+checking for 579:86b4b162:::29:head
+checking for 579:70d89383:::30:head
+checking for 579:dd450c7c:::31:head
+checking for 579:6d5729b1:::32:head
+checking for 579:c388f3fb:::33:head
+checking for 579:56cfea31:::34:head
+checking for 579:9dbc1bf7:::35:head
+checking for 579:40b74ccd:::36:head
+checking for 579:4d5aaf42:::37:head
+checking for 579:920f362c:::38:head
+checking for 579:6cc53222:::39:head
+checking for 579:9cad833f:::40:head
+checking for 579:1ea84d41:::41:head
+checking for 579:c4480ef6:::42:head
+checking for 579:a694361e:::43:head
+checking for 579:d1bd33e9:::44:head
+checking for 579:ddc2cd5d:::45:head
+checking for 579:2b782207:::46:head
+checking for 579:7b187fca:::47:head
+checking for 579:90ecdf6f:::48:head
+checking for 579:a5ed95fe:::49:head
+checking for 579:ea0eaa55:::50:head
+checking for 579:f33ef17b:::51:head
+checking for 579:a0d1b2f6:::52:head
+checking for 579:60c5229e:::53:head
+checking for 579:edcbc575:::54:head
+checking for 579:102cf253:::55:head
+checking for 579:efb7fb0b:::56:head
+checking for 579:50d0a326:::57:head
+checking for 579:d4dc5daf:::58:head
+checking for 579:3a130462:::59:head
+checking for 579:ec87ed71:::60:head
+checking for 579:d5bc9454:::61:head
+checking for 579:3ddfe313:::62:head
+checking for 579:7c2816b9:::63:head
+checking for 579:47e00e4d:::64:head
+checking for 579:c6410c18:::65:head
+checking for 579:b48ed237:::66:head
+checking for 579:cd63ad31:::67:head
+checking for 579:b179e92b:::68:head
+checking for 579:0d9f741a:::69:head
+checking for 579:6d3352ae:::70:head
+checking for 579:c6d5c19e:::71:head
+checking for 579:bc4729c3:::72:head
+checking for 579:77e930b9:::73:head
+checking for 579:0abeecfd:::74:head
+checking for 579:b7c37e15:::75:head
+checking for 579:b6378398:::76:head
+checking for 579:02bd68de:::77:head
+checking for 579:cc795d2d:::78:head
+checking for 579:630d4fea:::79:head
+checking for 579:e0d29ef5:::80:head
+checking for 579:fd6f13d2:::81:head
+checking for 579:606461d5:::82:head
+checking for 579:eadbdc43:::83:head
+checking for 579:8761d0bb:::84:head
+checking for 579:9ef0186f:::85:head
+checking for 579:e0d41294:::86:head
+checking for 579:961de695:::87:head
+checking for 579:1423148f:::88:head
+checking for 579:633a8fa2:::89:head
+checking for 579:a8653809:::90:head
+checking for 579:3dac8b33:::91:head
+checking for 579:35aad435:::92:head
+checking for 579:f6dcc343:::93:head
+checking for 579:dbbdad87:::94:head
+checking for 579:1cb48ce0:::95:head
+checking for 579:03cd461c:::96:head
+checking for 579:17a4ea99:::97:head
+checking for 579:9993c9a7:::98:head
+checking for 579:6394211c:::99:head
+checking for 579:94c7ae57:::100:head
+checking for 579:6fdee5bb:::101:head
+checking for 579:9a477fd1:::102:head
+checking for 579:eb850916:::103:head
+checking for 579:affc56b9:::104:head
+checking for 579:b42dc814:::105:head
+checking for 579:f319f8f0:::106:head
+checking for 579:9a40b9de:::107:head
+checking for 579:8b524f28:::108:head
+checking for 579:e3de589f:::109:head
+checking for 579:90f90a5b:::110:head
+checking for 579:a7b4f1d7:::111:head
+checking for 579:af51766e:::112:head
+checking for 579:b6f90bd1:::113:head
+checking for 579:e0261208:::114:head
+checking for 579:c9569ef7:::115:head
+checking for 579:61bebe50:::116:head
+checking for 579:fe93412b:::117:head
+checking for 579:d3d38bee:::118:head
+checking for 579:3100ba0c:::119:head
+checking for 579:d0560ada:::120:head
+checking for 579:f0ea8b35:::121:head
+checking for 579:766f231a:::122:head
+checking for 579:a07a2582:::123:head
+checking for 579:bd7c6b3a:::124:head
+checking for 579:fb2ddaff:::125:head
+checking for 579:4408e1fe:::126:head
+checking for 579:ee1df7a7:::127:head
+checking for 579:c3002909:::128:head
+checking for 579:4f48ffa9:::129:head
+checking for 579:edf38733:::130:head
+checking for 579:c08425c0:::131:head
+checking for 579:5f902d98:::132:head
+checking for 579:41ea2c93:::133:head
+checking for 579:813cee13:::134:head
+checking for 579:0131818d:::135:head
+checking for 579:26ba5a85:::136:head
+checking for 579:381b8a5a:::137:head
+checking for 579:28797e47:::138:head
+checking for 579:bfca7f22:::139:head
+checking for 579:36807075:::140:head
+checking for 579:80b03975:::141:head
+checking for 579:5c15709b:::142:head
+checking for 579:f39ea15e:::143:head
+checking for 579:ea992956:::144:head
+checking for 579:48887b1c:::145:head
+checking for 579:9f24a9dd:::146:head
+checking for 579:987f100b:::147:head
+checking for 579:d2dd3581:::148:head
+checking for 579:7fed1808:::149:head
+checking for 579:c80b70e9:::150:head
+checking for 579:85ed90f9:::151:head
+checking for 579:36428b24:::152:head
+checking for 579:d044c34a:::153:head
+checking for 579:7c18bf58:::154:head
+checking for 579:d1c21232:::155:head
+checking for 579:a7a3c575:::156:head
+checking for 579:87da0633:::157:head
+checking for 579:d5ac3822:::158:head
+checking for 579:3f20522d:::159:head
+checking for 579:6ca26563:::160:head
+checking for 579:532ce135:::161:head
+checking for 579:c78863e6:::162:head
+checking for 579:7462ddf6:::163:head
+checking for 579:5d165639:::164:head
+checking for 579:f43765fc:::165:head
+checking for 579:b4c720e9:::166:head
+checking for 579:e694b040:::167:head
+checking for 579:afa38db2:::168:head
+checking for 579:77ba9f53:::169:head
+checking for 579:87495034:::170:head
+checking for 579:7c96bf0e:::171:head
+checking for 579:dbe346cc:::172:head
+checking for 579:e943ec24:::173:head
+checking for 579:f97a9c0c:::174:head
+checking for 579:6f26e74d:::175:head
+checking for 579:4f95e106:::176:head
+checking for 579:0e6f2f8f:::177:head
+checking for 579:05db05f1:::178:head
+checking for 579:38a78d66:::179:head
+checking for 579:d095610b:::180:head
+checking for 579:a1a9d709:::181:head
+checking for 579:1e5d39db:::182:head
+checking for 579:f7df4fb9:::183:head
+checking for 579:03a7f161:::184:head
+checking for 579:ba70721e:::185:head
+checking for 579:28e5662d:::186:head
+checking for 579:973d52de:::187:head
+checking for 579:4303eb1c:::188:head
+checking for 579:b990b48e:::189:head
+checking for 579:29b8165b:::190:head
+checking for 579:3547f197:::191:head
+checking for 579:7e260936:::192:head
+checking for 579:1abec7b1:::193:head
+checking for 579:10fdda93:::194:head
+checking for 579:15817eea:::195:head
+checking for 579:770bab57:::196:head
+checking for 579:ed9e13e7:::197:head
+checking for 579:71471a8f:::198:head
+checking for 579:10fb1d02:::199:head
+[       OK ] LibRadosTwoPoolsPP.HitSetWrite (9122 ms)
+[ RUN      ] LibRadosTwoPoolsPP.HitSetTrim
+ got ls 1520231562,0
+first is 1520231562
+ got ls 1520231562,0
+ got ls 1520231562,0
+ got ls 1520231562,1520231564,1520231565,0
+ got ls 1520231562,1520231564,1520231565,0
+ got ls 1520231562,1520231564,1520231565,0
+ got ls 1520231562,1520231564,1520231565,1520231567,1520231568,0
+ got ls 1520231562,1520231564,1520231565,1520231567,1520231568,0
+ got ls 1520231562,1520231564,1520231565,1520231567,1520231568,0
+ got ls 1520231562,1520231564,1520231565,1520231567,1520231568,1520231570,1520231571,0
+ got ls 1520231562,1520231564,1520231565,1520231567,1520231568,1520231570,1520231571,0
+ got ls 1520231562,1520231564,1520231565,1520231567,1520231568,1520231570,1520231571,0
+ got ls 1520231565,1520231567,1520231568,1520231570,1520231571,1520231573,1520231574,0
+first now 1520231565, trimmed
+[       OK ] LibRadosTwoPoolsPP.HitSetTrim (24059 ms)
+[ RUN      ] LibRadosTwoPoolsPP.PromoteOn2ndRead
+foo0
+verifying foo0 is eventually promoted
+[       OK ] LibRadosTwoPoolsPP.PromoteOn2ndRead (18639 ms)
+[ RUN      ] LibRadosTwoPoolsPP.ProxyRead
+[       OK ] LibRadosTwoPoolsPP.ProxyRead (24747 ms)
+[ RUN      ] LibRadosTwoPoolsPP.CachePin
+[       OK ] LibRadosTwoPoolsPP.CachePin (23361 ms)
+[----------] 21 tests from LibRadosTwoPoolsPP (319839 ms total)
+
+[----------] 4 tests from LibRadosTierECPP
+[ RUN      ] LibRadosTierECPP.Dirty
+[       OK ] LibRadosTierECPP.Dirty (1618 ms)
+[ RUN      ] LibRadosTierECPP.FlushWriteRaces
+[       OK ] LibRadosTierECPP.FlushWriteRaces (51344 ms)
+[ RUN      ] LibRadosTierECPP.CallForcesPromote
+[       OK ] LibRadosTierECPP.CallForcesPromote (286231 ms)
+[ RUN      ] LibRadosTierECPP.HitSetNone
+[       OK ] LibRadosTierECPP.HitSetNone (198 ms)
+[----------] 4 tests from LibRadosTierECPP (339391 ms total)
+
+[----------] 18 tests from LibRadosTwoPoolsECPP
+[ RUN      ] LibRadosTwoPoolsECPP.Overlay
+[       OK ] LibRadosTwoPoolsECPP.Overlay (8883 ms)
+[ RUN      ] LibRadosTwoPoolsECPP.Promote
+[       OK ] LibRadosTwoPoolsECPP.Promote (8483 ms)
+[ RUN      ] LibRadosTwoPoolsECPP.PromoteSnap
+waiting for scrub...
+done waiting

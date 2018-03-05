@@ -1,0 +1,69 @@
++ dirname ./test_python.sh
++ nosetests -v ./../../../src/test/pybind/test_rados.py
+test_rados.TestCommand.test_ceph_osd_pool_create_utf8 ... ok
+test_rados.TestCommand.test_monmap_dump ... ok
+test_rados.TestCommand.test_osd_bench ... ok
+test_rados.TestIoctx.test_aio_append ... ok
+test_rados.TestIoctx.test_aio_read ... ok
+test_rados.TestIoctx.test_aio_write ... ok
+test_rados.TestIoctx.test_aio_write_full ... ok
+test_rados.TestIoctx.test_aio_write_no_comp_ref ... ok
+test_rados.TestIoctx.test_append ... ok
+test_rados.TestIoctx.test_change_auid ... ok
+test_rados.TestIoctx.test_clear_omap ... ok
+test_rados.TestIoctx.test_create_snap ... ok
+test_rados.TestIoctx.test_execute ... ok
+test_rados.TestIoctx.test_get_last_version ... ok
+test_rados.TestIoctx.test_get_omap_keys ... ok
+test_rados.TestIoctx.test_get_omap_vals_by_keys ... ok
+test_rados.TestIoctx.test_get_stats ... ok
+test_rados.TestIoctx.test_list_ns_objects ... ok
+test_rados.TestIoctx.test_list_objects ... ok
+test_rados.TestIoctx.test_list_objects_empty ... ok
+test_rados.TestIoctx.test_list_snaps ... ok
+test_rados.TestIoctx.test_list_snaps_empty ... ok
+test_rados.TestIoctx.test_locator ... ok
+test_rados.TestIoctx.test_lock ... ok
+test_rados.TestIoctx.test_lookup_snap ... ok
+test_rados.TestIoctx.test_obj_xattrs ... ok
+test_rados.TestIoctx.test_remove_snap ... ok
+test_rados.TestIoctx.test_set_omap ... ok
+test_rados.TestIoctx.test_snap_read ... ok
+test_rados.TestIoctx.test_snap_rollback ... ok
+test_rados.TestIoctx.test_snap_timestamp ... ok
+test_rados.TestIoctx.test_trunc ... ok
+test_rados.TestIoctx.test_write ... ok
+test_rados.TestIoctx.test_write_full ... ok
+test_rados.TestIoctx.test_write_zeros ... ok
+test_rados.TestIoctx.test_xattrs ... ok
+test_rados.TestObject.test_read ... ok
+test_rados.TestObject.test_seek ... ok
+test_rados.TestObject.test_write ... ok
+test_rados.TestRados.test_blacklist_add ... ok
+test_rados.TestRados.test_create ... ok
+test_rados.TestRados.test_create_auid ... ok
+test_rados.TestRados.test_create_utf8 ... ok
+test_rados.TestRados.test_eexist ... ok
+test_rados.TestRados.test_get_cluster_stats ... ok
+test_rados.TestRados.test_get_fsid ... ok
+test_rados.TestRados.test_get_pool_base_tier ... ok
+test_rados.TestRados.test_list_pools ... ok
+test_rados.TestRados.test_monitor_log ... ok
+test_rados.TestRados.test_ping_monitor ... ok
+test_rados.TestRados.test_pool_lookup_utf8 ... ok
+test_rados.TestRadosStateError.test_configuring ... ok
+test_rados.TestRadosStateError.test_connected ... ok
+test_rados.TestRadosStateError.test_shutdown ... ok
+test_rados.TestRequires.test_method_plain ... ok
+test_rados.TestRequires.test_method_with_opt_args ... ok
+test_rados.test_rados_init_error ... ok
+test_rados.test_rados_init ... ok
+test_rados.test_ioctx_context_manager ... ok
+test_rados.test_parse_argv ... ok
+test_rados.test_parse_argv_empty_str ... ok
+
+----------------------------------------------------------------------
+Ran 61 tests in 262.970s
+
+OK
++ exit 0

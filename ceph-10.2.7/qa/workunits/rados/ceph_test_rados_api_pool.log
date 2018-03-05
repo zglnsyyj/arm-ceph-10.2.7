@@ -1,0 +1,23 @@
+Running main() from gmock_main.cc
+[==========] Running 7 tests from 1 test case.
+[----------] Global test environment set-up.
+[----------] 7 tests from LibRadosPools
+[ RUN      ] LibRadosPools.PoolList
+[       OK ] LibRadosPools.PoolList (16104 ms)
+[ RUN      ] LibRadosPools.PoolLookup
+[       OK ] LibRadosPools.PoolLookup (3864 ms)
+[ RUN      ] LibRadosPools.PoolLookup2
+[       OK ] LibRadosPools.PoolLookup2 (8238 ms)
+[ RUN      ] LibRadosPools.PoolDelete
+[       OK ] LibRadosPools.PoolDelete (8120 ms)
+[ RUN      ] LibRadosPools.PoolCreateDelete
+[       OK ] LibRadosPools.PoolCreateDelete (5063 ms)
+[ RUN      ] LibRadosPools.PoolCreateWithCrushRule
+[       OK ] LibRadosPools.PoolCreateWithCrushRule (7092 ms)
+[ RUN      ] LibRadosPools.PoolGetBaseTier
+[       OK ] LibRadosPools.PoolGetBaseTier (8897 ms)
+[----------] 7 tests from LibRadosPools (57378 ms total)
+
+[----------] Global test environment tear-down
+[==========] 7 tests from 1 test case ran. (57379 ms total)
+[  PASSED  ] 7 tests.

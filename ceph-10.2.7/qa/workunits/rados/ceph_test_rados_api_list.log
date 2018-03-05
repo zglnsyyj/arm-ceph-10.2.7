@@ -1,0 +1,165 @@
+[]
+[==========] Running 26 tests from 5 test cases.
+[----------] Global test environment set-up.
+[----------] 5 tests from LibRadosList
+[ RUN      ] LibRadosList.ListObjects
+[       OK ] LibRadosList.ListObjects (4677 ms)
+[ RUN      ] LibRadosList.ListObjectsNS
+[       OK ] LibRadosList.ListObjectsNS (490 ms)
+[ RUN      ] LibRadosList.ListObjectsStart
+1 0
+15 1
+11 1
+7 2
+10 2
+13 2
+3 3
+4 3
+6 3
+12 3
+8 5
+5 5
+14 6
+0 6
+9 7
+2 7
+have 9 expect one of 2,9
+have 14 expect one of 0,14
+have 8 expect one of 5,8
+have 3 expect one of 12,3,4,6
+have 7 expect one of 10,13,7
+have 15 expect one of 11,15
+have 1 expect one of 1
+[       OK ] LibRadosList.ListObjectsStart (350 ms)
+[ RUN      ] LibRadosList.EnumerateObjects
+test/librados/list.cc:689: Failure
+Value of: err_str.empty()
+  Actual: false
+Expected: true
+./log/SubsystemMap.h: In function 'bool ceph::log::SubsystemMap::should_gather(unsigned int, int)' thread 7fa2b8f000 time 2018-03-05 15:28:14.801482
+./log/SubsystemMap.h: 62: FAILED assert(sub < m_subsys.size())
+ ceph version 55e00c42e8e7e98380b6dc70137119f36936769 (d55e00c42e8e7e98380b6dc70137119f36936769)
+ 1: (()+0x165094) [0x7fa37de094]
+ 2: (()+0xa0c00) [0x7fa3719c00]
+ 3: (()+0xa82d4) [0x7fa37212d4]
+ 4: (rados_ioctx_snap_set_read()+0x38) [0x7fa36e9500]
+ 5: (RadosTestNS::cleanup_all_objects(void*)+0x4c) [0x11ad097d4]
+ 6: (RadosTestNS::TearDown()+0x18) [0x11ad09cb8]
+ 7: (void testing::internal::HandleExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*)+0xbc) [0x11acfc34c]
+ 8: (testing::Test::Run()+0xb0) [0x11acf3e98]
+ 9: (testing::TestInfo::Run()+0x120) [0x11acf4018]
+ 10: (testing::TestCase::Run()+0xa8) [0x11acf40d8]
+ 11: (testing::internal::UnitTestImpl::RunAllTests()+0x240) [0x11acf4e70]
+ 12: (testing::UnitTest::Run()+0x68) [0x11acf51a0]
+ 13: (main()+0x174) [0x11acc057c]
+ 14: (__libc_start_main()+0xe0) [0x7fa30e8920]
+ NOTE: a copy of the executable, or `objdump -rdS <executable>` is needed to interpret this.
+*** Caught signal (Aborted) **
+ in thread 7fa2b8f000 thread_name:ceph_test_rados
+ ceph version 10.2.7 (50e863e0f4bc8f4b9e31156de690d765af245185)
+ 1: (()+0x15fa28) [0x11ad17a28]
+ 2: [0x7facbd46c0]
+ 3: (gsignal()+0x38) [0x7fa30fa568]
+2018-03-05 15:28:14.811838 7fa2b8f000 -1 *** Caught signal (Aborted) **
+ in thread 7fa2b8f000 thread_name:ceph_test_rados
+
+ ceph version 10.2.7 (50e863e0f4bc8f4b9e31156de690d765af245185)
+ 1: (()+0x15fa28) [0x11ad17a28]
+ 2: [0x7facbd46c0]
+ 3: (gsignal()+0x38) [0x7fa30fa568]
+ NOTE: a copy of the executable, or `objdump -rdS <executable>` is needed to interpret this.
+
+--- begin dump of recent events ---
+   -23> 2018-03-05 14:27:33.306466 7fa2b8f000  5 asok(0x1341cc5a0) register_command perfcounters_dump hook 0x1341d1040
+   -22> 2018-03-05 14:27:33.306488 7fa2b8f000  5 asok(0x1341cc5a0) register_command 1 hook 0x1341d1040
+   -21> 2018-03-05 14:27:33.306493 7fa2b8f000  5 asok(0x1341cc5a0) register_command perf dump hook 0x1341d1040
+   -20> 2018-03-05 14:27:33.306500 7fa2b8f000  5 asok(0x1341cc5a0) register_command perfcounters_schema hook 0x1341d1040
+   -19> 2018-03-05 14:27:33.306514 7fa2b8f000  5 asok(0x1341cc5a0) register_command 2 hook 0x1341d1040
+   -18> 2018-03-05 14:27:33.306518 7fa2b8f000  5 asok(0x1341cc5a0) register_command perf schema hook 0x1341d1040
+   -17> 2018-03-05 14:27:33.306523 7fa2b8f000  5 asok(0x1341cc5a0) register_command perf reset hook 0x1341d1040
+   -16> 2018-03-05 14:27:33.306532 7fa2b8f000  5 asok(0x1341cc5a0) register_command config show hook 0x1341d1040
+   -15> 2018-03-05 14:27:33.306538 7fa2b8f000  5 asok(0x1341cc5a0) register_command config set hook 0x1341d1040
+   -14> 2018-03-05 14:27:33.306543 7fa2b8f000  5 asok(0x1341cc5a0) register_command config get hook 0x1341d1040
+   -13> 2018-03-05 14:27:33.306549 7fa2b8f000  5 asok(0x1341cc5a0) register_command config diff hook 0x1341d1040
+   -12> 2018-03-05 14:27:33.306553 7fa2b8f000  5 asok(0x1341cc5a0) register_command log flush hook 0x1341d1040
+   -11> 2018-03-05 14:27:33.306558 7fa2b8f000  5 asok(0x1341cc5a0) register_command log dump hook 0x1341d1040
+   -10> 2018-03-05 14:27:33.306566 7fa2b8f000  5 asok(0x1341cc5a0) register_command log reopen hook 0x1341d1040
+    -9> 2018-03-05 14:27:33.314967 7fa2b8f000  5 asok(0x1341cc5a0) init /var/run/ceph/rbd-client-2969274.asok
+    -8> 2018-03-05 14:27:33.314992 7fa2b8f000  5 asok(0x1341cc5a0) bind_and_listen /var/run/ceph/rbd-client-2969274.asok
+    -7> 2018-03-05 14:27:33.315046 7fa2b8f000  5 asok(0x1341cc5a0) register_command 0 hook 0x13422d270
+    -6> 2018-03-05 14:27:33.315059 7fa2b8f000  5 asok(0x1341cc5a0) register_command version hook 0x13422d270
+    -5> 2018-03-05 14:27:33.315069 7fa2b8f000  5 asok(0x1341cc5a0) register_command git_version hook 0x13422d270
+    -4> 2018-03-05 14:27:33.315084 7fa2b8f000  5 asok(0x1341cc5a0) register_command help hook 0x13422dcc0
+    -3> 2018-03-05 14:27:33.315100 7fa2b8f000  5 asok(0x1341cc5a0) register_command get_command_descriptions hook 0x13422e0a0
+    -2> 2018-03-05 14:27:33.315206 7fa19c7f70  5 asok(0x1341cc5a0) entry start
+    -1> 2018-03-05 14:27:33.445540 7fa19c7f70  5 asok(0x1341cc5a0) AdminSocket: request '0' '' to 0x13422d270 returned 1 bytes
+     0> 2018-03-05 15:28:14.811838 7fa2b8f000 -1 *** Caught signal (Aborted) **
+ in thread 7fa2b8f000 thread_name:ceph_test_rados
+
+ ceph version 10.2.7 (50e863e0f4bc8f4b9e31156de690d765af245185)
+ 1: (()+0x15fa28) [0x11ad17a28]
+ 2: [0x7facbd46c0]
+ 3: (gsignal()+0x38) [0x7fa30fa568]
+ NOTE: a copy of the executable, or `objdump -rdS <executable>` is needed to interpret this.
+
+--- logging levels ---
+   0/ 5 none
+   0/ 1 lockdep
+   0/ 1 context
+   1/ 1 crush
+   1/ 5 mds
+   1/ 5 mds_balancer
+   1/ 5 mds_locker
+   1/ 5 mds_log
+   1/ 5 mds_log_expire
+   1/ 5 mds_migrator
+   0/ 1 buffer
+   0/ 1 timer
+   0/ 1 filer
+   0/ 1 striper
+   0/ 1 objecter
+   0/ 5 rados
+   0/ 5 rbd
+   0/ 5 rbd_mirror
+   0/ 5 rbd_replay
+   0/ 5 journaler
+   0/ 5 objectcacher
+   0/ 5 client
+   0/ 5 osd
+   0/ 5 optracker
+   0/ 5 objclass
+   1/ 3 filestore
+   1/ 3 journal
+   0/ 5 ms
+   1/ 5 mon
+   0/10 monc
+   1/ 5 paxos
+   0/ 5 tp
+   1/ 5 auth
+   1/ 5 crypto
+   1/ 1 finisher
+   1/ 5 heartbeatmap
+   1/ 5 perfcounter
+   1/ 5 rgw
+   1/10 civetweb
+   1/ 5 javaclient
+   1/ 5 asok
+   1/ 1 throttle
+   0/ 0 refs
+   1/ 5 xio
+   1/ 5 compressor
+   1/ 5 newstore
+   1/ 5 bluestore
+   1/ 5 bluefs
+   1/ 3 bdev
+   1/ 5 kstore
+   4/ 5 rocksdb
+   0/ 0 leveldb
+   1/ 5 kinetic
+   1/ 5 fuse
+  -2/-2 (syslog threshold)
+  99/99 (stderr threshold)
+  max_recent       500
+  max_new         1000
+  log_file /var/log/ceph/ceph.client.log
+--- end dump of recent events ---

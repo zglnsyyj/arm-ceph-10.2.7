@@ -1,0 +1,6 @@
++ set -e
++ rados -p data rm foo
+error opening pool data: (2) No such file or directory
++ true
++ rados -p data put foo.tmp /etc/passwd --object-locator foo
+error opening pool data: (2) No such file or directory

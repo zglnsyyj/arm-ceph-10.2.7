@@ -1,0 +1,75 @@
+Running main() from gmock_main.cc
+[==========] Running 17 tests from 4 test cases.
+[----------] Global test environment set-up.
+[----------] 4 tests from LibRadosStat
+[ RUN      ] LibRadosStat.Stat
+[       OK ] LibRadosStat.Stat (2796 ms)
+[ RUN      ] LibRadosStat.StatNS
+[       OK ] LibRadosStat.StatNS (252 ms)
+[ RUN      ] LibRadosStat.ClusterStat
+[       OK ] LibRadosStat.ClusterStat (1988 ms)
+[ RUN      ] LibRadosStat.PoolStat
+[       OK ] LibRadosStat.PoolStat (388 ms)
+[----------] 4 tests from LibRadosStat (5424 ms total)
+
+[----------] 5 tests from LibRadosStatPP
+[ RUN      ] LibRadosStatPP.StatPP
+[       OK ] LibRadosStatPP.StatPP (2080 ms)
+[ RUN      ] LibRadosStatPP.Stat2Mtime2PP
+[       OK ] LibRadosStatPP.Stat2Mtime2PP (206 ms)
+[ RUN      ] LibRadosStatPP.StatPPNS
+[       OK ] LibRadosStatPP.StatPPNS (220 ms)
+[ RUN      ] LibRadosStatPP.ClusterStatPP
+[       OK ] LibRadosStatPP.ClusterStatPP (22088 ms)
+[ RUN      ] LibRadosStatPP.PoolStatPP
+[       OK ] LibRadosStatPP.PoolStatPP (14189 ms)
+[----------] 5 tests from LibRadosStatPP (38783 ms total)
+
+[----------] 4 tests from LibRadosStatEC
+[ RUN      ] LibRadosStatEC.Stat
+[       OK ] LibRadosStatEC.Stat (281005 ms)
+[ RUN      ] LibRadosStatEC.StatNS
+[       OK ] LibRadosStatEC.StatNS (220 ms)
+[ RUN      ] LibRadosStatEC.ClusterStat
+test/librados/TestCase.cc:294: Failure
+Value of: rados_remove(ioctx, entry)
+  Actual: -2
+Expected: 0
+[  FAILED  ] LibRadosStatEC.ClusterStat (151 ms)
+[ RUN      ] LibRadosStatEC.PoolStat
+test/librados/TestCase.cc:294: Failure
+Value of: rados_remove(ioctx, entry)
+  Actual: -2
+Expected: 0
+[  FAILED  ] LibRadosStatEC.PoolStat (170 ms)
+[----------] 4 tests from LibRadosStatEC (281547 ms total)
+
+[----------] 4 tests from LibRadosStatECPP
+[ RUN      ] LibRadosStatECPP.StatPP
+[       OK ] LibRadosStatECPP.StatPP (1737 ms)
+[ RUN      ] LibRadosStatECPP.StatPPNS
+[       OK ] LibRadosStatECPP.StatPPNS (221 ms)
+[ RUN      ] LibRadosStatECPP.ClusterStatPP
+test/librados/TestCase.cc:350: Failure
+Value of: completion->get_return_value()
+  Actual: -2
+Expected: 0
+[  FAILED  ] LibRadosStatECPP.ClusterStatPP (152 ms)
+[ RUN      ] LibRadosStatECPP.PoolStatPP
+test/librados/TestCase.cc:350: Failure
+Value of: completion->get_return_value()
+  Actual: -2
+Expected: 0
+[  FAILED  ] LibRadosStatECPP.PoolStatPP (161 ms)
+[----------] 4 tests from LibRadosStatECPP (2271 ms total)
+
+[----------] Global test environment tear-down
+[==========] 17 tests from 4 test cases ran. (368649 ms total)
+[  PASSED  ] 13 tests.
+[  FAILED  ] 4 tests, listed below:
+[  FAILED  ] LibRadosStatEC.ClusterStat
+[  FAILED  ] LibRadosStatEC.PoolStat
+[  FAILED  ] LibRadosStatECPP.ClusterStatPP
+[  FAILED  ] LibRadosStatECPP.PoolStatPP
+
+ 4 FAILED TESTS
