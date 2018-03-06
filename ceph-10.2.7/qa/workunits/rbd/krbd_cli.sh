@@ -21,6 +21,9 @@ rbd create --pool $POOL_NAME --size 1 $IMAGE_NAME
 # list rbd 
 rbd list -p $POOL_NAME
 
+# show rbd info
+rbd info $POOL_NAME/$IMAGE_NAME
+
 # rbd map
 rbd map $POOL_NAME/$IMAGE_NAME
 
