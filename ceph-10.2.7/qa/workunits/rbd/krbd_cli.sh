@@ -22,7 +22,10 @@ rbd create --pool $POOL_NAME --size 1 $IMAGE_NAME
 rbd list -p $POOL_NAME
 
 # rbd map
-#rbd map $POOL_NAME/$IMAGE_NAME
+rbd map $POOL_NAME/$IMAGE_NAME
+
+# lists the mapped rbd
+rbd showmapped
 
 # rbd lock add
 rbd lock add $POOL_NAME/$IMAGE_NAME image-cli-lock
@@ -36,7 +39,7 @@ rbd lock remove $POOL_NAME/$IMAGE_NAME image-cli-lock $LOCK_CLIENT
 rbd lock list $POOL_NAME/$IMAGE_NAME
 
 # rbd unmap
-#rbd unmap
+rbd unmap /dev/rbd/$POOL_NAME/$IMAGE_NAME
 
 
 echo OK
