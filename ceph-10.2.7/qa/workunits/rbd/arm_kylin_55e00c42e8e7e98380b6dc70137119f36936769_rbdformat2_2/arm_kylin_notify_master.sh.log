@@ -1,0 +1,14 @@
++ dirname ./notify_master.sh
++ relpath=./../../../src/test/librbd
++ python ./../../../src/test/librbd/test_notify.py master
+starting master
+Traceback (most recent call last):
+  File "./../../../src/test/librbd/test_notify.py", line 170, in <module>
+    main()
+  File "./../../../src/test/librbd/test_notify.py", line 164, in main
+    master(ioctx)
+  File "./../../../src/test/librbd/test_notify.py", line 57, in master
+    features = get_features()
+  File "./../../../src/test/librbd/test_notify.py", line 47, in get_features
+    assert((features & RBD_FEATURE_EXCLUSIVE_LOCK) != 0)
+AssertionError
