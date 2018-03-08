@@ -1,0 +1,114 @@
+[==========] Running 81 tests from 3 test cases.
+[----------] Global test environment set-up.
+[----------] 67 tests from TestLibRBD
+seed 2537638
+[ RUN      ] TestLibRBD.CreateAndStat
+using old format
+image has size 2097152 and order 22
+[       OK ] TestLibRBD.CreateAndStat (6040 ms)
+[ RUN      ] TestLibRBD.CreateAndStatPP
+using old format
+[       OK ] TestLibRBD.CreateAndStatPP (191 ms)
+[ RUN      ] TestLibRBD.GetId
+using old format
+[       OK ] TestLibRBD.GetId (17 ms)
+[ RUN      ] TestLibRBD.GetIdPP
+using old format
+[       OK ] TestLibRBD.GetIdPP (18 ms)
+[ RUN      ] TestLibRBD.GetBlockNamePrefix
+using old format
+[       OK ] TestLibRBD.GetBlockNamePrefix (17 ms)
+[ RUN      ] TestLibRBD.GetBlockNamePrefixPP
+using old format
+[       OK ] TestLibRBD.GetBlockNamePrefixPP (16 ms)
+[ RUN      ] TestLibRBD.OpenAio
+using old format
+image has size 2097152 and order 22
+[       OK ] TestLibRBD.OpenAio (16 ms)
+[ RUN      ] TestLibRBD.OpenAioFail
+[       OK ] TestLibRBD.OpenAioFail (4 ms)
+[ RUN      ] TestLibRBD.OpenAioPP
+using old format
+[       OK ] TestLibRBD.OpenAioPP (31 ms)
+[ RUN      ] TestLibRBD.OpenAioFailPP
+[       OK ] TestLibRBD.OpenAioFailPP (3 ms)
+[ RUN      ] TestLibRBD.ResizeAndStat
+using old format
+[       OK ] TestLibRBD.ResizeAndStat (28 ms)
+[ RUN      ] TestLibRBD.ResizeAndStatPP
+using old format
+[       OK ] TestLibRBD.ResizeAndStatPP (28 ms)
+[ RUN      ] TestLibRBD.UpdateWatchAndResize
+using old format
+[       OK ] TestLibRBD.UpdateWatchAndResize (31 ms)
+[ RUN      ] TestLibRBD.UpdateWatchAndResizePP
+using old format
+[       OK ] TestLibRBD.UpdateWatchAndResizePP (30 ms)
+[ RUN      ] TestLibRBD.TestCreateLsDelete
+using old format
+image: image15
+expected = image15
+found image15
+using old format
+image: image15
+image: image16
+expected = image15
+found image15
+expected = image16
+found image16
+image: image16
+expected = image16
+found image16
+[       OK ] TestLibRBD.TestCreateLsDelete (5119 ms)
+[ RUN      ] TestLibRBD.TestCreateLsDeletePP
+using old format
+num images is: 1
+expected: 1
+image: image17
+expected = image17
+num images is: 2
+expected: 2
+image: image17
+image: image18
+expected = image17
+expected = image18
+num images is: 1
+expected: 1
+image: image18
+expected = image18
+[       OK ] TestLibRBD.TestCreateLsDeletePP (5406 ms)
+[ RUN      ] TestLibRBD.TestCopy
+using old format
+image: image19
+expected = image19
+found image19
+image: image19
+image: image20
+expected = image19
+found image19
+expected = image20
+found image20
+0.00% done
+100.00% done
+image: image19
+image: image20
+image: image21
+expected = image19
+found image19
+expected = image20
+found image20
+expected = image21
+found image21
+[       OK ] TestLibRBD.TestCopy (5595 ms)
+[ RUN      ] TestLibRBD.TestCopyPP
+using old format
+num images is: 1
+expected: 1
+image: image22
+expected = image22
+num images is: 2
+expected: 2
+image: image22
+image: image23
+expected = image22
+expected = image23
