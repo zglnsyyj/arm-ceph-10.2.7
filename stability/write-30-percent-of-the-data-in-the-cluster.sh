@@ -89,12 +89,12 @@ do
 done
 }
 
-#create_mount_point
+create_mount_point
 #create_pool
 #create_rbd
-#krbdmap
-#krbdformatfilesystem
-#krbdmount
-#ddfile
-krbdumount
-krbdunmap
+krbdmap
+krbdformatfilesystem
+krbdmount
+ddfile
+#krbdumount
+#krbdunmap
