@@ -19,7 +19,7 @@ MACHINE_ID=3
 create_mount_point(){
 for ((j=1;j<=$RBD_NUMBER_PER_MACHINE;j++));
 do
- mkdir -p "/root/node-$MACHINE_NUMBER/node-$MACHINE_ID-rbd-$j"
+ mkdir -p "/root/node-$MACHINE_ID/node-$MACHINE_ID-rbd-$j"
 done
 }
 
@@ -84,7 +84,7 @@ for ((k=1;k<=$RBD_NUMBER_PER_MACHINE;k++));
 do
  for ((l=1;l<=$DD_FILE_NUMBER_PER_RBD;l++));
  do
-  dd if=/dev/zero of="/root/node-$MACHINE_NUMBER/node-$MACHINE_ID-rbd-$k/node-$MACHINE_ID-rbd-$k-file-$l"  bs=$DD_FILE_SIZE"G" count=1
+  dd if=/dev/zero of="/root/node-$MACHINE_NUMBER/node-$MACHINE_ID-rbd-$k/node-$MACHINE_ID-rbd-$k-file-$l"  bs=1G count=$DD_FILE_SIZE
  done
 done
 }
@@ -95,6 +95,6 @@ done
 #krbdmap
 #krbdformatfilesystem
 #krbdmount
-ddfile
-#krbdumount
-#krbdunmap
+#ddfile
+krbdumount
+krbdunmap
