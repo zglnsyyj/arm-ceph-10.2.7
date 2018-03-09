@@ -84,7 +84,7 @@ for ((k=1;k<=$RBD_NUMBER_PER_MACHINE;k++));
 do
  for ((l=1;l<=$DD_FILE_NUMBER_PER_RBD;l++));
  do
-  dd if=/dev/zero of="/root/node-$MACHINE_NUMBER/node-$MACHINE_ID-rbd-$k/node-$MACHINE_ID-rbd-$k-file-$l"  bs=1G count=$DD_FILE_SIZE
+  dd if=/dev/zero of="/root/node-$MACHINE_ID/node-$MACHINE_ID-rbd-$k/node-$MACHINE_ID-rbd-$k-file-$l"  bs=1G count=$DD_FILE_SIZE
  done
 done
 }
