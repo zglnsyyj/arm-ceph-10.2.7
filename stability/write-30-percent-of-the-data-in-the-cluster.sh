@@ -68,7 +68,7 @@ done
 krbdmount(){
 for ((k=1;k<=$RBD_NUMBER_PER_MACHINE;k++));
 do
- mount /dev/rbd/$POOL_NAME/"node-$MACHINE_ID-rbd-$k" /root/node-$MACHINE_NUMBER/node-$MACHINE_ID-rbd-$k
+ mount /dev/rbd/$POOL_NAME/"node-$MACHINE_ID-rbd-$k" /root/node-$MACHINE_ID/node-$MACHINE_ID-rbd-$k
 done
 }
 
