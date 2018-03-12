@@ -105,43 +105,39 @@ done
 # iozone test
 DATE_TIME=`date "+%Y_%m_%d_%H_%M_%S"`
 RW_UNITS=("4k" "8k" "64k" "1024k")
-PROCESS_LOWER=32
-PROCESS_UPPER=32
+PROCESS_LOWER=40
+PROCESS_UPPER=40
 IOZONE_TEST_FILE=""
+DIRECTORY_LEVEL_SPLICING=""
 DIRECTORY_DEPTH=4
-NUMBER_OF_FILES_EACH_DIRECTORY=2
+NUMBER_OF_FILES_EACH_DIRECTORY=1
 iozone_splicing_directory(){
-for ((k=1;k<=$RBD_NUMBER_PER_MACHINE;k++));
+for dir in `find ${PERFIX_DIRECTORY}${MACHINE_NAME}-${MACHINE_ID}/ -print`
 do
- for ((m=1;m<=$NUMBER_OF_FILES_EACH_DIRECTORY;m++));
+ for ((k=1;k<=NUMBER_OF_FILES_EACH_DIRECTORY;k++));
  do
-   IOZONE_TEST_FILE="${IOZONE_TEST_FILE} ${PERFIX_DIRECTORY}${MACHINE_NAME}-${MACHINE_ID}/${MACHINE_NAME}-${MACHINE_ID}-rbd-${k}/${k}-${m}"
-   for ((l=1;l<=$DIRECTORY_DEPTH;l++));
-   do
-    IOZONE_TEST_FILE="${IOZONE_TEST_FILE} ${PERFIX_DIRECTORY}${MACHINE_NAME}-${MACHINE_ID}/${MACHINE_NAME}-${MACHINE_ID}-rbd-${k}/${l}/${k}-${l}-${m}"
-   done
-  #$IOZONE_TEST_FILE = "${PERFIX_DIRECTORY}${MACHINE_NAME}-${MACHINE_ID}/${MACHINE_NAME}-${MACHINE_ID}-rbd-${k}\n"
+  IOZONE_TEST_FILE=" ${IOZONE_TEST_FILE}  ${dir}/${k}-FILE"
  done
+ echo ${dir}
 done
-echo $IOZONE_TEST_FILE
 }
 
 iozone_test(){
 for unit in ${RW_UNITS[@]}
 do
-# iozone -z -l $PROCESS_LOWER -u $PROCESS_UPPER -r ${unit} -s 30g -F /root/iozone/iozone.tmp
- echo ${unit}
+ iozone -z -l $PROCESS_LOWER -u $PROCESS_UPPER -r ${unit} -s 1m -F ${IOZONE_TEST_FILE}
+# echo ${unit}
 done
 }
-#create_mount_point
+create_mount_point
 #create_pool
 #create_rbd
 #krbdmap
 #krbdformatfilesystem
 #krbdmount
-#create_directory_level
+create_directory_level
 iozone_splicing_directory
-#iozone_test
+iozone_test
 #ddfile
 #krbdumount
 #krbdunmap
