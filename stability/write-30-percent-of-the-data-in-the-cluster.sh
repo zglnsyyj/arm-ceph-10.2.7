@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash
 
 CEPH_CAPACITY=`ceph -s | grep used | awk '{print $4}'`
 
@@ -109,15 +109,21 @@ PROCESS_LOWER=32
 PROCESS_UPPER=32
 IOZONE_TEST_FILE=""
 DIRECTORY_DEPTH=4
+NUMBER_OF_FILES_EACH_DIRECTORY=2
 iozone_splicing_directory(){
 for ((k=1;k<=$RBD_NUMBER_PER_MACHINE;k++));
 do
- for ((l=1;l<=$DIRECTORY_DEPTH;l++));
+ for ((m=1;m<=$NUMBER_OF_FILES_EACH_DIRECTORY;m++));
  do
-  $IOZONE_TEST_FILE = "${IOZONE_TEST_FILE} ${PERFIX_DIRECTORY}${MACHINE_NAME}-${MACHINE_ID}/${MACHINE_NAME}-${MACHINE_ID}-rbd-${k}"
-  echo $IOZONE_TEST_FILE
+   IOZONE_TEST_FILE="${IOZONE_TEST_FILE} ${PERFIX_DIRECTORY}${MACHINE_NAME}-${MACHINE_ID}/${MACHINE_NAME}-${MACHINE_ID}-rbd-${k}/${k}-${m}"
+   for ((l=1;l<=$DIRECTORY_DEPTH;l++));
+   do
+    IOZONE_TEST_FILE="${IOZONE_TEST_FILE} ${PERFIX_DIRECTORY}${MACHINE_NAME}-${MACHINE_ID}/${MACHINE_NAME}-${MACHINE_ID}-rbd-${k}/${l}/${k}-${l}-${m}"
+   done
+  #$IOZONE_TEST_FILE = "${PERFIX_DIRECTORY}${MACHINE_NAME}-${MACHINE_ID}/${MACHINE_NAME}-${MACHINE_ID}-rbd-${k}\n"
  done
 done
+echo $IOZONE_TEST_FILE
 }
 
 iozone_test(){
