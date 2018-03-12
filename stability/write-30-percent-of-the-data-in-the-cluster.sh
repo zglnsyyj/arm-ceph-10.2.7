@@ -28,8 +28,9 @@ done
 }
 
 # create directory level, call after mount
-DIRECTORY_LEVEL="/A/B/C/"
+DIRECTORY_LEVEL="/1/2/3/"
 create_directory_level(){
+for ((j=1;j<=$RBD_NUMBER_PER_MACHINE;j++));
 do
  mkdir -p "$PERFIX_DIRECTORY""$MACHINE_NAME-$MACHINE_ID/$MACHINE_NAME-$MACHINE_ID-rbd-$j""$DIRECTORY_LEVEL"
 done
@@ -101,12 +102,40 @@ do
 done
 }
 
-create_mount_point
+# iozone test
+DATE_TIME=`date "+%Y_%m_%d_%H_%M_%S"`
+RW_UNITS=("4k" "8k" "64k" "1024k")
+PROCESS_LOWER=32
+PROCESS_UPPER=32
+IOZONE_TEST_FILE=""
+DIRECTORY_DEPTH=4
+iozone_splicing_directory(){
+for ((k=1;k<=$RBD_NUMBER_PER_MACHINE;k++));
+do
+ for ((l=1;l<=$DIRECTORY_DEPTH;l++));
+ do
+  $IOZONE_TEST_FILE = "${IOZONE_TEST_FILE} ${PERFIX_DIRECTORY}${MACHINE_NAME}-${MACHINE_ID}/${MACHINE_NAME}-${MACHINE_ID}-rbd-${k}"
+  echo $IOZONE_TEST_FILE
+ done
+done
+}
+
+iozone_test(){
+for unit in ${RW_UNITS[@]}
+do
+# iozone -z -l $PROCESS_LOWER -u $PROCESS_UPPER -r ${unit} -s 30g -F /root/iozone/iozone.tmp
+ echo ${unit}
+done
+}
+#create_mount_point
 #create_pool
 #create_rbd
 #krbdmap
 #krbdformatfilesystem
 #krbdmount
+#create_directory_level
+iozone_splicing_directory
+#iozone_test
 #ddfile
 #krbdumount
 #krbdunmap
