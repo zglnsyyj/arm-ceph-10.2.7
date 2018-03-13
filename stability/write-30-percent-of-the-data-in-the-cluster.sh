@@ -134,7 +134,7 @@ iozone_test(){
 for unit in ${RW_UNITS[@]}
 do
 # iozone -z -u -l $PROCESS_LOWER -u $PROCESS_UPPER -r ${unit} -s "$((${RBD_SIZE}/${DIRECTORY_DEPTH}/${NUMBER_OF_FILES_EACH_DIRECTORY}-500))m" -F ${IOZONE_TEST_FILE}
- iozone -z -u -l ${PROCESS_LOWER} -u ${PROCESS_UPPER} -r ${unit} -s "1m" -F ${IOZONE_TEST_FILE}
+ iozone -+u -+d -+p -+t -z -l ${PROCESS_LOWER} -u ${PROCESS_UPPER} -r ${unit} -s "1m" -F ${IOZONE_TEST_FILE}
 done
 }
 
