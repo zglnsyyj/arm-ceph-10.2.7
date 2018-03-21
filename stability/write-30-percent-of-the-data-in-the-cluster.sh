@@ -119,7 +119,7 @@ PROCESS_LOWER=$((${NUMBER_OF_FILES_EACH_DIRECTORY}*${DIRECTORY_DEPTH}*${RBD_NUMB
 PROCESS_UPPER=$((${NUMBER_OF_FILES_EACH_DIRECTORY}*${DIRECTORY_DEPTH}*${RBD_NUMBER_PER_MACHINE}))
 
 iozone_splicing_directory(){
-for dir in `find ${PERFIX_DIRECTORY}${MACHINE_NAME}-${MACHINE_ID}/ -print`
+for dir in `find ${PERFIX_DIRECTORY}${MACHINE_NAME}-${MACHINE_ID}/ -regex "${PERFIX_DIRECTORY}${MACHINE_NAME}-${MACHINE_ID}/node.*" -print | grep -v lost`
 do
  for ((k=1;k<=$NUMBER_OF_FILES_EACH_DIRECTORY;k++));
  do
@@ -147,11 +147,11 @@ done
 #krbdmount
 #create_directory_level
 
-while true
-do
+#while true
+#do
 iozone_splicing_directory
-iozone_test
-done
+#iozone_test
+#done
 
 #ddfile
 #krbdumount
