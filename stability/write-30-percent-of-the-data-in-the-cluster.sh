@@ -129,13 +129,13 @@ do
 done
 }
 
-#echo $((${RBD_SIZE}/${DIRECTORY_DEPTH}/${NUMBER_OF_FILES_EACH_DIRECTORY}-500))
+#echo $((${RBD_SIZE}/${DIRECTORY_DEPTH}/${NUMBER_OF_FILES_EACH_DIRECTORY}-2048))
 iozone_test(){
 for unit in ${RW_UNITS[@]}
 do
 # iozone -z -u -l $PROCESS_LOWER -u $PROCESS_UPPER -r ${unit} -s "$((${RBD_SIZE}/${DIRECTORY_DEPTH}/${NUMBER_OF_FILES_EACH_DIRECTORY}-500))m" -F ${IOZONE_TEST_FILE}
- DATE_TIME_TMP=`date "+%Y_%m_%d_%H_%M_%S`
- iozone -+u -+d -+p -+t -z -l ${PROCESS_LOWER} -u ${PROCESS_UPPER} -r ${unit} -s $((${RBD_SIZE}-2048))"m" -F ${IOZONE_TEST_FILE} -Rab "${DATE_TIME_TMP}_${PROCESS_LOWER}_${PROCESS_UPPER}_${unit}_${RBD_SIZE}_iozone_result.xls"
+ DATE_TIME_TMP=`date "+%Y_%m_%d_%H_%M_%S"`
+ iozone -+u -+d -+p -+t -z -l ${PROCESS_LOWER} -u ${PROCESS_UPPER} -r ${unit} -s $((${RBD_SIZE}/(${DIRECTORY_DEPTH}+1)/${NUMBER_OF_FILES_EACH_DIRECTORY}))"m" -F ${IOZONE_TEST_FILE} -Rb "${DATE_TIME_TMP}_${PROCESS_LOWER}_${PROCESS_UPPER}_${unit}_${RBD_SIZE}_iozone_result.xls"
 done
 }
 
@@ -146,11 +146,13 @@ done
 #krbdformatfilesystem
 #krbdmount
 #create_directory_level
+
 while true
 do
 iozone_splicing_directory
 iozone_test
 done
+
 #ddfile
 #krbdumount
 #krbdunmap
