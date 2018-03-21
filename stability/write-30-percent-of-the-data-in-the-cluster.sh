@@ -2,7 +2,7 @@
 
 #CEPH_CAPACITY=`ceph -s | grep used | awk '{print $4}'`
 # Unit GB
-CEPH_CAPACITY_GB=17408
+CEPH_CAPACITY_GB=33517
 CLUSTER_CAPACITY_PERCENTAGE=30
 CEPH_CAPACITY=$((${CEPH_CAPACITY_GB}*1024))
 echo $CEPH_CAPACITY
@@ -18,7 +18,7 @@ echo $RBD_SIZE
 DD_FILE_SIZE=55
 DD_FILE_NUMBER_PER_RBD=1
 # ************* must modify
-MACHINE_ID=3
+MACHINE_ID=1
 MACHINE_NAME="node"
 # ************* must modify
 # ************* prefix directory
@@ -114,14 +114,14 @@ RW_UNITS=("4k" "8k" "64k" "1024k")
 IOZONE_TEST_FILE=""
 DIRECTORY_LEVEL_SPLICING=""
 DIRECTORY_DEPTH=4
-NUMBER_OF_FILES_EACH_DIRECTORY=2
+NUMBER_OF_FILES_EACH_DIRECTORY=1
 PROCESS_LOWER=$((${NUMBER_OF_FILES_EACH_DIRECTORY}*${DIRECTORY_DEPTH}*${RBD_NUMBER_PER_MACHINE}))
 PROCESS_UPPER=$((${NUMBER_OF_FILES_EACH_DIRECTORY}*${DIRECTORY_DEPTH}*${RBD_NUMBER_PER_MACHINE}))
 
 iozone_splicing_directory(){
 for dir in `find ${PERFIX_DIRECTORY}${MACHINE_NAME}-${MACHINE_ID}/ -print`
 do
- for ((k=1;k<=NUMBER_OF_FILES_EACH_DIRECTORY;k++));
+ for ((k=1;k<=$NUMBER_OF_FILES_EACH_DIRECTORY;k++));
  do
   IOZONE_TEST_FILE=" ${IOZONE_TEST_FILE}  ${dir}/${k}-FILE"
  done
@@ -134,19 +134,23 @@ iozone_test(){
 for unit in ${RW_UNITS[@]}
 do
 # iozone -z -u -l $PROCESS_LOWER -u $PROCESS_UPPER -r ${unit} -s "$((${RBD_SIZE}/${DIRECTORY_DEPTH}/${NUMBER_OF_FILES_EACH_DIRECTORY}-500))m" -F ${IOZONE_TEST_FILE}
- iozone -+u -+d -+p -+t -z -l ${PROCESS_LOWER} -u ${PROCESS_UPPER} -r ${unit} -s "1m" -F ${IOZONE_TEST_FILE}
+ DATE_TIME_TMP=`date "+%Y_%m_%d_%H_%M_%S`
+ iozone -+u -+d -+p -+t -z -l ${PROCESS_LOWER} -u ${PROCESS_UPPER} -r ${unit} -s $((${RBD_SIZE}-2048))"m" -F ${IOZONE_TEST_FILE} -Rab "${DATE_TIME_TMP}_${PROCESS_LOWER}_${PROCESS_UPPER}_${unit}_${RBD_SIZE}_iozone_result.xls"
 done
 }
 
-create_mount_point
+#create_mount_point
 #create_pool
 #create_rbd
 #krbdmap
 #krbdformatfilesystem
 #krbdmount
-create_directory_level
+#create_directory_level
+while true
+do
 iozone_splicing_directory
 iozone_test
+done
 #ddfile
 #krbdumount
 #krbdunmap
