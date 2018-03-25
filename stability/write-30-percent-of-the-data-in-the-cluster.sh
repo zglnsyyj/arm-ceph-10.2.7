@@ -3,7 +3,7 @@
 #CEPH_CAPACITY=`ceph -s | grep used | awk '{print $4}'`
 # Unit GB
 CEPH_CAPACITY_GB=33517
-CLUSTER_CAPACITY_PERCENTAGE=30
+CLUSTER_CAPACITY_PERCENTAGE=50
 CEPH_CAPACITY=$((${CEPH_CAPACITY_GB}*1024))
 echo $CEPH_CAPACITY
 POOL_NAME="datapool"
@@ -136,7 +136,7 @@ do
 # iozone -z -u -l $PROCESS_LOWER -u $PROCESS_UPPER -r ${unit} -s "$((${RBD_SIZE}/${DIRECTORY_DEPTH}/${NUMBER_OF_FILES_EACH_DIRECTORY}-500))m" -F ${IOZONE_TEST_FILE}
  DATE_TIME_TMP=`date "+%Y_%m_%d_%H_%M_%S"`
  #iozone -+u -+d -+p -+t -z -l ${PROCESS_LOWER} -u ${PROCESS_UPPER} -r ${unit} -s $((${RBD_SIZE}/(${DIRECTORY_DEPTH}+1)/${NUMBER_OF_FILES_EACH_DIRECTORY}))"m" -F ${IOZONE_TEST_FILE} -Rb "${DATE_TIME_TMP}_${PROCESS_LOWER}_${PROCESS_UPPER}_${unit}_${RBD_SIZE}_iozone_result.xls"
- iozone -+p -+t -z -l ${PROCESS_LOWER} -u ${PROCESS_UPPER} -r ${unit} -s $((${RBD_SIZE}/(${DIRECTORY_DEPTH}+1)/${NUMBER_OF_FILES_EACH_DIRECTORY}))"m" -F ${IOZONE_TEST_FILE} -Rb "${DATE_TIME_TMP}_${PROCESS_LOWER}_${PROCESS_UPPER}_${unit}_${RBD_SIZE}_iozone_result.xls"
+ iozone -+p -+t -z -l ${PROCESS_LOWER} -u ${PROCESS_UPPER} -r ${unit} -s $((${RBD_SIZE}/(${DIRECTORY_DEPTH}+1)/${NUMBER_OF_FILES_EACH_DIRECTORY}))"m" -F ${IOZONE_TEST_FILE} -Rb "${DATE_TIME_TMP}_${PROCESS_LOWER}_${PROCESS_UPPER}_${unit}_${RBD_SIZE}_iozone_result.xls" > run.log
 done
 }
 
